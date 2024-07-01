@@ -1,0 +1,15 @@
+.menuItem:hover{
+    -fx-border-color: #660099;
+    -fx-border-width: 0px 0px 3px 0px;
+}
+
+.sidebarItem:hover{
+    -fx-background-color: #146886;
+    -fx-border-color: WHITE;
+    -fx-border-width: 0px 0px 0px 3px;
+}
+.colored_card{
+    -fx-background-color linear-gradient(to right, #1A3384, #2B49B3);
+    -fx-background-radius 10px;
+
+}
