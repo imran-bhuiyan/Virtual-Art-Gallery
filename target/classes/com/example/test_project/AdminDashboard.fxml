@@ -28,21 +28,25 @@
                   <Button layoutX="10.0" layoutY="490.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="144.0" style="-fx-background-color: #40E0D0;" text="Reports" />
                </children>
             </VBox>
-            <AnchorPane layoutX="192.0" layoutY="152.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FBE9D0;" styleClass="colored_card" stylesheets="@../../../../java/com/example/test_project/styles.css">
+            <AnchorPane layoutX="192.0" layoutY="152.0" prefHeight="200.0" prefWidth="200.0" styleClass="colored_card" stylesheets="@../../../../java/com/example/test_project/styles.css">
                <effect>
                   <InnerShadow />
                </effect>
                <children>
-                  <Text layoutX="76.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artists" wrappingWidth="54.78216552734375">
-                     <font>
-                        <Font name="Malgun Gothic" size="18.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="87.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="25.98223876953125">
-                     <font>
-                        <Font name="Malgun Gothic" size="18.0" />
-                     </font>
-                  </Text>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #FBE9D0;">
+                     <children>
+                        <Text layoutX="87.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="25.98223876953125">
+                           <font>
+                              <Font name="Malgun Gothic" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artists" wrappingWidth="59.5821533203125">
+                           <font>
+                              <Font name="Malgun Gothic" size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
                </children>
             </AnchorPane>
             <Pane layoutX="-3.0" layoutY="-1.0" prefHeight="74.0" prefWidth="906.0" style="-fx-background-color: #40E0D0;">
@@ -122,7 +126,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="431.0" layoutY="152.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #90AEAD;">
+            <AnchorPane layoutX="433.0" layoutY="152.0" prefHeight="200.0" prefWidth="198.0" style="-fx-background-color: #90AEAD;">
                <effect>
                   <InnerShadow />
                </effect>
@@ -156,11 +160,6 @@
                   </Text>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="331.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../java/Icon/autumn-leaves-fall-gracefully-painting-nature-canvas-generative-ai.jpg" />
-               </image>
-            </ImageView>
          </children>
          <effect>
             <Blend />
