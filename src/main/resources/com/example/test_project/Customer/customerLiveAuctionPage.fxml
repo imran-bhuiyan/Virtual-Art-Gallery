@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.customerPageController">
+    <children>
+
+        <Text layoutX="375.0" layoutY="125.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Live Auctions" />
+
+        <ScrollPane layoutY="140.0" prefHeight="528.0" prefWidth="899.0">
+            <content>
+                <VBox spacing="20" style="-fx-padding: 20;">
+                    <children>
+                        <!-- Auction Item 1 -->
+                        <AnchorPane prefHeight="270.0" prefWidth="816.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-width: 1;">
+                            <children>
+                                <ImageView fitHeight="230.0" fitWidth="200.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Street%20Art.jpg" />
+                           </image></ImageView>
+                                <Text layoutX="220.0" layoutY="30.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Sunset Landscape" />
+                                <Text layoutX="220.0" layoutY="60.0" text="Artist: " />
+                                <Text layoutX="220.0" layoutY="90.0" text="Category:" />
+                                <Text layoutX="220.0" layoutY="120.0" text="Size: " />
+                                <Text layoutX="220.0" layoutY="166.0" text="Current Bid: " />
+                                <Text layoutX="220.0" layoutY="194.0" text="Auction Ends: " />
+                                <TextField layoutX="220.0" layoutY="224.0" promptText="Enter your bid" />
+                                <Button layoutX="380.0" layoutY="223.0" mnemonicParsing="false" style="-fx-background-color: #4CAF50;" text="Place Bid">
+                                    <graphic>
+                                        <ImageView fitHeight="14.0" fitWidth="14.0">
+                                            <image>
+                                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Auction.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button layoutX="470.0" layoutY="223.0" mnemonicParsing="false" style="-fx-background-color: #FFA500;" text="View">
+                                    <graphic>
+                                        <ImageView fitHeight="14.0" fitWidth="14.0">
+                                            <image>
+                                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Eye.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                        <Text layoutX="255.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="John Doe" />
+                        <Text layoutX="272.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Oil on canvas" />
+                        <Text layoutX="251.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="24x36 inches" />
+                        <Text layoutX="291.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$5,000" />
+                        <Text layoutX="294.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="July 15, 2024 at 8:00 PM" />
+                        <Text layoutX="221.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Starting Bid: " />
+                        <Text layoutX="294.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3000$" />
+                            </children>
+                        </AnchorPane>
+                  <AnchorPane layoutX="30.0" layoutY="30.0" prefHeight="176.0" prefWidth="781.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-width: 1;">
+                     <children>
+                        <ImageView fitHeight="230.0" fitWidth="200.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Street%20Art.jpg" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="220.0" layoutY="30.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Sunset Landscape" />
+                        <Text layoutX="220.0" layoutY="60.0" text="Artist: " />
+                        <Text layoutX="220.0" layoutY="90.0" text="Category:" />
+                        <Text layoutX="220.0" layoutY="120.0" text="Size: " />
+                        <Text layoutX="220.0" layoutY="166.0" text="Current Bid: " />
+                        <Text layoutX="220.0" layoutY="194.0" text="Auction Ends: " />
+                        <TextField layoutX="220.0" layoutY="224.0" promptText="Enter your bid" />
+                        <Button layoutX="380.0" layoutY="223.0" mnemonicParsing="false" style="-fx-background-color: #4CAF50;" text="Place Bid">
+                           <graphic>
+                              <ImageView fitHeight="14.0" fitWidth="14.0">
+                                 <image>
+                                    <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Auction.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="470.0" layoutY="223.0" mnemonicParsing="false" style="-fx-background-color: #FFA500;" text="View">
+                           <graphic>
+                              <ImageView fitHeight="14.0" fitWidth="14.0">
+                                 <image>
+                                    <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Eye.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Text layoutX="255.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="John Doe" />
+                        <Text layoutX="272.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Oil on canvas" />
+                        <Text layoutX="251.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="24x36 inches" />
+                        <Text layoutX="291.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$5,000" />
+                        <Text layoutX="294.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="July 15, 2024 at 8:00 PM" />
+                        <Text layoutX="221.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Starting Bid: " />
+                        <Text layoutX="294.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3000$" />
+                     </children>
+                  </AnchorPane>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+      <HBox alignment="CENTER" layoutX="1.0" prefHeight="80.0" prefWidth="899.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
+               <font>
+                  <Font name="System Italic" size="30.0" />
+               </font>
+            </Text>
+            <Button mnemonicParsing="false" onAction="#goCustomerHome" style="-fx-background-color: transparent;" text="Home" textFill="#181818" />
+            <Button mnemonicParsing="false" onAction="#goCustomerPaintings" style="-fx-background-color: transparent;" text="Paintings" textFill="#181818" />
+            <Button mnemonicParsing="false" onAction="#goCustomerTopArt" style="-fx-background-color: transparent;" text="Top Art" textFill="#1b1b1b" />
+            <Button mnemonicParsing="false" onAction="#goCustomerEvents" style="-fx-background-color: transparent;" text="Events" textFill="#0d0d0d" />
+            <Button mnemonicParsing="false" onAction="#goCustomerAuction" style="-fx-background-color: transparent;" text="Auction" textFill="#0d0d0d" />
+            <Button mnemonicParsing="false" onAction="#goCustomerNFT" style="-fx-background-color: transparent;" text="NFT" textFill="#131212" />
+            <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerProfile" style="-fx-background-color: transparent;" text="Profile" textFill="#181818" />
+            <Button mnemonicParsing="false" onAction="#goCustomerCart" prefWidth="0.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0">
+                     <image>
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Shopping%20Cart.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="741.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerNotification" style="-fx-background-color: transparent;" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Notification.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goCustomerMessages" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Chat%20Message.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+    </children>
+</AnchorPane>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.customerPageController">
+    <top>
+        <HBox alignment="CENTER" prefHeight="79.0" prefWidth="899.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
+                    <font>
+                        <Font name="System Italic" size="30.0" />
+                    </font>
+                </Text>
+                <Button mnemonicParsing="false" onAction="#goCustomerHome" style="-fx-background-color: transparent;" text="Home" textFill="#181818" />
+                <Button mnemonicParsing="false" onAction="#goCustomerPaintings" style="-fx-background-color: transparent;" text="Paintings" textFill="#181818" />
+                <Button mnemonicParsing="false" onAction="#goCustomerTopArt" style="-fx-background-color: transparent;" text="Top Art" textFill="#1b1b1b" />
+                <Button mnemonicParsing="false" onAction="#goCustomerEvents" style="-fx-background-color: transparent;" text="Events" textFill="#0d0d0d" />
+                <Button mnemonicParsing="false" onAction="#goCustomerAuction" style="-fx-background-color: transparent;" text="Auction" textFill="#0d0d0d" />
+                <Button mnemonicParsing="false" onAction="#goCustomerNFT" style="-fx-background-color: transparent;" text="NFT" textFill="#131212" />
+                <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerProfile" style="-fx-background-color: transparent;" text="Profile" textFill="#181818" />
+                <Button mnemonicParsing="false" onAction="#goCustomerCart" prefWidth="0.0" style="-fx-background-color: transparent;">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0">
+                            <image>
+                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Shopping%20Cart.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button layoutX="741.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerNotification" style="-fx-background-color: transparent;" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Notification.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerMessages" style="-fx-background-color: transparent;">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Chat%20Message.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Text style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Notifications" />
+                <Button mnemonicParsing="false" style="-fx-background-color: #40E0D0;" text="Mark All as Read" />
+            </HBox>
+
+            <ScrollPane fitToWidth="true" prefHeight="500.0">
+                <VBox spacing="10">
+                    <!-- Notification Item 1 -->
+                    <AnchorPane prefHeight="80.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-width: 1;">
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="20.0">
+                            <image>
+                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Auction.png" />
+                            </image>
+                        </ImageView>
+                        <VBox layoutX="60.0" layoutY="10.0">
+                            <Text style="-fx-font-weight: bold;" text="Auction Reminder" />
+                            <Text text="The auction for 'Sunset Landscape' starts in 1 hour" />
+                            <Text style="-fx-font-size: 12;" text="30 minutes ago" />
+                        </VBox>
+                        <HBox layoutX="400.0" layoutY="25.0" spacing="10">
+                            <Button mnemonicParsing="false" style="-fx-background-color: #40E0D0;" text="View Auction" />
+                            <Button mnemonicParsing="false" style="-fx-background-color: #FFA500;" text="Mark as Read" />
+                            <Button mnemonicParsing="false" style="-fx-background-color: #FF6347;" text="Delete" />
+                        </HBox>
+                    </AnchorPane>
+
+                    <!-- Notification Item 2 -->
+                    <AnchorPane prefHeight="80.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-width: 1;">
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="20.0">
+                            <image>
+                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Money%20Bag%20Bitcoin.png" />
+                            </image>
+                        </ImageView>
+                        <VBox layoutX="60.0" layoutY="10.0">
+                            <Text style="-fx-font-weight: bold;" text="New NFT Collection Available" />
+                            <Text text="Check out our latest NFT collection 'Digital Wonders'" />
+                            <Text style="-fx-font-size: 12;" text="2 hours ago" />
+                        </VBox>
+                        <HBox layoutX="400.0" layoutY="25.0" spacing="10">
+                            <Button mnemonicParsing="false" style="-fx-background-color: #40E0D0;" text="View Collection" />
+                            <Button mnemonicParsing="false" style="-fx-background-color: #FFA500;" text="Mark as Read" />
+                            <Button mnemonicParsing="false" style="-fx-background-color: #FF6347;" text="Delete" />
+                        </HBox>
+                    </AnchorPane>
+
+                    <!-- Notification Item 3 -->
+                    <AnchorPane prefHeight="80.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-width: 1;">
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="20.0">
+                            <image>
+                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Notification.png" />
+                            </image>
+                        </ImageView>
+                        <VBox layoutX="60.0" layoutY="10.0">
+                            <Text style="-fx-font-weight: bold;" text="Upcoming Gallery Event" />
+                            <Text text="Join us for the opening of 'Modern Masterpieces' exhibition" />
+                            <Text style="-fx-font-size: 12;" text="1 day ago" />
+                        </VBox>
+                        <HBox layoutX="400.0" layoutY="25.0" spacing="10">
+                            <Button mnemonicParsing="false" style="-fx-background-color: #40E0D0;" text="Event Details" />
+                            <Button mnemonicParsing="false" style="-fx-background-color: #FFA500;" text="Mark as Read" />
+                            <Button mnemonicParsing="false" style="-fx-background-color: #FF6347;" text="Delete" />
+                        </HBox>
+                    </AnchorPane>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </center>
+</BorderPane>

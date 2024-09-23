@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.AdminPageController">
+    <center>
+        <AnchorPane prefHeight="716.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+            <children>
+                <AnchorPane layoutX="180.0" layoutY="181.0" prefHeight="459.0" prefWidth="718.0">
+                    <children>
+                        <TextField layoutX="127.0" layoutY="14.0" prefHeight="26.0" prefWidth="534.0" />
+                        <Button layoutX="672.0" layoutY="14.0" mnemonicParsing="false">
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../java/Icon/Search.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Text layoutX="24.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Artwork" wrappingWidth="93.28359985351562" />
+                        <Pane layoutX="35.0" layoutY="170.0" prefHeight="230.0" prefWidth="190.0" style="-fx-background-color: #D4F1F9;">
+                            <children>
+                                <Text layoutX="37.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" ID: 101" wrappingWidth="72.25823974609375" />
+                                <Text layoutX="40.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist: Kibutsuji Muzan" wrappingWidth="137.8582763671875" />
+                        <ImageView fitHeight="116.0" fitWidth="124.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:/D:/Projects/AOOP/Project_23-07-24/src/main/java/Icon/colorful-portrait-black-man_181203-28026.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="30.0" layoutY="192.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="58.0" style="-fx-background-color: Green;" text="Edit" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                            </children>
+                        </Pane>
+                  <Button layoutX="642.0" layoutY="83.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="49.0" style="-fx-background-color: Sky;" text="Sort" />
+                  <Pane layoutX="271.0" layoutY="170.0" prefHeight="230.0" prefWidth="190.0" style="-fx-background-color: #D4F1F9;">
+                     <children>
+                        <Text layoutX="37.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" ID: 101" wrappingWidth="72.25823974609375" />
+                        <Text layoutX="40.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist: Kibutsuji Muzan" wrappingWidth="137.8582763671875" />
+                        <ImageView fitHeight="116.0" fitWidth="124.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:/D:/Projects/AOOP/Project_23-07-24/src/main/java/Icon/autumn-leaves-fall-gracefully-painting-nature-canvas-generative-ai.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="37.0" layoutY="191.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="58.0" style="-fx-background-color: Green;" text="Edit" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="509.0" layoutY="170.0" prefHeight="230.0" prefWidth="190.0" style="-fx-background-color: #D4F1F9;">
+                     <children>
+                        <Text layoutX="37.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" ID: 101" wrappingWidth="72.25823974609375" />
+                        <ImageView fitHeight="116.0" fitWidth="124.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:/D:/Projects/AOOP/Project_23-07-24/src/main/java/Icon/unsplash.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="37.0" layoutY="187.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="58.0" style="-fx-background-color: Green;" text="Edit" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Text layoutX="40.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist: Kibutsuji Muzan" wrappingWidth="137.8582763671875" />
+                     </children>
+                  </Pane>
+                    </children>
+                </AnchorPane>
+                <Text layoutX="439.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Artwork">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Text>
+            <AnchorPane layoutX="12.0" layoutY="119.0" prefHeight="546.0" prefWidth="162.0" style="-fx-background-color: #AFDDE5;">
+               <children>
+                  <Button layoutX="46.0" layoutY="242.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Orders">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <MenuButton layoutX="34.0" layoutY="186.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Customers">
+                     <items>
+                        <MenuItem text="Add" />
+                        <MenuItem text="Manage" />
+                     </items>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </MenuButton>
+                  <MenuButton layoutX="45.0" layoutY="294.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Events">
+                     <items>
+                        <MenuItem text="Add" />
+                        <MenuItem text="Manage" />
+                     </items>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </MenuButton>
+                  <Button layoutX="48.0" layoutY="341.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Chats">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="40.0" layoutY="392.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Reports">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <MenuButton layoutX="52.0" layoutY="89.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artist">
+                     <items>
+                        <MenuItem text="Add" />
+                        <MenuItem text="Manage" />
+                     </items>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </MenuButton>
+                  <MenuButton layoutX="38.0" layoutY="138.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artworks">
+                     <items>
+                        <MenuItem text="Add" />
+                        <MenuItem text="Manage" />
+                     </items>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </MenuButton>
+                  <Button layoutX="27.0" layoutY="41.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="112.0" style="-fx-background-color: transparent;" text="Dashboard">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="39.0" layoutY="442.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Inquiries">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="27.0" fitWidth="33.0" layoutX="69.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../java/Icon/Menu.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="37.0" layoutY="494.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Auctions">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <Pane layoutX="1.0" prefHeight="74.0" prefWidth="900.0" style="-fx-background-color: #1eb6a7;">
+               <children>
+                  <Button layoutX="807.0" layoutY="24.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="28.0" style="-fx-background-color: #1eb6a7;" />
+                  <Text layoutX="397.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Panel" wrappingWidth="162.125732421875">
+                     <font>
+                        <Font name="System Italic" size="24.0" />
+                     </font>
+                  </Text>
+                  <MenuButton layoutX="835.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Logout" />
+                     </items>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../java/Icon/User.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuButton>
+               </children>
+               <effect>
+                  <Blend />
+               </effect>
+            </Pane>
+            </children>
+            <effect>
+                <Blend />
+            </effect>
+        </AnchorPane>
+    </center>
+</BorderPane>

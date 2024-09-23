@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.ArtistPageController">
+    <center>
+        <AnchorPane prefHeight="716.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+            <children>
+                <AnchorPane layoutX="263.0" layoutY="163.0" prefHeight="398.0" prefWidth="479.0" style="-fx-border-color: #1eb6a7;">
+                    <children>
+                        <TextField layoutX="170.0" layoutY="125.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: #1eb6a7;" />
+                        <Text layoutX="99.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+                        <Text layoutX="104.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+                        <Text layoutX="236.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Text>
+                        <Button layoutX="232.0" layoutY="274.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="58.0" style="-fx-background-color: Green;" text="Update" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <Text layoutX="97.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+                        <TextField layoutX="169.0" layoutY="171.0" prefHeight="23.0" prefWidth="184.0" style="-fx-background-color: transparent; -fx-border-color: #1eb6a7;" />
+                        <TextField layoutX="170.0" layoutY="77.0" prefHeight="20.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: #1eb6a7;" />
+                        <Text layoutX="89.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenue" wrappingWidth="57.15313720703125" />
+                  <TextField layoutX="169.0" layoutY="215.0" prefHeight="23.0" prefWidth="184.0" style="-fx-background-color: transparent; -fx-border-color: #1eb6a7;" />
+                    </children>
+                </AnchorPane>
+                <Pane layoutX="2.0" prefHeight="74.0" prefWidth="900.0" style="-fx-background-color: #40E0D0;">
+                    <children>
+                        <Text layoutX="411.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist Panel" wrappingWidth="162.125732421875">
+                            <font>
+                                <Font name="System Italic" size="24.0" />
+                            </font>
+                        </Text>
+                    </children>
+                    <effect>
+                        <Blend />
+                    </effect>
+                </Pane>
+                <AnchorPane layoutX="1.0" layoutY="119.0" prefHeight="546.0" prefWidth="162.0" style="-fx-background-color: #AFDDE5;">
+                    <children>
+                        <Button layoutX="19.0" layoutY="212.0" mnemonicParsing="false" onAction="#artistAddPainting" style="-fx-background-color: transparent;" text="Add Paintings">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="35.0" layoutY="262.0" mnemonicParsing="false" onAction="#artistMessages" style="-fx-background-color: transparent;" text="Messages">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="27.0" layoutY="66.0" mnemonicParsing="false" onAction="#artistDashboard" prefHeight="38.0" prefWidth="112.0" style="-fx-background-color: transparent;" text="Dashboard">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" layoutX="69.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="file:/D:/Projects/AOOP/Project_23-07-24/src/main/java/Icon/Menu.png" />
+                            </image>
+                        </ImageView>
+                        <Button layoutX="19.0" layoutY="316.0" mnemonicParsing="false" onAction="#artistAddAuctions" style="-fx-background-color: transparent;" text="Add Auctions">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="24.0" layoutY="112.0" mnemonicParsing="false" onAction="#artistPaintings" prefHeight="38.0" prefWidth="112.0" style="-fx-background-color: transparent;" text="Paintings">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="18.0" layoutY="161.0" mnemonicParsing="false" onAction="#artistMyPainting" prefHeight="38.0" prefWidth="130.0" style="-fx-background-color: transparent;" text="My Paintings">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="42.0" layoutY="425.0" mnemonicParsing="false" onAction="#artistLogout" style="-fx-background-color: transparent;" text="Logout">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="31.0" layoutY="367.0" mnemonicParsing="false" onAction="#artistMyProfile" style="-fx-background-color: transparent;" text="My Profile">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
+            </children>
+            <effect>
+                <Blend />
+            </effect>
+        </AnchorPane>
+    </center>
+</BorderPane>
