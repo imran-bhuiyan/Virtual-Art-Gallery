@@ -1,5 +1,6 @@
 package com.example.test_project;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +18,11 @@ import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class AdminMessagesController {
 
@@ -38,95 +38,205 @@ public class AdminMessagesController {
     @FXML
     private TextField userSearchField;
 
+    @FXML
+    private Text currentUserName;
+
     private Map<String, ObservableList<String>> userChats = new HashMap<>();
     private ObservableList<String> users = FXCollections.observableArrayList();
     private String currentUser = null;
+    private ExecutorService executorService;
+    private ChatClient chatClient;
+    private int adminId;
 
     @FXML
     public void initialize() {
-        userListView.setItems(users);
+        executorService = Executors.newFixedThreadPool(2);
+        chatClient = new ChatClient();
 
-        // Load initial users from the database
+        userListView.setItems(users);
         loadAllUsers();
 
-        // Add listener to search field
         userSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.trim().isEmpty()) {
-                loadAllUsers(); // Reload all users if search is empty
-            } else {
-                searchUsers(newValue);
-            }
+            executorService.submit(() -> searchUsers(newValue));
         });
 
         userListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 currentUser = newValue;
+                currentUserName.setText(currentUser);
                 displayChat(currentUser);
             }
         });
 
-        // Select the first user by default if available
         if (!users.isEmpty()) {
             userListView.getSelectionModel().selectFirst();
         }
+
+        startMessageListener();
+
+        // Get admin ID
+        adminId = getAdminId();
     }
 
     private void loadAllUsers() {
-        users.clear(); // Clear current list
-
-        try (Connection connection = DataBaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT name FROM users");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                users.add(resultSet.getString("name"));
+        executorService.submit(() -> {
+            try (Connection connection = DataBaseConnection.getConnection()) {
+                PreparedStatement statement = connection.prepareStatement("SELECT name FROM users WHERE role != 'admin'");
+                ResultSet resultSet = statement.executeQuery();
+                ObservableList<String> loadedUsers = FXCollections.observableArrayList();
+                while (resultSet.next()) {
+                    loadedUsers.add(resultSet.getString("name"));
+                }
+                Platform.runLater(() -> users.setAll(loadedUsers));
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        });
     }
 
     private void searchUsers(String query) {
-        users.clear(); // Clear current list
+        executorService.submit(() -> {
+            try (Connection connection = DataBaseConnection.getConnection()) {
+                String sql = "SELECT name FROM users WHERE (name LIKE ? OR email LIKE ?) AND role != 'admin'";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, "%" + query + "%");
+                statement.setString(2, "%" + query + "%");
+                ResultSet resultSet = statement.executeQuery();
 
-        try (Connection connection = DataBaseConnection.getConnection()) {
-            String sql = "SELECT name FROM users WHERE name LIKE ? OR email LIKE ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, "%" + query + "%");
-            statement.setString(2, "%" + query + "%");
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                users.add(resultSet.getString("name"));
+                ObservableList<String> searchResults = FXCollections.observableArrayList();
+                while (resultSet.next()) {
+                    searchResults.add(resultSet.getString("name"));
+                }
+                Platform.runLater(() -> users.setAll(searchResults));
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        });
     }
 
     private void displayChat(String user) {
-        chatBox.getChildren().clear();
-        ObservableList<String> chat = userChats.computeIfAbsent(user, k -> FXCollections.observableArrayList());
+        Platform.runLater(() -> {
+            chatBox.getChildren().clear();
+            ObservableList<String> chat = userChats.computeIfAbsent(user, k -> FXCollections.observableArrayList());
 
-        for (String message : chat) {
-            addMessageToChat(message, false);
+            // Load chat history from database
+            loadChatHistory(user);
+
+            for (String message : chat) {
+                addMessageToChat(message, message.startsWith("admin:"));
+            }
+        });
+    }
+
+    private void loadChatHistory(String username) {
+        int userId = getUserIdFromDatabase(username);
+        if (userId == -1) return;
+
+        String sql = "SELECT sender_id, content FROM messages WHERE (sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?) ORDER BY sent_at ASC";
+
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, adminId);
+            pstmt.setInt(2, userId);
+            pstmt.setInt(3, userId);
+            pstmt.setInt(4, adminId);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            ObservableList<String> chat = userChats.get(username);
+            while (rs.next()) {
+                int senderId = rs.getInt("sender_id");
+                String content = rs.getString("content");
+                String message = (senderId == adminId ? "admin: " : username + ": ") + content;
+                chat.add(message);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error loading chat history: " + e.getMessage());
         }
     }
 
     @FXML
     private void sendMessage() {
         if (currentUser == null || messageField.getText().trim().isEmpty()) {
-            return; // Do nothing if no current user or empty message
+            return;
         }
 
         String message = messageField.getText().trim();
+        String finalMessage = "admin: " + message;
 
-        // Store the message in the user's chat history
-        ObservableList<String> chat = userChats.computeIfAbsent(currentUser, k -> FXCollections.observableArrayList());
-        chat.add("admin: " + message);
+        executorService.submit(() -> {
+            int receiverId = getUserIdFromDatabase(currentUser);
+            if (receiverId != -1) {
+                saveMessageToDatabase(adminId, receiverId, message);
+                chatClient.sendMessage(finalMessage);
+                Platform.runLater(() -> {
+                    ObservableList<String> chat = userChats.computeIfAbsent(currentUser, k -> FXCollections.observableArrayList());
+                    chat.add(finalMessage);
+                    addMessageToChat(finalMessage, true);
+                    messageField.clear();
+                });
+            } else {
+                Platform.runLater(() -> {
+                    // Handle error - user not found
+                    System.out.println("Error: User not found in database");
+                });
+            }
+        });
+    }
 
-        addMessageToChat("admin: " + message, true);
+    private void saveMessageToDatabase(int senderId, int receiverId, String content) {
+        String sql = "INSERT INTO messages (sender_id, receiver_id, content, sent_at) VALUES (?, ?, ?, ?)";
 
-        messageField.clear(); // Clear input field after sending
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, senderId);
+            pstmt.setInt(2, receiverId);
+            pstmt.setString(3, content);
+            pstmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error saving message to database: " + e.getMessage());
+        }
+    }
+
+    private int getUserIdFromDatabase(String username) {
+        String sql = "SELECT user_id FROM users WHERE name = ?";
+
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("user_id");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting user ID from database: " + e.getMessage());
+        }
+
+        return -1; // Return -1 if user not found
+    }
+
+    private int getAdminId() {
+        String sql = "SELECT user_id FROM users WHERE role = 'admin' LIMIT 1";
+
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("user_id");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting admin ID from database: " + e.getMessage());
+        }
+
+        return -1; // Return -1 if admin not found
     }
 
     private void addMessageToChat(String message, boolean isAdmin) {
@@ -138,6 +248,25 @@ public class AdminMessagesController {
 
         messageBox.getChildren().add(text);
         chatBox.getChildren().add(messageBox);
+    }
+
+    private void startMessageListener() {
+        Thread listenerThread = new Thread(() -> {
+            try {
+                while (true) {
+                    String message = chatClient.receiveMessage();
+                    Platform.runLater(() -> {
+                        ObservableList<String> chat = userChats.computeIfAbsent(currentUser, k -> FXCollections.observableArrayList());
+                        chat.add(message);
+                        addMessageToChat(message, false);
+                    });
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        listenerThread.setDaemon(true);
+        listenerThread.start();
     }
 
     @FXML
@@ -152,5 +281,9 @@ public class AdminMessagesController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void shutdown() {
+        executorService.shutdown();
     }
 }
