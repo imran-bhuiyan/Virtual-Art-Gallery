@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<BorderPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.AdminPageController" prefHeight="700.0" prefWidth="900.0">
+    <center>
+        <AnchorPane prefHeight="716.0" prefWidth="900.0">
+            <children>
+                <Pane layoutX="-3.0" layoutY="-1.0" prefHeight="74.0" prefWidth="906.0" style="-fx-background-color: #1eb6a7;">
+                    <children>
+                        <Button layoutX="807.0" layoutY="24.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="28.0" style="-fx-background-color: #1eb6a7;" />
+                        <Text layoutX="397.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Panel" wrappingWidth="162.125732421875">
+                            <font>
+                                <Font name="System Italic" size="24.0" />
+                            </font>
+                        </Text>
+                        <MenuButton layoutX="835.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Logout" />
+                            </items>
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="file:/D:/Projects/AOOP/Project_23-07-24/src/main/java/Icon/User.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </MenuButton>
+                    </children>
+                    <effect>
+                        <Blend />
+                    </effect>
+                </Pane>
+
+                <AnchorPane layoutX="183.0" layoutY="156.0" prefHeight="529.0" prefWidth="727.0">
+                    <children>
+                        <Text layoutX="15.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports" font="{size: 18.0}"/>
+
+                        <ListView fx:id="reportListView" layoutX="14.0" layoutY="44.0" prefHeight="300.0" prefWidth="668.0"/>
+
+                        <Pane layoutX="14.0" layoutY="360.0" prefHeight="150.0" prefWidth="668.0" style="-fx-background-color: #D4F1F9; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;">
+                            <children>
+                                <Text layoutX="15.0" layoutY="31.0" text="Response:" />
+                                <TextArea fx:id="responseTextArea" layoutX="15.0" layoutY="44.0" prefWidth="400.0" prefHeight="80.0" promptText="Type your response here..." />
+                                <CheckBox layoutX="420.0" layoutY="45.0" mnemonicParsing="false" text="Mark as Done" />
+                                <Button layoutX="540.0" layoutY="44.0" text="Send Response" onAction="#handleSendResponse"/>
+                                <Button layoutX="540.0" layoutY="80.0" text="Delete Report" onAction="#handleDeleteReport"/>
+                            </children>
+                        </Pane>
+                    </children>
+                </AnchorPane>
+
+                <AnchorPane layoutX="12.0" layoutY="119.0" prefHeight="546.0" prefWidth="162.0" style="-fx-background-color: #AFDDE5;">
+                    <children>
+                        <Button layoutX="46.0" layoutY="242.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Orders"/>
+                        <MenuButton layoutX="34.0" layoutY="186.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Customers">
+                            <items>
+                                <MenuItem text="Add" />
+                                <MenuItem text="Manage" />
+                            </items>
+                        </MenuButton>
+                        <MenuButton layoutX="45.0" layoutY="294.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Events">
+                            <items>
+                                <MenuItem text="Add" />
+                                <MenuItem text="Manage" />
+                            </items>
+                        </MenuButton>
+                        <Button layoutX="48.0" layoutY="341.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Chats"/>
+                        <Button layoutX="40.0" layoutY="392.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Reports"/>
+                        <MenuButton layoutX="52.0" layoutY="89.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artist">
+                            <items>
+                                <MenuItem text="Add" />
+                                <MenuItem text="Manage" />
+                            </items>
+                        </MenuButton>
+                        <MenuButton layoutX="38.0" layoutY="138.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artworks">
+                            <items>
+                                <MenuItem text="Add" />
+                                <MenuItem text="Manage" />
+                            </items>
+                        </MenuButton>
+                        <Button layoutX="27.0" layoutY="41.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="112.0" style="-fx-background-color: transparent;" text="Dashboard"/>
+                        <Button layoutX="39.0" layoutY="442.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Inquiries"/>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" layoutX="69.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="file:/D:/Projects/AOOP/Project_23-07-24/src/main/java/Icon/Menu.png" />
+                            </image>
+                        </ImageView>
+                        <Button layoutX="37.0" layoutY="494.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Auctions"/>
+                    </children>
+                </AnchorPane>
+            </children>
+            <effect>
+                <Blend />
+            </effect>
+        </AnchorPane>
+    </center>
+</BorderPane>

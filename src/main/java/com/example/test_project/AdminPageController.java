@@ -12,97 +12,109 @@ import java.io.IOException;
 
 public class AdminPageController {
 
-//    @FXML
-//    private Label welcomeText;
-
-//      public void setWelcomeText(String username) {
-//          if (welcomeText != null) {
-//            welcomeText.setText("Welcome, " + username + "!");
-//            } else {
-//              System.out.println("Welcome text label is null. Make sure it's properly initialized in the FXML file.");
-//           }
-//        }
-
-//    @FXML
-//    void adminAddAuctions(ActionEvent event) throws IOException {
-//        loadPage(event, "Admin/AdminAddAuction.fxml");
-//    }
-
     @FXML
-    void adminReports(ActionEvent event) throws IOException {
+    void handleReports(ActionEvent event) throws IOException {
+        System.out.println("Admin Reports button clicked");
         loadPage(event, "Admin/AdminReports.fxml");
     }
 
     @FXML
-    void adminAddArtist(ActionEvent event) throws IOException {
+    void handleAddArtist(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Add Artist page");
         loadPage(event, "Admin/AdminAddArtist.fxml");
     }
 
     @FXML
-    void adminAddArtwork(ActionEvent event) throws IOException {
+    void handleAddArtwork(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Add Artwork page");
         loadPage(event, "Admin/AdminAddArtwork.fxml");
     }
 
     @FXML
-    void adminAddCustomers(ActionEvent event) throws IOException {
+    void handleAddCustomers(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Add Customers page");
         loadPage(event, "Admin/AdminAddCustomer.fxml");
     }
 
     @FXML
-    void adminAddEvents(ActionEvent event) throws IOException {
+    void handleAddEvents(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Add Events page");
         loadPage(event, "Admin/AdminAddEvent.fxml");
     }
 
     @FXML
-    void adminAuctions(ActionEvent event) throws IOException {
+    void handleAuctions(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Auctions page");
         loadPage(event, "Admin/AdminAuction.fxml");
     }
 
     @FXML
-    void adminChats(ActionEvent event) throws IOException {
-        loadPage(event, "Admin/AdminChat.fxml");
+    void handleChats(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Chats page");
+        loadPage(event, "Admin/AdminMessages.fxml");
     }
 
     @FXML
-    void adminDashboard(ActionEvent event) throws IOException {
+    void handleDashboard(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Dashboard page");
         loadPage(event, "Admin/AdminDashboard.fxml");
     }
 
     @FXML
-    void adminInquiries(ActionEvent event) throws IOException {
+    void handleInquiries(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Inquiries page");
         loadPage(event, "Admin/AdminInquiries.fxml");
     }
 
     @FXML
-    void adminManageArtist(ActionEvent event) throws IOException {
+    void handleManageArtist(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Manage Artist page");
         loadPage(event, "Admin/AdminManageArtist.fxml");
     }
 
     @FXML
-    void adminManageArtwork(ActionEvent event) throws IOException {
+    void handleManageArtwork(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Manage Artwork page");
         loadPage(event, "Admin/AdminManageArtwork.fxml");
     }
 
     @FXML
-    void adminManageCustomers(ActionEvent event) throws IOException {
+    void handleManageCustomers(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Manage Customers page");
         loadPage(event, "Admin/AdminManageCustomers.fxml");
     }
 
     @FXML
-    void adminManageEvents(ActionEvent event) throws IOException {
+    void handleManageEvents(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Manage Events page");
         loadPage(event, "Admin/AdminManageEvent.fxml");
     }
 
     @FXML
-    void adminOrders(ActionEvent event) throws IOException {
+    void handleOrders(ActionEvent event) throws IOException {
+        System.out.println("Navigating to Orders page");
         loadPage(event, "Admin/AdminOrders.fxml");
     }
 
-    private void loadPage(ActionEvent event, String fxmlFile) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+        System.out.println("Logging out");
+        loadPage(event, "userOrGuestHomePage.fxml");
+    }
+
+    // Improved loadPage method with exception handling
+    private void loadPage(ActionEvent event, String fxmlFile) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace(); // This will help with debugging if loading fails
+        }
+    }
+
+    public void handleBrowseButtonAction(ActionEvent event) {
     }
 }

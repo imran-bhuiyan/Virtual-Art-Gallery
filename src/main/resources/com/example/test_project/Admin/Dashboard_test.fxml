@@ -17,8 +17,6 @@
     <top>
         <AnchorPane prefHeight="716.0" prefWidth="900.0" BorderPane.alignment="CENTER">
             <children>
-
-                <!-- Cards Section (Colored Boxes) -->
                 <AnchorPane layoutX="192.0" layoutY="152.0" prefHeight="200.0" prefWidth="200.0" styleClass="colored_card">
                     <effect>
                         <InnerShadow />
@@ -40,13 +38,11 @@
                         </Pane>
                     </children>
                 </AnchorPane>
-
-                <!-- Pane for Header -->
                 <Pane layoutX="-3.0" layoutY="-1.0" prefHeight="74.0" prefWidth="906.0" style="-fx-background-color: #40E0D0;">
                     <children>
                         <MenuButton layoutX="824.0" layoutY="21.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Logout" />
+                                <MenuItem mnemonicParsing="false" text="Logout" onAction="#logout" />
                             </items>
                             <graphic>
                                 <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -66,8 +62,6 @@
                         <Blend />
                     </effect>
                 </Pane>
-
-                <!-- More Cards -->
                 <AnchorPane layoutX="194.0" layoutY="402.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #AFDDE5;">
                     <effect>
                         <InnerShadow />
@@ -85,8 +79,7 @@
                         </Text>
                     </children>
                 </AnchorPane>
-
-                <AnchorPane layoutX="431.0" layoutY="402.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EBE9E1;">
+                <AnchorPane layoutX="431.0" layoutY="402.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EBE9E1;" onAction="#adminReports">
                     <effect>
                         <InnerShadow />
                     </effect>
@@ -103,7 +96,6 @@
                         </Text>
                     </children>
                 </AnchorPane>
-
                 <AnchorPane layoutX="682.0" layoutY="402.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #40E0D0;">
                     <effect>
                         <InnerShadow />
@@ -121,7 +113,6 @@
                         </Text>
                     </children>
                 </AnchorPane>
-
                 <AnchorPane layoutX="433.0" layoutY="152.0" prefHeight="200.0" prefWidth="198.0" style="-fx-background-color: #90AEAD;">
                     <effect>
                         <InnerShadow />
@@ -139,7 +130,6 @@
                         </Text>
                     </children>
                 </AnchorPane>
-
                 <AnchorPane layoutX="682.0" layoutY="152.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #D3D9D4;">
                     <effect>
                         <InnerShadow />
@@ -157,104 +147,55 @@
                         </Text>
                     </children>
                 </AnchorPane>
-
-                <!-- Main Menu Buttons Pane -->
                 <AnchorPane layoutX="2.0" layoutY="109.0" prefHeight="546.0" prefWidth="162.0" style="-fx-background-color: #AFDDE5;">
                     <children>
-
-                        <!-- Dashboard Button -->
-                        <Button layoutX="27.0" layoutY="41.0" mnemonicParsing="false" onAction="#adminDashboard" prefHeight="38.0" prefWidth="112.0" style="-fx-background-color: transparent;" text="Dashboard">
-                            <font>
-                                <Font size="17.0" />
-                            </font>
-                        </Button>
-
-                        <!-- Artist Menu Button -->
-                        <MenuButton layoutX="52.0" layoutY="89.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artist">
-                            <items>
-                                <MenuItem onAction="#adminAddArtist" text="Add" />
-                                <MenuItem onAction="#adminManageArtist" text="Manage" />
-                            </items>
-                            <font>
-                                <Font size="17.0" />
-                            </font>
-                        </MenuButton>
-
-                        <!-- Artworks Menu Button -->
-                        <MenuButton layoutX="38.0" layoutY="138.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artworks">
-                            <items>
-                                <MenuItem onAction="#adminAddArtwork" text="Add" />
-                                <MenuItem onAction="#adminManageArtwork" text="Manage" />
-                            </items>
-                            <font>
-                                <Font size="17.0" />
-                            </font>
-                        </MenuButton>
-
-                        <!-- Customers Menu Button -->
-                        <MenuButton layoutX="34.0" layoutY="186.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Customers">
-                            <items>
-                                <MenuItem onAction="#adminAddCustomers" text="Add" />
-                                <MenuItem onAction="#adminManageCustomers" text="Manage" />
-                            </items>
-                            <font>
-                                <Font size="17.0" />
-                            </font>
-                        </MenuButton>
-
-                        <!-- Orders Button -->
                         <Button layoutX="46.0" layoutY="242.0" mnemonicParsing="false" onAction="#adminOrders" style="-fx-background-color: transparent;" text="Orders">
                             <font>
                                 <Font size="17.0" />
                             </font>
                         </Button>
-
-                        <!-- Events Menu Button -->
-                        <MenuButton layoutX="45.0" layoutY="294.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Events">
+                        <MenuButton layoutX="34.0" layoutY="186.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Events">
                             <items>
-                                <MenuItem onAction="#adminAddEvents" text="Add" />
-                                <MenuItem onAction="#adminManageEvents" text="Manage" />
+                                <MenuItem mnemonicParsing="false" text="Add Event" onAction="#adminAddEvents" />
+                                <MenuItem mnemonicParsing="false" text="Manage Event" onAction="#adminManageEvents" />
                             </items>
-                            <font>
-                                <Font size="17.0" />
-                            </font>
                         </MenuButton>
-
-                        <!-- Chats Button -->
-                        <Button layoutX="48.0" layoutY="341.0" mnemonicParsing="false" onAction="#adminChats" style="-fx-background-color: transparent;" text="Chats">
+                        <MenuButton layoutX="35.0" layoutY="138.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Customers">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Add Customer" onAction="#adminAddCustomers" />
+                                <MenuItem mnemonicParsing="false" text="Manage Customers" onAction="#adminManageCustomers" />
+                            </items>
+                        </MenuButton>
+                        <Button layoutX="46.0" layoutY="308.0" mnemonicParsing="false" onAction="#adminChats" style="-fx-background-color: transparent;" text="Chats">
                             <font>
                                 <Font size="17.0" />
                             </font>
                         </Button>
-
-                        <!-- Reports Button -->
-                        <Button layoutX="40.0" layoutY="392.0" mnemonicParsing="false" onAction="#adminReports" style="-fx-background-color: transparent;" text="Reports">
+                        <MenuButton layoutX="34.0" layoutY="91.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artworks">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Add Artwork" onAction="#adminAddArtwork" />
+                                <MenuItem mnemonicParsing="false" text="Manage Artworks" onAction="#adminManageArtwork" />
+                            </items>
+                        </MenuButton>
+                        <Button layoutX="46.0" layoutY="366.0" mnemonicParsing="false" onAction="#adminInquiries" style="-fx-background-color: transparent;" text="Inquiries">
                             <font>
                                 <Font size="17.0" />
                             </font>
                         </Button>
-
-                        <!-- Inquiries Button -->
-                        <Button layoutX="39.0" layoutY="442.0" mnemonicParsing="false" onAction="#adminInquiries" style="-fx-background-color: transparent;" text="Inquiries">
+                        <Button layoutX="46.0" layoutY="433.0" mnemonicParsing="false" onAction="#adminAuctions" style="-fx-background-color: transparent;" text="Auctions">
                             <font>
                                 <Font size="17.0" />
                             </font>
                         </Button>
-
-                        <!-- Auctions Button -->
-                        <Button layoutX="37.0" layoutY="494.0" mnemonicParsing="false" onAction="#adminAuctions" style="-fx-background-color: transparent;" text="Auctions">
-                            <font>
-                                <Font size="17.0" />
-                            </font>
-                        </Button>
-
+                        <MenuButton layoutX="36.0" layoutY="44.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artists">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Add Artist" onAction="#adminAddArtist" />
+                                <MenuItem mnemonicParsing="false" text="Manage Artists" onAction="#adminManageArtist" />
+                            </items>
+                        </MenuButton>
                     </children>
                 </AnchorPane>
-
             </children>
-            <effect>
-                <Blend />
-            </effect>
         </AnchorPane>
     </top>
 </BorderPane>

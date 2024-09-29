@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.AdminMessagesController">
+    <stylesheets>
+        <URL value="@chat-styles.css" />
+    </stylesheets>
+    <children>
+        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <!-- Header -->
+                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #1eb6a7; -fx-padding: 10px;">
+                    <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery - Admin Messages">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Text>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: white;" text="Back to Dashboard">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+
+                <!-- Main Content -->
+                <SplitPane dividerPositions="0.25" VBox.vgrow="ALWAYS">
+                    <!-- User List -->
+                    <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10px;">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Users">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Text>
+                        <TextField fx:id="userSearchField" promptText="Search users..." />
+                        <ListView fx:id="userListView" VBox.vgrow="ALWAYS" />
+                    </VBox>
+
+                    <!-- Chat Area -->
+                    <VBox spacing="10">
+                        <Text fx:id="currentUserName" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a user">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="10.0" top="10.0" />
+                            </VBox.margin>
+                        </Text>
+                        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                            <content>
+                                <VBox fx:id="chatBox" spacing="10" styleClass="chat-box" />
+                            </content>
+                        </ScrollPane>
+                        <HBox spacing="10" style="-fx-padding: 10px;">
+                            <TextField fx:id="messageField" promptText="Type your message here..." HBox.hgrow="ALWAYS" />
+                            <Button mnemonicParsing="false" onAction="#handleSendMessage" text="Send" />
+                        </HBox>
+                    </VBox>
+                </SplitPane>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

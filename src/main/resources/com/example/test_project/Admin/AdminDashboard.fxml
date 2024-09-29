@@ -149,15 +149,15 @@
             </AnchorPane>
             <AnchorPane layoutX="2.0" layoutY="109.0" prefHeight="546.0" prefWidth="162.0" style="-fx-background-color: #AFDDE5;">
                <children>
-                  <Button layoutX="46.0" layoutY="242.0" mnemonicParsing="false" onAction="#adminOrders" style="-fx-background-color: transparent;" text="Orders">
+                  <Button layoutX="46.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleOrders" style="-fx-background-color: transparent;" text="Orders">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Button>
                   <MenuButton layoutX="34.0" layoutY="186.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Customers">
                      <items>
-                        <MenuItem onAction="#adminAddCustomers" text="Add" />
-                        <MenuItem onAction="#adminManageCustomers" text="Manage" />
+                        <MenuItem onAction="#handleAddCustomers" text="Add" />
+                        <MenuItem onAction="#handleManageCustomers" text="Manage" />
                      </items>
                      <font>
                         <Font size="17.0" />
@@ -165,27 +165,27 @@
                   </MenuButton>
                   <MenuButton layoutX="45.0" layoutY="294.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Events">
                      <items>
-                        <MenuItem onAction="#adminAddEvents" text="Add" />
-                        <MenuItem onAction="#adminManageEvents" text="Manage" />
+                        <MenuItem onAction="#handleAddEvents" text="Add" />
+                        <MenuItem onAction="#handleManageEvents" text="Manage" />
                      </items>
                      <font>
                         <Font size="17.0" />
                      </font>
                   </MenuButton>
-                  <Button layoutX="48.0" layoutY="341.0" mnemonicParsing="false" onAction="#adminChats" style="-fx-background-color: transparent;" text="Chats">
+                  <Button layoutX="48.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleChats" style="-fx-background-color: transparent;" text="Chats">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Button>
-                  <Button layoutX="40.0" layoutY="392.0" mnemonicParsing="false" onAction="#adminReports" style="-fx-background-color: transparent;" text="Reports">
+                  <Button layoutX="40.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleReports" style="-fx-background-color: transparent;" text="Reports">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Button>
                   <MenuButton layoutX="52.0" layoutY="89.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artist">
                      <items>
-                        <MenuItem onAction="#adminAddArtist" text="Add" />
-                        <MenuItem onAction="#adminManageArtist" text="Manage" />
+                        <MenuItem onAction="#handleAddArtist" text="Add" />
+                        <MenuItem onAction="#handleManageArtist" text="Manage" />
                      </items>
                      <font>
                         <Font size="17.0" />
@@ -193,19 +193,19 @@
                   </MenuButton>
                   <MenuButton layoutX="38.0" layoutY="138.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artworks">
                      <items>
-                        <MenuItem onAction="#adminAddArtwork" text="Add" />
-                        <MenuItem onAction="#adminManageArtwork" text="Manage" />
+                        <MenuItem onAction="#handleAddArtwork" text="Add" />
+                        <MenuItem onAction="#handleManageArtwork" text="Manage" />
                      </items>
                      <font>
                         <Font size="17.0" />
                      </font>
                   </MenuButton>
-                  <Button layoutX="27.0" layoutY="41.0" mnemonicParsing="false" onAction="#adminDashboard" prefHeight="38.0" prefWidth="112.0" style="-fx-background-color: transparent;" text="Dashboard">
+                  <Button layoutX="27.0" layoutY="41.0" mnemonicParsing="false" onAction="#handleDashboard" prefHeight="38.0" prefWidth="112.0" style="-fx-background-color: transparent;" text="Dashboard">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Button>
-                  <Button layoutX="39.0" layoutY="442.0" mnemonicParsing="false" onAction="#adminInquiries" style="-fx-background-color: transparent;" text="Inquiries">
+                  <Button layoutX="39.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleInquiries" style="-fx-background-color: transparent;" text="Inquiries">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -215,7 +215,7 @@
                         <Image url="file:/D:/Projects/AOOP/Project_23-07-24/src/main/java/Icon/Menu.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="37.0" layoutY="494.0" mnemonicParsing="false" onAction="#adminAuctions" style="-fx-background-color: transparent;" text="Auctions">
+                  <Button layoutX="37.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleAuctions" style="-fx-background-color: transparent;" text="Auctions">
                      <font>
                         <Font size="17.0" />
                      </font>
