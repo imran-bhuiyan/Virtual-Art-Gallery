@@ -42,7 +42,7 @@ class ClientHandler implements Runnable {
     private PrintWriter out;
     private BufferedReader in;
     private String name;
-    private int userId; // Assuming each user has a unique ID
+    private int userId;
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
@@ -54,14 +54,18 @@ class ClientHandler implements Runnable {
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
+            // Read the username sent by the client
             name = in.readLine();
-            userId = getUserIdFromDatabase(name); // You need to implement this method
+            userId = getUserIdFromDatabase(name);
+            System.out.println("User connected: " + name);
+
             ChatServer.broadcastMessage(name + " has joined the chat", this);
 
             String message;
             while ((message = in.readLine()) != null) {
-                ChatServer.broadcastMessage(name + ": " + message, this);
-                saveMessageToDatabase(userId, -1, message); // -1 for broadcast messages
+                System.out.println("Received message: " + message);
+                ChatServer.broadcastMessage(message, this);
+                saveMessageToDatabase(userId, -1, message.split(":", 2)[1].trim()); // -1 for broadcast messages
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -98,7 +102,7 @@ class ClientHandler implements Runnable {
     }
 
     private int getUserIdFromDatabase(String username) {
-        String sql = "SELECT user_id FROM users WHERE username = ?";
+        String sql = "SELECT user_id FROM users WHERE name = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

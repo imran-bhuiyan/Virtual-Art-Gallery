@@ -10,6 +10,7 @@ public class ChatClient {
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
+    private String username;
 
     public ChatClient() {
         try {
@@ -21,8 +22,13 @@ public class ChatClient {
         }
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+        out.println(username); // Send username to server
+    }
+
     public void sendMessage(String message) {
-        out.println(message);
+        out.println(username + ": " + message);
     }
 
     public String receiveMessage() throws IOException {

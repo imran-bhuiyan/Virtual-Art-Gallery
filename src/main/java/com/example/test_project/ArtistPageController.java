@@ -6,23 +6,40 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ArtistPageController {
 
-//    @FXML
-//    private Label welcomeText;
+    @FXML private PasswordField currpass;
+    @FXML private PasswordField newpass;
+    @FXML private PasswordField currnewpass;
+    @FXML private Text db;
+    @FXML private Text em;
+    @FXML private Text nam;
+    @FXML private TextField emailField;
+    @FXML private TextField nameField;
 
-//      public void setWelcomeText(String username) {
-//          if (welcomeText != null) {
-//            welcomeText.setText("Welcome, " + username + "!");
-//            } else {
-//              System.out.println("Welcome text label is null. Make sure it's properly initialized in the FXML file.");
-//           }
-//        }
+    public void initialize() {
+        //loadProfileData();
+    }
+
+    public void setArtistId(int artistId) {
+        System.out.println("artisId From ArtistPageController : " + artistId);
+        CurrentArtist.getInstance().setArtistId(artistId);
+       // loadProfileData();
+    }
+
 
 
     @FXML
@@ -65,11 +82,35 @@ public class ArtistPageController {
         loadPage(event, "Artist/ArtistPaintingPage.fxml");
     }
 
+
+
+//    @FXML
+//    void editProfile(ActionEvent event) throws IOException {
+//        loadPage(event, "Artist/ArtistProfileEdit.fxml");
+//    }
+
     private void loadPage(ActionEvent event, String fxmlFile) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Parent root = loader.load();
+
+        Object controller = loader.getController();
+        if (controller instanceof ArtistPageController) {
+            ((ArtistPageController) controller).setArtistId(CurrentArtist.getInstance().getArtistId());
+        }
+
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+
+
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

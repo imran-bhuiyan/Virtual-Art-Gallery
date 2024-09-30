@@ -1,20 +1,19 @@
 package com.example.test_project;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.geometry.Pos;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -47,6 +46,7 @@ public class AdminMessagesController {
     private ExecutorService executorService;
     private ChatClient chatClient;
     private int adminId;
+    private Map<String, Integer> unreadMessageCounts = new HashMap<>();
 
     @FXML
     public void initialize() {
@@ -62,9 +62,27 @@ public class AdminMessagesController {
 
         userListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                currentUser = newValue;
+                currentUser = newValue.split(" \\(")[0]; // Remove unread count from username
                 currentUserName.setText(currentUser);
                 displayChat(currentUser);
+            }
+        });
+
+        userListView.setCellFactory(lv -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(item);
+                    if (item.contains("(")) {
+                        setStyle("-fx-font-weight: bold;");
+                    } else {
+                        setStyle("");
+                    }
+                }
             }
         });
 
@@ -119,12 +137,19 @@ public class AdminMessagesController {
             chatBox.getChildren().clear();
             ObservableList<String> chat = userChats.computeIfAbsent(user, k -> FXCollections.observableArrayList());
 
+            // Clear the chat history before reloading
+            chat.clear();
+
             // Load chat history from database
             loadChatHistory(user);
 
             for (String message : chat) {
                 addMessageToChat(message, message.startsWith("admin:"));
             }
+
+            // Reset unread count for this user
+            unreadMessageCounts.put(user, 0);
+            updateUserListView();
         });
     }
 
@@ -169,7 +194,7 @@ public class AdminMessagesController {
             int receiverId = getUserIdFromDatabase(currentUser);
             if (receiverId != -1) {
                 saveMessageToDatabase(adminId, receiverId, message);
-                chatClient.sendMessage(finalMessage);
+                chatClient.sendMessage(currentUser + ": " + finalMessage);
                 Platform.runLater(() -> {
                     ObservableList<String> chat = userChats.computeIfAbsent(currentUser, k -> FXCollections.observableArrayList());
                     chat.add(finalMessage);
@@ -178,7 +203,6 @@ public class AdminMessagesController {
                 });
             } else {
                 Platform.runLater(() -> {
-                    // Handle error - user not found
                     System.out.println("Error: User not found in database");
                 });
             }
@@ -256,9 +280,12 @@ public class AdminMessagesController {
                 while (true) {
                     String message = chatClient.receiveMessage();
                     Platform.runLater(() -> {
-                        ObservableList<String> chat = userChats.computeIfAbsent(currentUser, k -> FXCollections.observableArrayList());
-                        chat.add(message);
-                        addMessageToChat(message, false);
+                        String[] parts = message.split(":", 2);
+                        if (parts.length == 2) {
+                            String sender = parts[0].trim();
+                            String content = parts[1].trim();
+                            handleIncomingMessage(sender, content);
+                        }
                     });
                 }
             } catch (IOException e) {
@@ -267,6 +294,30 @@ public class AdminMessagesController {
         });
         listenerThread.setDaemon(true);
         listenerThread.start();
+    }
+
+    private void handleIncomingMessage(String sender, String content) {
+        ObservableList<String> chat = userChats.computeIfAbsent(sender, k -> FXCollections.observableArrayList());
+        chat.add(sender + ": " + content);
+
+        if (sender.equals(currentUser)) {
+            // If the message is from the current user, update the chat view
+            addMessageToChat(sender + ": " + content, false);
+        } else {
+            // If the message is from another user, update the unread count
+            unreadMessageCounts.put(sender, unreadMessageCounts.getOrDefault(sender, 0) + 1);
+            updateUserListView();
+        }
+    }
+
+    private void updateUserListView() {
+        ObservableList<String> updatedUserList = FXCollections.observableArrayList();
+        for (String user : users) {
+            int unreadCount = unreadMessageCounts.getOrDefault(user, 0);
+            String displayName = user + (unreadCount > 0 ? " (" + unreadCount + ")" : "");
+            updatedUserList.add(displayName);
+        }
+        userListView.setItems(updatedUserList);
     }
 
     @FXML
