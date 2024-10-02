@@ -1,3 +1,4 @@
+// UserLoginController.java
 package com.example.test_project;
 
 import javafx.event.ActionEvent;
@@ -27,17 +28,20 @@ public class UserLoginController {
 
     private String userRole;
 
+    private String uname;
+
     @FXML
     void goCustomerHome(ActionEvent event) throws IOException {
-        String uname = username.getText();
+        uname = username.getText();
         String pass = userPass.getText();
 
         if (validateLogin(uname, pass)) {
             if ("customer".equals(userRole)) {
                 loadPage(event, "Customer/customerHomePage.fxml");
             } else if ("artist".equals(userRole)) {
-                 loadPage(event, "Artist/ArtistHomePage.fxml");
+                loadPage(event, "Artist/ArtistHomePage.fxml");
             } else if ("admin".equals(userRole)) {
+                // Redirect to AdminDashboard instead of AdminMessages
                 loadPage(event, "Admin/AdminDashboard.fxml");
             }
         } else {
@@ -47,7 +51,7 @@ public class UserLoginController {
 
     private boolean validateLogin(String username, String password) {
         boolean isValid = false;
-        String query = "SELECT password, role FROM Users WHERE name = ?";
+        String query = "SELECT password, role FROM users WHERE name = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -71,49 +75,34 @@ public class UserLoginController {
         return isValid;
     }
 
-    @FXML
-    void goHome(ActionEvent event) throws IOException {
-        loadPage(event, "guest/UserOrGuestHomePage.fxml");
-    }
-
-    @FXML
-    void goGuestRegistrationForm(ActionEvent event) throws IOException {
-        loadPage(event, "guest/guestRegistrationForm.fxml");
-    }
-
     private void loadPage(ActionEvent event, String fxmlFile) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
         Parent root = loader.load();
-        System.out.println(username);
 
-//        if(username != null) {
-//            ArtistPageController ar=loader.getController();
-//            ar.setWelcomeText(username);
-//        }
-
-//        if (username != null) {
-//            Object controller = loader.getController();
-//            if (controller instanceof ArtistPageController) {
-//                ArtistPageController artistController = (ArtistPageController) controller;
-//                artistController.setWelcomeText(username);
-//            }
-//        }
-
-
-
-
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-
-        private void showAlert (String title, String message){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(title);
-            alert.setHeaderText(null);
-            alert.setContentText(message);
-            alert.showAndWait();
-        }
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public String getUsername() {
+        return uname;
+    }
+    @FXML
+    public void goGuestRegistrationForm(ActionEvent event)throws IOException {
+        loadPage(event, "Guest/GuestRegistrationForm.fxml");
+    }
+
+    @FXML
+    public void goHome(ActionEvent event)throws IOException {
+        loadPage(event,"Guest/UserOrGuestHomePage");
+    }
+}

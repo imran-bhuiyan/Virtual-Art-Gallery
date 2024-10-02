@@ -10,4 +10,6 @@ module com.example.test_project {
 
     opens com.example.test_project to javafx.fxml;
     exports com.example.test_project;
+    exports chat;
+    opens chat to javafx.fxml;
 }

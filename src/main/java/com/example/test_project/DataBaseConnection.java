@@ -34,7 +34,7 @@ public class DataBaseConnection {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
-            e.printStackTrace(); // Consider using a logger instead of printStackTrace in production code
+            e.printStackTrace();
         }
         return connection;
     }
