@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" prefHeight="199.0" prefWidth="504.0" spacing="20.0" style="-fx-background-color: #FFF9E3;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.ArtistBalanceController">
+    <children>
+        <Label text="Your Current Balance" />
+        <Text fx:id="balanceText" text="Loading...">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font></Text>
+    </children>
+</VBox>

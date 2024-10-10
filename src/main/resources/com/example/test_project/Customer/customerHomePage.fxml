@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,22 +12,43 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.customerPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.customerHomePageController">
     <children>
-        <HBox alignment="CENTER" prefHeight="79.0" prefWidth="899.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
+        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="921.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
             <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
                <font>
-                  <Font name="System Italic" size="30.0" />
+                  <Font name="Bell MT Bold" size="27.0" />
                </font>
             </Text>
-                <Button mnemonicParsing="false" onAction="#goCustomerHome" style="-fx-background-color: transparent;" text="Home" textFill="#181818" />
-                <Button mnemonicParsing="false" onAction="#goCustomerPaintings" style="-fx-background-color: transparent;" text="Paintings" textFill="#181818" />
-                <Button mnemonicParsing="false" onAction="#goCustomerTopArt" style="-fx-background-color: transparent;" text="Top Art" textFill="#1b1b1b" />
-                <Button mnemonicParsing="false" onAction="#goCustomerEvents" style="-fx-background-color: transparent;" text="Events" textFill="#0d0d0d" />
-                <Button mnemonicParsing="false" onAction="#goCustomerAuction" style="-fx-background-color: transparent;" text="Auction" textFill="#0d0d0d" />
-                <Button mnemonicParsing="false" onAction="#goCustomerNFT" style="-fx-background-color: transparent;" text="NFT" textFill="#131212" />
-            <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerProfile" style="-fx-background-color: transparent;" text="Profile" textFill="#181818" />
+                <Button mnemonicParsing="false" onAction="#goCustomerHome" style="-fx-background-color: transparent;" text="Home" textFill="#181818">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerPaintings" style="-fx-background-color: transparent;" text="Paintings" textFill="#181818">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerTopArt" style="-fx-background-color: transparent;" text="Top Art" textFill="#1b1b1b">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerEvents" style="-fx-background-color: transparent;" text="Events" textFill="#0d0d0d">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerAuction" style="-fx-background-color: transparent;" text="Auction" textFill="#0d0d0d">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerNFT" style="-fx-background-color: transparent;" text="NFT" textFill="#131212">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerProfile" style="-fx-background-color: transparent;" text="Profile" textFill="#181818">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
                 <Button mnemonicParsing="false" onAction="#goCustomerCart" prefWidth="0.0" style="-fx-background-color: transparent;">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0">
@@ -53,56 +76,52 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button layoutX="843.0" layoutY="36.0" mnemonicParsing="false" onAction="#customerLogout" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/logout.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             </children>
         </HBox>
 
-        <StackPane layoutX="-2.0" layoutY="77.0" prefHeight="268.0" prefWidth="899.0">
+        <StackPane layoutX="-2.0" layoutY="77.0" prefHeight="268.0" prefWidth="871.0">
             <children>
-                <ImageView fitHeight="268.0" fitWidth="892.0" opacity="0.61" pickOnBounds="true" preserveRatio="true">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To Virtual Art Gallery">
+                    <font>
+                        <Font name="Arial Narrow Bold Italic" size="56.0" />
+                    </font>
+                </Text>
+                <ImageView fitHeight="275.0" fitWidth="925.0" opacity="0.35" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/rsz_nature.jpg" />
                     </image>
                 </ImageView>
-                <Text fill="#151515" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To Virtual Art Gallery">
-                    <font>
-                        <Font name="Arial Narrow Bold" size="55.0" />
-                    </font>
-                </Text>
             </children>
         </StackPane>
 
         <Text fill="#201a1a" layoutX="208.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step into a world where creativity knows no bounds and art comes alive in the digital realm" />
 
-        <Pane layoutX="-1.0" layoutY="345.0" prefHeight="294.0" prefWidth="326.0" style="-fx-border-color: #000000;">
-            <children>
-                <ImageView fitHeight="235.0" fitWidth="306.0" layoutX="10.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/rsz_beautiful-shot-airplane-going-building-with-starry-sky-background.jpg" />
-               </image></ImageView>
-                <Text layoutX="69.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Featured Artwork">
-                    <font>
-                        <Font name="System Bold" size="21.0" />
-                    </font>
-                </Text>
-                <Text layoutX="65.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'Starry Night' by Vincent van Gogh" />
-            </children>
-        </Pane>
+        <Pane layoutY="345.0" prefHeight="294.0" prefWidth="921.0" style="-fx-border-color: #000000;">
+         <children>
+            <Button layoutX="151.0" layoutY="79.0" mnemonicParsing="false" onAction="#addCredit" prefHeight="31.0" prefWidth="135.0" style="-fx-background-color: blue;" text="Add Credit " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Label layoutX="9.0" layoutY="29.0" text="Balance : " textFill="#b90d0d">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="balance" layoutX="144.0" layoutY="29.0" prefHeight="35.0" prefWidth="149.0" />
+            <Button layoutX="306.0" layoutY="34.0" mnemonicParsing="false" onAction="#seeBalance" prefHeight="25.0" prefWidth="54.0" text="See" />
+         </children></Pane>
 
-        <Pane layoutX="572.0" layoutY="345.0" prefHeight="293.0" prefWidth="326.0" style="-fx-border-color: #000000;">
-            <children>
-                <Text layoutX="82.0" layoutY="36.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Upcoming Event" />
-            <Text layoutX="59.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
-            <Text layoutX="100.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Retrive" />
-            <Text layoutX="59.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
-            <Text layoutX="94.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database retrive" />
-            <Text layoutX="59.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Venue:" />
-            <Text layoutX="103.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database" />
-            <Text layoutX="61.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity: " />
-            <Text layoutX="117.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20" />
-            </children>
-        </Pane>
-
-        <Button layoutX="757.0" layoutY="640.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="143.0" style="-fx-background-color: #40E0D0;" text="Chat With Admin">
+        <Button layoutX="778.0" layoutY="640.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="143.0" style="-fx-background-color: #40E0D0;" text="Chat With Admin">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0">
                     <image>

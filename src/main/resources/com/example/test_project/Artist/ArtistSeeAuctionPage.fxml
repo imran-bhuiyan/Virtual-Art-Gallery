@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="728.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.ArtistSeeAuctionsController">
+   <children>
+      <Pane layoutX="-5.0" prefHeight="74.0" prefWidth="996.0" style="-fx-background-color: #40E0D0;">
+         <children>
+            <Text layoutX="453.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AUCTIONS" wrappingWidth="162.125732421875">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+         </children>
+         <effect>
+            <Blend />
+         </effect>
+      </Pane>
+      <ScrollPane layoutX="174.0" layoutY="86.0" prefHeight="595.0" prefWidth="818.0">
+         <content>
+            <FlowPane fx:id="auctionCardsPane" hgap="20" prefWrapLength="800" vgap="20" />
+         </content>
+      </ScrollPane>
+      <AnchorPane layoutY="74.0" prefHeight="653.0" prefWidth="162.0" style="-fx-background-color: #AFDDE5;">
+         <children>
+            <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="21.0" prefWidth="142.0" spacing="10">
+               <children>
+                  <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Menu.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" onAction="#artistDashboard" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #40E0D0; -fx-text-fill: white;" text="Dashboard">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#artistPaintings" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Paintings">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#artistMyPainting" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="My Paintings">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#artistAddPainting" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Add Paintings">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="287.0" mnemonicParsing="false" onAction="#artistAddNFTs" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Add NFT">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#artistMessages" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Messages">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#artistAddAuctions" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Add Auction">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#artistMyProfile" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="My Profile">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#artistNotification" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Notifications">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#artistSeeAuction" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Auctions">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#artistOrders" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #FFD09B; -fx-text-fill: black;" text="Orders">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#artistLogout" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #FF6347; -fx-text-fill: white;" text="Logout">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

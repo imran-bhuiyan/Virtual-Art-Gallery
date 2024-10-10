@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="IU-241.18034.62">
-    <data-source name="User Data Source" uuid="e5d63c2f-b113-4106-bafe-be0498fad914">
+    <data-source name="User Data Source" uuid="eaf4d423-7c73-4b1c-9e1d-fe56a023667b">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>

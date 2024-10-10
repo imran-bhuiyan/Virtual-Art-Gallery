@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="450.0" prefWidth="368.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="com.example.test_project.ArtistEditPaintingController">
+    <children>
+        <VBox alignment="CENTER" spacing="10" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+            <ImageView fx:id="paintingImageView" fitHeight="200" fitWidth="200" preserveRatio="true" />
+            <Button onAction="#changeImage" style="-fx-background-color: #40E0D0;" text="Change Image" />
+            <TextField fx:id="nameField" promptText="Painting Name" />
+            <TextField fx:id="yearField" promptText="Year" />
+            <TextField fx:id="categoryField" promptText="Category" />
+            <TextField fx:id="priceField" promptText="Price" />
+            <HBox alignment="CENTER" spacing="10">
+                <Button onAction="#updatePainting" style="-fx-background-color: Green;" text="Update" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+<!--                <Button onAction="#deletePainting" style="-fx-background-color: Red;" text="Delete" textFill="WHITE" />-->
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

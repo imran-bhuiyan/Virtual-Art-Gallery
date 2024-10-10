@@ -4,11 +4,10 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,14 +15,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.guestPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.userRegistrationController">
     <right>
         <AnchorPane prefHeight="600.0" prefWidth="350.0" BorderPane.alignment="CENTER">
             <children>
-                <TextField layoutX="151.0" layoutY="200.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #40E0D0; -fx-border-width: 0px 0px 2px 0px;" />
-                <TextField layoutX="151.0" layoutY="250.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #40E0D0; -fx-border-width: 0px 0px 2px 0px;" />
-                <PasswordField layoutX="151.0" layoutY="300.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #40E0D0; -fx-border-width: 0px 0px 2px 0px;" />
-                <ComboBox layoutX="151.0" layoutY="350.0" prefWidth="150.0" promptText="Select Role">
+                <TextField fx:id="userName" layoutX="151.0" layoutY="200.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #40E0D0; -fx-border-width: 0px 0px 2px 0px;" />
+                <TextField fx:id="uemail" layoutX="151.0" layoutY="250.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #40E0D0; -fx-border-width: 0px 0px 2px 0px;" />
+                <PasswordField fx:id="upass" layoutX="151.0" layoutY="300.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #40E0D0; -fx-border-width: 0px 0px 2px 0px;" />
+                <ComboBox fx:id="userRole" layoutX="151.0" layoutY="350.0" prefWidth="150.0" promptText="Select Role">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Artist" />
@@ -31,13 +30,7 @@
                         </FXCollections>
                     </items>
                 </ComboBox>
-                <RadioButton layoutX="151.0" layoutY="400.0" mnemonicParsing="false" text="Male">
-                    <toggleGroup>
-                        <ToggleGroup fx:id="gender" />
-                    </toggleGroup>
-                </RadioButton>
-                <RadioButton layoutX="227.0" layoutY="400.0" mnemonicParsing="false" text="Female" toggleGroup="$gender" />
-                <Button layoutX="174.0" layoutY="450.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #40E0D0;" text="Register" />
+                <Button layoutX="174.0" layoutY="450.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #40E0D0;" text="Register" />
                 <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="109.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/User.png" />
@@ -63,17 +56,18 @@
                         <Font name="System Bold" size="19.0" />
                     </font>
                 </Text>
-                <Hyperlink layoutX="150.0" layoutY="552.0" onAction="#goHome" text="Back to Home" />
-            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="109.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/User.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="110.0" layoutY="397.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Decision.png" />
-               </image>
-            </ImageView>
+                <Hyperlink layoutX="173.0" layoutY="547.0" onAction="#goHome" text="Back to Home" />
+                <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="109.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/User.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="109.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Calendar.png" />
+                    </image>
+                </ImageView>
+                <DatePicker fx:id="birthday" layoutX="149.0" layoutY="399.0" promptText="Birthday" />
             </children>
         </AnchorPane>
     </right>

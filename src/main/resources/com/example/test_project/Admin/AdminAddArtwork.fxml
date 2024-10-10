@@ -14,55 +14,50 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.AdminPageController">
-    <center>
-        <AnchorPane prefHeight="716.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.adminAddArtController">
+   <bottom>
+        <AnchorPane prefHeight="700.0" prefWidth="956.0" style="-fx-background-color: #D8D2C2;" BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane layoutX="263.0" layoutY="163.0" prefHeight="457.0" prefWidth="479.0" style="-fx-border-color: #1eb6a7;">
+                <AnchorPane layoutX="252.0" layoutY="139.0" prefHeight="490.0" prefWidth="562.0" style="-fx-background-color: #d8e4e9; -fx-background-radius: 10 10 10 10;">
                     <children>
                         <TextField fx:id="imagePathField" layoutX="172.0" layoutY="110.0" prefHeight="26.0" prefWidth="182.0" style="-fx-border-color: #1eb6a7;" />
-                        <Button layoutX="360.0" layoutY="111.0" mnemonicParsing="false" onAction="#handleBrowseButtonAction" text="Browse" />
-                        <TextField layoutX="172.0" layoutY="159.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: #1eb6a7;" />
-                        <ComboBox accessibleText="color pastel" layoutX="182.0" layoutY="355.0" prefHeight="26.0" prefWidth="182.0" promptText="Select" style="-fx-background-color: #d4f1f9;" />
-                        <Text layoutX="84.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert Image" />
+                        <Button layoutX="360.0" layoutY="111.0" mnemonicParsing="false" onAction="#photoBrowse" style="-fx-background-color: #40E0D0;" text="Browse" />
+                        <TextField fx:id="artistID" layoutX="172.0" layoutY="159.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: #1eb6a7;" />
+                        <ComboBox fx:id="catagorySelect" accessibleText="color pastel" layoutX="173.0" layoutY="362.0" prefHeight="26.0" prefWidth="182.0" promptText="Select" style="-fx-background-color: #d4f1f9;" />
+                        <Text layoutX="76.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert Image" />
                         <Text layoutX="84.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist ID" />
-                        <Text layoutX="87.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" wrappingWidth="59.15313720703125" />
+                        <Text layoutX="89.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price :" wrappingWidth="38.15313720703125" />
                         <ImageView fx:id="imageView" fitHeight="20.0" fitWidth="20.0" layoutX="359.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
-                        <Text layoutX="182.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Artwork">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Text>
-                  <Button layoutX="223.0" layoutY="406.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="58.0" style="-fx-background-color: Green;" text="Add" textFill="WHITE">
+                  <Button layoutX="213.0" layoutY="423.0" mnemonicParsing="false" onAction="#photoadd" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #6EC207;" text="Add" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Text layoutX="85.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-                  <TextField layoutX="172.0" layoutY="257.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: #1eb6a7;" />
-                  <Text layoutX="85.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-                  <TextField layoutX="172.0" layoutY="206.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: #1eb6a7;" />
-                  <Text layoutX="89.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Catagory" wrappingWidth="59.15313720703125" />
-                  <TextField layoutX="172.0" layoutY="308.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: #1eb6a7;" />
+                  <Text layoutX="90.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" />
+                  <TextField fx:id="photoname" layoutX="172.0" layoutY="206.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: #1eb6a7;" />
+                  <Text layoutX="78.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Catagory : " wrappingWidth="59.15313720703125" />
+                  <TextField fx:id="photoprice" layoutX="172.0" layoutY="258.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: #1eb6a7;" />
+                  <Text layoutX="89.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year :" wrappingWidth="38.15313720703125" />
+                  <TextField fx:id="photoyear" layoutX="172.0" layoutY="306.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: #1eb6a7;" />
                     </children>
                 </AnchorPane>
-            <Pane layoutX="2.0" prefHeight="74.0" prefWidth="900.0" style="-fx-background-color: #40E0D0;">
+            <Pane prefHeight="74.0" prefWidth="900.0" style="-fx-background-color: #40E0D0;">
                <children>
                   <MenuButton layoutX="824.0" layoutY="21.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Logout" />
+                        <MenuItem mnemonicParsing="false" onAction="#goLogout" text="Logout" />
                      </items>
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="file:/D:/Projects/AOOP/Project_23-07-24/src/main/java/Icon/User.png" />
+                              <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/User.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </MenuButton>
-                  <Text layoutX="411.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Panel" wrappingWidth="162.125732421875">
+                  <Text layoutX="411.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Painting" wrappingWidth="162.125732421875">
                      <font>
-                        <Font name="System Italic" size="24.0" />
+                        <Font name="Bell MT Bold" size="24.0" />
                      </font>
                   </Text>
                </children>
@@ -70,77 +65,72 @@
                   <Blend />
                </effect>
             </Pane>
-            <AnchorPane layoutX="14.0" layoutY="113.0" prefHeight="546.0" prefWidth="162.0" style="-fx-background-color: #AFDDE5;">
+            <AnchorPane layoutY="73.0" prefHeight="626.0" prefWidth="162.0" style="-fx-background-color: #AFDDE5;">
                <children>
-                  <Button layoutX="46.0" layoutY="242.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Orders">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
-                  <MenuButton layoutX="34.0" layoutY="186.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Customers">
+                  <MenuButton layoutX="16.0" layoutY="217.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="132.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Customers">
                      <items>
-                        <MenuItem text="Add" />
-                        <MenuItem text="Manage" />
+                        <MenuItem onAction="#addCustomer" text="Add" />
+                        <MenuItem onAction="#manageCustomer" text="Manage" />
                      </items>
                      <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </MenuButton>
-                  <MenuButton layoutX="45.0" layoutY="294.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Events">
+                  <MenuButton layoutX="14.0" layoutY="273.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="137.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Events" textAlignment="CENTER">
                      <items>
-                        <MenuItem text="Add" />
-                        <MenuItem text="Manage" />
+                        <MenuItem onAction="#addEvent" text="Add" />
+                        <MenuItem onAction="#manageEvent" text="Manage" />
                      </items>
                      <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </MenuButton>
-                  <Button layoutX="48.0" layoutY="341.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Chats">
+                  <Button layoutX="13.0" layoutY="379.0" mnemonicParsing="false" onAction="#goMessages" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Chats" textAlignment="CENTER">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="40.0" layoutY="392.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Reports">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
-                  <MenuButton layoutX="52.0" layoutY="89.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artist">
+                  <MenuButton layoutX="15.0" layoutY="109.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="133.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Artist" textAlignment="CENTER">
                      <items>
-                        <MenuItem text="Add" />
-                        <MenuItem text="Manage" />
+                        <MenuItem onAction="#addArtist" text="Add" />
+                        <MenuItem onAction="#manageArtist" text="Manage" />
                      </items>
                      <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </MenuButton>
-                  <MenuButton layoutX="38.0" layoutY="138.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artworks">
+                  <MenuButton layoutX="17.0" layoutY="162.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="131.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Artworks">
                      <items>
-                        <MenuItem text="Add" />
-                        <MenuItem text="Manage" />
+                        <MenuItem onAction="#addArtworks" text="Add" />
+                        <MenuItem onAction="#manageArtwork" text="Manage" />
                      </items>
                      <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </MenuButton>
-                  <Button layoutX="27.0" layoutY="41.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="112.0" style="-fx-background-color: transparent;" text="Dashboard">
+                  <Button layoutX="13.0" layoutY="55.0" mnemonicParsing="false" onAction="#goDashboard" prefHeight="38.0" prefWidth="135.0" style="-fx-background-color: #A5B68D;" text="Dashboard">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="39.0" layoutY="442.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Inquiries">
+                  <Button layoutX="12.0" layoutY="432.0" mnemonicParsing="false" onAction="#goQueries" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Inquiries" textAlignment="CENTER">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
                   <ImageView fitHeight="27.0" fitWidth="33.0" layoutX="69.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:/D:/Projects/AOOP/Project_23-07-24/src/main/java/Icon/Menu.png" />
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Menu.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="37.0" layoutY="494.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Auctions">
+                  <Button layoutX="15.0" layoutY="485.0" mnemonicParsing="false" onAction="#goAuctionRequest" prefHeight="40.0" prefWidth="135.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Auctions" textAlignment="CENTER">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#goOrders" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Orders" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
                </children>
@@ -150,5 +140,5 @@
                 <Blend />
             </effect>
         </AnchorPane>
-    </center>
+   </bottom>
 </BorderPane>

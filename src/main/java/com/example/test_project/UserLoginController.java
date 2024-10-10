@@ -1,4 +1,5 @@
-// UserLoginController.java
+//UserLoginController.java
+
 package com.example.test_project;
 
 import javafx.event.ActionEvent;
@@ -27,31 +28,29 @@ public class UserLoginController {
     private TextField username;
 
     private String userRole;
-
-    private String uname;
+    private int userId;
 
     @FXML
     void goCustomerHome(ActionEvent event) throws IOException {
-        uname = username.getText();
+        String uname = username.getText();
         String pass = userPass.getText();
 
         if (validateLogin(uname, pass)) {
             if ("customer".equals(userRole)) {
-                loadPage(event, "Customer/customerHomePage.fxml");
+                loadPageWithUserId(event, "Customer/customerHomePage.fxml");
             } else if ("artist".equals(userRole)) {
-                loadPage(event, "Artist/ArtistHomePage.fxml");
+                loadPageWithUserId(event, "Artist/ArtistDashboard.fxml");
             } else if ("admin".equals(userRole)) {
-                // Redirect to AdminDashboard instead of AdminMessages
-                loadPage(event, "Admin/AdminDashboard.fxml");
+                loadPageWithUserId(event, "Admin/AdminDashboard.fxml");
             }
         } else {
-            showAlert("Login Failed", "Incorrect username or password.");
+            showAlert("Login Failed", "Incorrect email or password.");
         }
     }
 
     private boolean validateLogin(String username, String password) {
         boolean isValid = false;
-        String query = "SELECT password, role FROM users WHERE name = ?";
+        String query = "SELECT user_id, password, role FROM Users WHERE email = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -62,6 +61,7 @@ public class UserLoginController {
                 if (rs.next()) {
                     String storedPassword = rs.getString("password");
                     userRole = rs.getString("role");
+                    userId = rs.getInt("user_id");
 
                     if (storedPassword.equals(password)) {
                         isValid = true;
@@ -73,6 +73,34 @@ public class UserLoginController {
         }
 
         return isValid;
+    }
+
+    @FXML
+    void goHome(ActionEvent event) throws IOException {
+        loadPage(event, "guest/UserOrGuestHomePage.fxml");
+    }
+
+    @FXML
+    void goGuestRegestrationForm(ActionEvent event) throws IOException {
+        loadPage(event, "guest/guestRegistrationForm.fxml");
+    }
+
+    private void loadPageWithUserId(ActionEvent event, String fxmlFile) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Parent root = loader.load();
+
+        BaseController controller = loader.getController();
+        if (controller != null) {
+            controller.setUserId(userId);
+            System.out.println("UserLoginController: Setting userId to " + userId + " for " + controller.getClass().getSimpleName());
+        } else {
+            System.out.println("UserLoginController: Warning - controller is null");
+        }
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void loadPage(ActionEvent event, String fxmlFile) throws IOException {
@@ -91,18 +119,5 @@ public class UserLoginController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    public String getUsername() {
-        return uname;
-    }
-    @FXML
-    public void goGuestRegistrationForm(ActionEvent event)throws IOException {
-        loadPage(event, "Guest/GuestRegistrationForm.fxml");
-    }
-
-    @FXML
-    public void goHome(ActionEvent event)throws IOException {
-        loadPage(event,"Guest/UserOrGuestHomePage");
     }
 }

@@ -8,22 +8,50 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="908.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.customerPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="916.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.customerPageTopArtController">
     <children>
-        <HBox alignment="CENTER" layoutX="1.0" prefHeight="77.0" prefWidth="908.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
+        <HBox alignment="CENTER" layoutX="1.0" prefHeight="78.0" prefWidth="916.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
+                <Text fill="#a10000" strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="144.53666973114014">
                     <font>
-                        <Font name="System Italic" size="30.0" />
+                        <Font name="Bell MT Bold" size="27.0" />
                     </font>
                 </Text>
-                <Button mnemonicParsing="false" onAction="#goCustomerHome" style="-fx-background-color: transparent;" text="Home" textFill="#181818" />
-                <Button mnemonicParsing="false" onAction="#goCustomerPaintings" style="-fx-background-color: transparent;" text="Paintings" textFill="#181818" />
-                <Button mnemonicParsing="false" onAction="#goCustomerTopArt" style="-fx-background-color: transparent;" text="Top Art" textFill="#1b1b1b" />
-                <Button mnemonicParsing="false" onAction="#goCustomerEvents" style="-fx-background-color: transparent;" text="Events" textFill="#0d0d0d" />
-                <Button mnemonicParsing="false" onAction="#goCustomerAuction" style="-fx-background-color: transparent;" text="Auction" textFill="#0d0d0d" />
-                <Button mnemonicParsing="false" onAction="#goCustomerNFT" style="-fx-background-color: transparent;" text="NFT" textFill="#131212" />
-                <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerProfile" style="-fx-background-color: transparent;" text="Profile" textFill="#181818" />
+                <Button mnemonicParsing="false" onAction="#goCustomerHome" style="-fx-background-color: transparent;" text="Home" textFill="#181818">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerPaintings" style="-fx-background-color: transparent;" text="Paintings" textFill="#181818">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerTopArt" style="-fx-background-color: transparent;" text="Top Art" textFill="#1b1b1b">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerEvents" style="-fx-background-color: transparent;" text="Events" textFill="#0d0d0d">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerAuction" style="-fx-background-color: transparent;" text="Auction" textFill="#0d0d0d">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerNFT" style="-fx-background-color: transparent;" text="NFT" textFill="#131212">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+                <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerProfile" style="-fx-background-color: transparent;" text="Profile" textFill="#181818">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
                 <Button mnemonicParsing="false" onAction="#goCustomerCart" prefWidth="0.0" style="-fx-background-color: transparent;">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0">
@@ -51,14 +79,25 @@
                         </ImageView>
                     </graphic>
                 </Button>
+                <Button layoutX="836.0" layoutY="35.0" mnemonicParsing="false" onAction="#customerLogout" style="-fx-background-color: transparent;">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/logout.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
             </children>
         </HBox>
-        <ImageView fitHeight="340.0" fitWidth="533.0" layoutX="178.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Street%20Art.jpg" />
-            </image>
-        </ImageView>
-        <Text layoutX="361.0" layoutY="511.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street Art">
+
+        <AnchorPane layoutX="196.0" layoutY="111.0" prefHeight="340.0" prefWidth="533.0" style="-fx-background-color: #f0f0f0;">
+            <children>
+                <ImageView fx:id="paintingImageView" fitHeight="300.0" fitWidth="500.0" layoutX="16.5" layoutY="20.0" preserveRatio="true" />
+            </children>
+        </AnchorPane>
+
+        <Text fx:id="titleText" layoutX="361.0" layoutY="511.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Painting Name">
             <font>
                 <Font name="System Bold Italic" size="32.0" />
             </font>
@@ -68,7 +107,7 @@
                 <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Love.png" />
             </image>
         </ImageView>
-        <Text layoutX="410.0" layoutY="555.0" strokeType="OUTSIDE" strokeWidth="0.0" text="300">
+        <Text fx:id="reactionsText" layoutX="410.0" layoutY="555.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
             <font>
                 <Font size="21.0" />
             </font>
@@ -78,7 +117,7 @@
                 <Font size="23.0" />
             </font>
         </Text>
-        <Text layoutX="444.0" layoutY="597.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Muzan Kibutsuji">
+        <Text fx:id="artistText" layoutX="444.0" layoutY="597.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist Name">
             <font>
                 <Font size="23.0" />
             </font>

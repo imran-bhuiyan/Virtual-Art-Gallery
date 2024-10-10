@@ -1,0 +1,54 @@
+.root {
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.field-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.text-field, .text-area, .date-picker {
+    -fx-pref-width: 300px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+}
+
+.text-area {
+    -fx-pref-height: 100px;
+}
+
+.image-button {
+    -fx-background-color: #4a90e2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+}
+
+.image-button:hover {
+    -fx-background-color: #3a7bc8;
+}
+
+.update-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+}
+
+.update-button:hover {
+    -fx-background-color: #45a049;
+}
+
+.clear-button {
+    -fx-background-color: #f44336;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+}
+
+.clear-button:hover {
+    -fx-background-color: #da190b;
+}

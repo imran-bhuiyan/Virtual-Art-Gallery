@@ -6,14 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -23,254 +24,263 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ArtistPaintingPageController {
+public class ArtistPaintingPageController extends BaseController {
 
-    @FXML private VBox paintingsContainer;
+    @FXML
+    private ComboBox<String> categoryComboBox;
+    @FXML
+    private VBox paintingsContainer;
 
-    private int artistId;
+    private DataBaseConnection dbConnection = new DataBaseConnection();
+    private static final String IMAGE_DIRECTORY = "D:\\Trimester\\8th\\AOOP\\IntellijIdea\\Test_Project\\src\\main\\java\\Uploads";
 
+    @FXML
     public void initialize() {
+        categoryComboBox.getItems().addAll("All Categories", "Oil paint", "Acrylic paint", "Watercolor", "Gouache", "Tempera", "Encaustic", "Casein", "Alkyd");
+        categoryComboBox.setValue("All Categories");
+        categoryComboBox.setOnAction(event -> loadPaintings());
+    }
+
+    @Override
+    public void setUserId(int userId) {
+        super.setUserId(userId);
+        System.out.println("ArtistPaintingPageController: setUserId() called with userId: " + userId);
         loadPaintings();
     }
 
-    public void setArtistId(int artistId) {
-        System.out.println("artistId From Artist Painting Controller : " + artistId);
-        this.artistId = artistId;
-        loadPaintings();
-    }
-
-    public void loadPaintings() {
-        int artistId = CurrentArtist.getInstance().getArtistId();
+    private void loadPaintings() {
         paintingsContainer.getChildren().clear();
-        String query = "SELECT p.*, u.name as artist_name, " +
-                "(SELECT COUNT(*) FROM Reactions r WHERE r.painting_id = p.painting_id) as reaction_count " +
-                "FROM Paintings p " +
-                "JOIN Users u ON p.artist_id = u.user_id";
+        String selectedCategory = categoryComboBox.getValue();
 
-        try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query);
-             ResultSet rs = pstmt.executeQuery()) {
+        String query = "SELECT p.painting_id, p.name as Title, u.name as Artist, p.year, p.category, p.price, p.image_url,  COUNT(r.painting_id) as Reaction " +
+                "FROM paintings as p JOIN users as u ON p.artist_id = u.user_id " +
+                "LEFT JOIN reactions as r ON r.painting_id = p.painting_id " +
+                "WHERE p.category = ? OR ? = 'All Categories' and p.painting_status ='active' " +
+                "GROUP BY p.painting_id";
 
-            while (rs.next()) {
-                AnchorPane paintingPane = createPaintingPane(rs);
-                paintingsContainer.getChildren().add(paintingPane);
+        try (Connection conn = dbConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, selectedCategory);
+            pstmt.setString(2, selectedCategory);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    AnchorPane paintingCard = createPaintingCard(
+                            rs.getString("Title"),
+                            rs.getString("Artist"),
+                            rs.getInt("year"),
+                            rs.getString("category"),
+                            rs.getDouble("price"),
+                            rs.getInt("Reaction"),
+                            rs.getString("image_url"),
+                            rs.getInt("painting_id")
+                    );
+                    paintingsContainer.getChildren().add(paintingCard);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load paintings");
+            // Handle the exception appropriately
         }
     }
 
-    private AnchorPane createPaintingPane(ResultSet rs) throws SQLException {
-        AnchorPane pane = new AnchorPane();
-        pane.setPrefHeight(250.0);
-        pane.setPrefWidth(848.0);
-        pane.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-width: 1;");
+    private AnchorPane createPaintingCard(String title, String artist, int year, String category, double price, int reactions, String imageUrl, int paintingId) {
+        AnchorPane card = new AnchorPane();
+        card.setPrefSize(860, 213);
 
-        // Add ImageView for the painting
-        ImageView paintingImage = new ImageView();
-        paintingImage.setFitHeight(200.0);
-        paintingImage.setFitWidth(200.0);
-        paintingImage.setLayoutX(10.0);
-        paintingImage.setLayoutY(10.0);
-        paintingImage.setPreserveRatio(true);
+        card.setStyle("-fx-background-color: #F0F8FF; -fx-border-color: #cccccc; -fx-border-width: 1;");
 
-        // Load the image
-        String imagePath = rs.getString("image_url");
-        File imageFile = new File(imagePath);
+        Text titleText = new Text(title);
+        titleText.setLayoutX(220);
+        titleText.setLayoutY(30);
+        titleText.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+
+        Text artistText = new Text("Artist: " + artist);
+        artistText.setLayoutX(220);
+        artistText.setLayoutY(57);
+
+        Text yearText = new Text("Year: " + year);
+        yearText.setLayoutX(220);
+        yearText.setLayoutY(87);
+
+        Text categoryText = new Text("Category: " + category);
+        categoryText.setLayoutX(220);
+        categoryText.setLayoutY(114);
+
+        Text priceText = new Text("Price: $" + price);
+        priceText.setLayoutX(220);
+        priceText.setLayoutY(142);
+
+        Text reactionText = new Text(String.valueOf(reactions));
+        reactionText.setLayoutX(269);
+        reactionText.setLayoutY(170);
+
+        Button reactionButton = new Button();
+        reactionButton.setLayoutX(218);
+        reactionButton.setLayoutY(153);
+
+
+
+        Image loveImage = new Image("file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Love.png");
+        ImageView imageView = new ImageView(loveImage);
+        imageView.setFitWidth(20);
+        imageView.setFitHeight(20);
+        reactionButton.setGraphic(imageView);
+
+        ImageView paintingImageView = new ImageView();
+        paintingImageView.setFitWidth(150);
+        paintingImageView.setFitHeight(150);
+        paintingImageView.setLayoutX(20);
+        paintingImageView.setLayoutY(20);
+
+        File imageFile = new File(imageUrl);
         if (imageFile.exists()) {
-            Image image = new Image(imageFile.toURI().toString());
-            paintingImage.setImage(image);
-
-            // Add click event to open larger image
-            paintingImage.setOnMouseClicked(event -> openLargerImage(image));
+            try {
+                Image image = new Image(imageFile.toURI().toString());
+                paintingImageView.setImage(image);
+                paintingImageView.setOnMouseClicked(event -> openImageInNewWindow(image));
+            } catch (Exception e) {
+                System.out.println("Error loading image: " + e.getMessage());
+                setPlaceholderImage(paintingImageView);
+            }
         } else {
-            // Set a placeholder image or show an error message
-            paintingImage.setImage(new Image("file:placeholder.png"));
+            System.out.println("Image file not found: " + imageUrl);
+            setPlaceholderImage(paintingImageView);
         }
 
-        Text nameText = new Text(rs.getString("name"));
-        nameText.setLayoutX(220.0);
-        nameText.setLayoutY(30.0);
-        nameText.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        card.getChildren().addAll(titleText, artistText, yearText, categoryText, priceText, reactionText,  reactionButton, paintingImageView);
 
-        Text artistLabel = new Text("Artist:");
-        artistLabel.setLayoutX(220.0);
-        artistLabel.setLayoutY(57.0);
-
-        Text artistName = new Text(rs.getString("artist_name"));
-        artistName.setLayoutX(255.0);
-        artistName.setLayoutY(57.0);
-
-        Text yearLabel = new Text("Year:");
-        yearLabel.setLayoutX(221.0);
-        yearLabel.setLayoutY(87.0);
-
-        Text year = new Text(String.valueOf(rs.getInt("year")));
-        year.setLayoutX(259.0);
-        year.setLayoutY(87.0);
-
-
-
-
-        Text categoryLabel = new Text("Category:");
-        categoryLabel.setLayoutX(220.0);
-        categoryLabel.setLayoutY(114.0);
-
-        Text category = new Text(rs.getString("category"));
-        category.setLayoutX(279.0);
-        category.setLayoutY(114.0);
-
-
-
-
-        Text priceLabel = new Text("Price:");
-        priceLabel.setLayoutX(220.0);
-        priceLabel.setLayoutY(142.0);
-
-        Text price = new Text(String.format("$%.2f", rs.getDouble("price")));
-        price.setLayoutX(258.0);
-        price.setLayoutY(142.0);
-
-        Button addToCartButton = new Button("Add to Cart");
-        addToCartButton.setLayoutX(750.0);
-        addToCartButton.setLayoutY(10.0);
-        addToCartButton.setStyle("-fx-background-color: #40E0D0;");
-
-        Button reactButton = new Button();
-        reactButton.setLayoutX(218.0);
-        reactButton.setLayoutY(153.0);
-        //ImageView reactIcon = new ImageView(new Image("file:/path/to/your/icon/Love.png"));
-        ImageView reactIcon = new ImageView(new Image("file:D:\\Trimester\\8th\\AOOP\\IntellijIdea\\Test_Project\\src\\main\\java\\Icon\\Love.png"));
-
-        reactIcon.setFitHeight(20.0);
-        reactIcon.setFitWidth(20.0);
-        reactButton.setGraphic(reactIcon);
-
-        Text reactionCount = new Text(String.valueOf(rs.getInt("reaction_count")));
-        reactionCount.setLayoutX(269.0);
-        reactionCount.setLayoutY(170.0);
-
-        pane.getChildren().addAll(paintingImage, nameText, artistLabel, artistName, yearLabel, year,
-                categoryLabel, category, priceLabel, price, addToCartButton,
-                reactButton, reactionCount);
-
-
-
-//        Text artistIcon = new Text("\uf007"); // FontAwesome user icon
-//        artistIcon.getStyleClass().add("icon");
-//        artistIcon.setLayoutX(220.0);
-//        artistIcon.setLayoutY(57.0);
-//
-//
-//
-//        Text yearIcon = new Text("\uf073"); // FontAwesome calendar icon
-//        yearIcon.getStyleClass().add("icon");
-//        yearIcon.setLayoutX(220.0);
-//        yearIcon.setLayoutY(87.0);
-//
-//
-//
-//        Text priceIcon = new Text("\uf155"); // FontAwesome dollar icon
-//        priceIcon.getStyleClass().add("icon");
-//        priceIcon.setLayoutX(220.0);
-//        priceIcon.setLayoutY(117.0);
-//
-//
-//
-//        Text reactionIcon = new Text("\uf004"); // FontAwesome heart icon
-//        reactionIcon.getStyleClass().add("icon");
-//        reactionIcon.setLayoutX(220.0);
-//        reactionIcon.setLayoutY(147.0);
-
-
-
-
-
-        return pane;
+        return card;
     }
 
-    private void openLargerImage(Image image) {
-//        Stage popupStage = new Stage();
-//        popupStage.initModality(Modality.APPLICATION_MODAL);
-//        popupStage.setTitle("Larger View");
-//
-//        ImageView largerImageView = new ImageView(image);
-//        largerImageView.setPreserveRatio(true);
-//        largerImageView.setFitWidth(600); // Adjust this value as needed
-//
-//        Scene scene = new Scene(new AnchorPane(largerImageView));
-//        popupStage.setScene(scene);
-//        popupStage.show();
+    private void setPlaceholderImage(ImageView imageView) {
+        File placeholderFile = new File(IMAGE_DIRECTORY, "placeholder.png");
+        if (placeholderFile.exists()) {
+            imageView.setImage(new Image(placeholderFile.toURI().toString()));
+        } else {
+            System.out.println("Placeholder image not found");
+        }
+    }
 
-        Stage stage = new Stage();
+
+    private void openImageInNewWindow(Image image) {
+        // Create a new stage (window)
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Zoomed Image");
+
+        // Create an ImageView for displaying the image
         ImageView imageView = new ImageView(image);
-        imageView.setPreserveRatio(true);
-        imageView.setFitHeight(600); // Adjust this value to change the size of the larger view
+        imageView.setPreserveRatio(true); // Keep aspect ratio
 
-        Scene scene = new Scene(new VBox(imageView));
-        stage.setScene(scene);
-        stage.setTitle("Larger Image View");
-        stage.show();
+        // Set the fixed size for the ImageView (500x600)
+        imageView.setFitWidth(500);
+        imageView.setFitHeight(600);
 
+        // Add the ImageView to a layout container (StackPane)
+        StackPane root = new StackPane(imageView);
+        Scene scene = new Scene(root, 500, 600); // Set the window size to 500x600
 
+        // Set the scene and show the new window
+        newWindow.setScene(scene);
+        newWindow.show();
     }
 
-    private void showAlert(Alert.AlertType alertType, String title, String content) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
+
+    // Navigation methods (same as in ArtistAddPaintController)
+    @FXML
+    void artistAddAuctions(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistAddAuction.fxml");
+    }
+
+    @FXML
+    void artistAddNFTs(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistAddNFTs.fxml");
     }
 
     @FXML
     void artistDashboard(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistDashboard.fxml");
-    }
-
-    @FXML
-    void artistAddPainting(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistAddPaint.fxml");
-    }
-
-    @FXML
-    void artistMessages(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistMessage.fxml");
-    }
-
-    @FXML
-    void artistAddAuctions(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistAddAuction.fxml");
-    }
-
-    @FXML
-    void artistMyPainting(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistMyPaintPage.fxml");
-    }
-
-    @FXML
-    void artistMyProfile(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistProfile.fxml");
+        loadPageWithUserId(event, "Artist/ArtistDashboard.fxml");
     }
 
     @FXML
     void artistLogout(ActionEvent event) throws IOException {
-        loadPage(event, "Guest/userOrGuestHomePage.fxml");
+        System.out.println("ArtistAddNFTController: Logging out user");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Customer/CustomerLoginPage.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("ArtistAddNFTController: Navigated to login page");
     }
 
-    private void loadPage(ActionEvent event, String fxmlFile) throws IOException {
-        int artistId = CurrentArtist.getInstance().getArtistId();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+    @FXML
+    void artistMessages(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistMessage.fxml");
+    }
+
+    @FXML
+    void artistMyPainting(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistMyPaintPage.fxml");
+    }
+
+    @FXML
+    void artistMyProfile(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistProfile.fxml");
+    }
+
+    @FXML
+    void artistNotification(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNotification.fxml");
+    }
+
+    @FXML
+    void artistPaintings(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistPaintingPage.fxml");
+    }
+
+    @FXML
+    void artistSeeAuction(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistSeeAuctionPage.fxml");
+    }
+
+    @FXML
+    void artistOrders(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistOrderPage.fxml");
+    }
+
+
+    @FXML
+    void artistAddPainting(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistAddPaint.fxml");
+    }
+
+    private void loadPageWithUserId(ActionEvent event, String fxmlPath) throws IOException {
+        System.out.println("ArtistAddNFTController: loadPageWithUserId() called with path: " + fxmlPath);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load();
 
-        Object controller = loader.getController();
-        if (controller instanceof ArtistPageController) {
-            ((ArtistPageController) controller).setArtistId(CurrentArtist.getInstance().getArtistId());
+        BaseController controller = loader.getController();
+        if (controller != null) {
+            System.out.println("ArtistAddNFTController: Setting userId " + userId + " on new controller");
+            controller.setUserId(this.userId);
+        } else {
+            System.out.println("ArtistAddNFTController: Warning - controller is null");
         }
 
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
+        Stage stage;
+
+        if (event.getSource() instanceof MenuItem) {
+            MenuItem menuItem = (MenuItem) event.getSource();
+            stage = (Stage) menuItem.getParentPopup().getOwnerWindow();
+        } else if (event.getSource() instanceof Node) {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        } else {
+            throw new IllegalArgumentException("Event source not recognized");
+        }
+
         stage.setScene(scene);
         stage.show();
     }

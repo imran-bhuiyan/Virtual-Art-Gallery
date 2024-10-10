@@ -1,89 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Blend?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="661.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.AdminPageController">
+<AnchorPane prefHeight="485.0" prefWidth="469.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.adminEditArtworkController">
     <children>
-        <Pane prefHeight="74.0" prefWidth="906.0" style="-fx-background-color: #1eb6a7;">
-            <children>
-                <Button layoutX="807.0" layoutY="24.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="28.0" style="-fx-background-color: #1eb6a7;" />
-                <Text layoutX="397.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Panel" wrappingWidth="162.125732421875">
-                    <font>
-                        <Font name="System Italic" size="24.0" />
-                    </font>
-                </Text>
-                <MenuButton layoutX="835.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Logout" />
-                    </items>
-                    <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="file:/D:/Projects/AOOP/Project_23-07-24/src/main/java/Icon/User.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </MenuButton>
-            </children>
-            <effect>
-                <Blend />
-            </effect>
-        </Pane>
-        <Label layoutX="422.0" layoutY="115.0" text="Edit Art">
-            <font>
-                <Font name="System Bold" size="25.0" />
-            </font>
-        </Label>
-        <Pane layoutX="70.0" layoutY="151.0" prefHeight="423.0" prefWidth="746.0">
-            <children>
-                <Label layoutX="176.0" layoutY="46.0" text="Name:">
-                    <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font>
-                </Label>
-                <Label layoutX="137.0" layoutY="93.0" text="Description:">
-                    <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font>
-                </Label>
-                <TextField layoutX="255.0" layoutY="48.0" prefHeight="25.0" prefWidth="379.0" />
-                <TextField layoutX="255.0" layoutY="94.0" prefHeight="25.0" prefWidth="379.0" />
-                <Button layoutX="325.0" layoutY="285.0" mnemonicParsing="false" style="-fx-background-color: #ff0000;" text="Update">
-                    <font>
-                        <Font name="System Bold" size="12.0" />
-                    </font>
-                </Button>
-                <Button layoutX="402.0" layoutY="285.0" mnemonicParsing="false" style="-fx-background-color: #2ee11e;" text="Delete">
-                    <font>
-                        <Font name="System Bold" size="12.0" />
-                    </font>
-                </Button>
-            <Label layoutX="154.0" layoutY="137.0" text="Category:">
+        <VBox alignment="CENTER" layoutX="6.0" layoutY="6.0" prefHeight="463.0" prefWidth="456.0" spacing="10" style="-fx-background-color: #F5EEC8;" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="6.0">
+            <ImageView fx:id="paintingImageView" fitHeight="200" fitWidth="200" preserveRatio="true" />
+            <Button onAction="#changeImage" style="-fx-background-color: #40E0D0;" text="Change Image" />
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Name:" />
+                <TextField fx:id="nameField" promptText="Painting Name" HBox.hgrow="ALWAYS" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Year:" />
+                <TextField fx:id="yearField" promptText="Year" HBox.hgrow="ALWAYS" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Category:" />
+                <TextField fx:id="categoryField" promptText="Category" HBox.hgrow="ALWAYS" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Price:" />
+                <TextField fx:id="priceField" promptText="Price" HBox.hgrow="ALWAYS" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Artist Name:" />
+                <TextField fx:id="artistNameField" editable="false" promptText="Artist Name" HBox.hgrow="ALWAYS" />
+            </HBox>
+            <HBox alignment="CENTER" spacing="10">
+                <Button onAction="#updatePainting" style="-fx-background-color: #6EC207;" text="Update" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="185.0" layoutY="185.0" text="Price:">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField layoutX="255.0" layoutY="138.0" prefHeight="25.0" prefWidth="379.0" />
-            <TextField layoutX="255.0" layoutY="186.0" prefHeight="25.0" prefWidth="379.0" />
-            </children>
-        </Pane>
-        <Hyperlink layoutX="425.0" layoutY="588.0" text="Back To Home" />
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button onAction="#cancelEdit" style="-fx-background-color: #ff0000;" text="Cancel" textFill="WHITE" />
+            </HBox>
+        </VBox>
     </children>
 </AnchorPane>

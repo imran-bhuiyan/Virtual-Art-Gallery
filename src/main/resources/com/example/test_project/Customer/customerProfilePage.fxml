@@ -1,159 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.customerPageController">
-    <top>
-        <HBox alignment="CENTER" prefHeight="79.0" prefWidth="899.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
-                    <font>
-                        <Font name="System Italic" size="30.0" />
-                    </font>
-                </Text>
-                <Button mnemonicParsing="false" onAction="#goCustomerHome" style="-fx-background-color: transparent;" text="Home" textFill="#181818" />
-                <Button mnemonicParsing="false" onAction="#goCustomerPaintings" style="-fx-background-color: transparent;" text="Paintings" textFill="#181818" />
-                <Button mnemonicParsing="false" onAction="#goCustomerTopArt" style="-fx-background-color: transparent;" text="Top Art" textFill="#1b1b1b" />
-                <Button mnemonicParsing="false" onAction="#goCustomerEvents" style="-fx-background-color: transparent;" text="Events" textFill="#0d0d0d" />
-                <Button mnemonicParsing="false" onAction="#goCustomerAuction" style="-fx-background-color: transparent;" text="Auction" textFill="#0d0d0d" />
-                <Button mnemonicParsing="false" onAction="#goCustomerNFT" style="-fx-background-color: transparent;" text="NFT" textFill="#131212" />
-                <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerProfile" style="-fx-background-color: transparent;" text="Profile" textFill="#181818" />
-                <Button mnemonicParsing="false" onAction="#goCustomerCart" prefWidth="0.0" style="-fx-background-color: transparent;">
-                    <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0">
-                            <image>
-                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Shopping%20Cart.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button layoutX="741.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerNotification" style="-fx-background-color: transparent;" textFill="WHITE">
-                    <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Notification.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button mnemonicParsing="false" onAction="#goCustomerMessages" style="-fx-background-color: transparent;">
-                    <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Chat%20Message.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-            </children>
-        </HBox>
-    </top>
-   <bottom>
-        <ScrollPane fitToWidth="true" BorderPane.alignment="CENTER">
-            <content>
-                <VBox spacing="20" style="-fx-padding: 20;">
-                    <HBox alignment="CENTER_LEFT" spacing="20">
-                        <Text style="-fx-font-size: 24px; -fx-font-weight: bold;" text="My Profile" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: #40E0D0;" text="Edit Profile">
-                            <graphic>
-                                <ImageView fitHeight="16.0" fitWidth="16.0">
-                                    <image>
-                                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/User.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                    </HBox>
-
-                    <!-- User Details Section -->
-                    <GridPane hgap="10" vgap="10">
-                        <HBox alignment="CENTER_LEFT" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                            <ImageView fitHeight="20.0" fitWidth="20.0">
-                                <image>
-                                    <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/User.png" />
-                                </image>
-                            </ImageView>
-                            <TextField editable="false" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: #40E0D0; -fx-border-width: 0px 0px 2px 0px;" />
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                            <ImageView fitHeight="20.0" fitWidth="20.0">
-                                <image>
-                                    <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Email.png" />
-                                </image>
-                            </ImageView>
-                            <TextField editable="false" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #40E0D0; -fx-border-width: 0px 0px 2px 0px;" />
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                            <ImageView fitHeight="20.0" fitWidth="20.0">
-                                <image>
-                                    <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Calendar.png" />
-                                </image>
-                            </ImageView>
-                            <TextField editable="false" promptText="Date of Birth" style="-fx-background-color: transparent; -fx-border-color: #40E0D0; -fx-border-width: 0px 0px 2px 0px;" />
-                        </HBox>
-                        <columnConstraints>
-                            <ColumnConstraints />
-                        </columnConstraints>
-                        <rowConstraints>
-                            <RowConstraints maxHeight="32.79998779296875" minHeight="22.399993896484375" prefHeight="30.399993896484375" />
-                            <RowConstraints maxHeight="33.60000610351563" minHeight="23.200012207031257" prefHeight="25.600006103515632" />
-                            <RowConstraints />
-                        </rowConstraints>
-                    </GridPane>
-
-                    <!-- My NFTs Section -->
-                    <Text style="-fx-font-size: 18px; -fx-font-weight: bold;" text="My NFTs" />
-                    <ScrollPane hbarPolicy="ALWAYS" vbarPolicy="NEVER">
-                        <HBox spacing="10">
-                            <!-- Add sample NFTs -->
-                            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/even2.jpg" />
-                                </image>
-                            </ImageView>
-                            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/autumn-leaves-fall-gracefully-painting-nature-canvas-generative-ai.jpg" />
-                                </image>
-                            </ImageView>
-                            <!-- Add more NFT ImageViews as needed -->
-                        </HBox>
-                    </ScrollPane>
-
-                    <!-- My Paintings Section -->
-                    <Text style="-fx-font-size: 18px; -fx-font-weight: bold;" text="My Paintings" />
-                    <ScrollPane fitToWidth="true" prefHeight="300.0">
-                        <VBox spacing="20">
-                            <!-- Sample Painting Item -->
-                            <AnchorPane prefHeight="150.0" prefWidth="816.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-width: 1;">
-                                <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/beautiful-shot-airplane-going-building-with-starry-sky-background.jpg" />
-                                    </image>
-                                </ImageView>
-                                <Text layoutX="150.0" layoutY="30.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="My Masterpiece" />
-                                <Text layoutX="150.0" layoutY="60.0" text="Size: 24x36 inches" />
-                                <Text layoutX="150.0" layoutY="90.0" text="Created: June 15, 2023" />
-                                <Button layoutX="150.0" layoutY="110.0" mnemonicParsing="false" style="-fx-background-color: #40E0D0;" text="Edit Details" />
-                            </AnchorPane>
-                            <!-- Add more painting items as needed -->
-                        </VBox>
-                    </ScrollPane>
-                </VBox>
-            </content>
-        </ScrollPane>
-   </bottom>
-</BorderPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="712.0" prefWidth="922.0" style="-fx-background-color: #F0F8FF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.CustomerProfileController">
+   <children>
+      <AnchorPane layoutX="146.0" layoutY="86.0" prefHeight="436.0" prefWidth="694.0" style="-fx-background-color: #FFF9E3;" />
+      <HBox alignment="CENTER" prefHeight="80.0" prefWidth="922.0" spacing="20" style="-fx-background-color: #6EC207; -fx-padding: 10;">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
+               <font>
+                  <Font name="Bell MT Bold" size="27.0" />
+               </font>
+            </Text>
+            <Button mnemonicParsing="false" onAction="#goCustomerHome" style="-fx-background-color: transparent;" text="Home" textFill="#181818">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goCustomerPaintings" style="-fx-background-color: transparent;" text="Paintings" textFill="#181818">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goCustomerTopArt" style="-fx-background-color: transparent;" text="Top Art" textFill="#1b1b1b">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goCustomerEvents" style="-fx-background-color: transparent;" text="Events" textFill="#0d0d0d">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goCustomerAuction" style="-fx-background-color: transparent;" text="Auction" textFill="#0d0d0d">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goCustomerNFT" style="-fx-background-color: transparent;" text="NFT" textFill="#131212">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerProfile" style="-fx-background-color: transparent;" text="Profile" textFill="#181818">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goCustomerCart" prefWidth="0.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0">
+                     <image>
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Shopping%20Cart.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="741.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerNotification" style="-fx-background-color: transparent;" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Notification.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goCustomerMessages" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Chat%20Message.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="843.0" layoutY="36.0" mnemonicParsing="false" onAction="#customerLogout" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/logout.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+      <Label layoutX="451.0" layoutY="100.0" text="My Profile ">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="270.0" layoutY="149.0" text="Name : ">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="284.0" layoutY="194.0" text="Id : ">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="231.0" layoutY="356.0" text="Date of Birth : ">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="273.0" layoutY="234.0" text="Email : ">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="251.0" layoutY="276.0" text="Password :">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="278.0" layoutY="318.0" text="Role : ">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="272.0" layoutY="394.0" text="Credit : ">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="userName" layoutX="351.0" layoutY="149.0" prefHeight="25.0" prefWidth="375.0" />
+      <TextField fx:id="id" disable="true" layoutX="351.0" layoutY="194.0" prefHeight="25.0" prefWidth="375.0" />
+      <TextField fx:id="userEmail" layoutX="351.0" layoutY="234.0" prefHeight="25.0" prefWidth="375.0" />
+      <TextField fx:id="userPass" layoutX="351.0" layoutY="276.0" prefHeight="25.0" prefWidth="375.0" />
+      <TextField fx:id="userRole" disable="true" layoutX="351.0" layoutY="318.0" prefHeight="25.0" prefWidth="375.0" />
+      <TextField fx:id="userDOB" disable="true" layoutX="351.0" layoutY="356.0" prefHeight="25.0" prefWidth="375.0" />
+      <TextField fx:id="userCredit" disable="true" layoutX="351.0" layoutY="394.0" prefHeight="25.0" prefWidth="375.0" />
+      <Button layoutX="424.0" layoutY="438.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="28.0" prefWidth="75.0" style="-fx-background-color: Red;" text="Clear" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="541.0" layoutY="438.0" mnemonicParsing="false" onAction="#updateButton" prefHeight="28.0" prefWidth="75.0" style="-fx-background-color: #6EC207;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <ScrollPane fx:id="nftScrollPane" layoutX="-2.0" layoutY="550.0" prefHeight="162.0" prefWidth="921.0">
+         <content>
+            <VBox fx:id="nftListContainer" spacing="10" />
+         </content>
+      </ScrollPane>
+      <Button layoutX="1.0" layoutY="520.0" mnemonicParsing="false" onAction="#myNFT" prefHeight="28.0" prefWidth="75.0" style="-fx-background-color: #15d8ff;" text="My NFT's " textFill="#030303" />
+   </children>
+</AnchorPane>

@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -23,7 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class ArtistAddPaintController {
+public class ArtistAddPaintController extends BaseController{
 
     @FXML private ComboBox<String> catagorySelect;
     @FXML private TextField imagePathField;
@@ -33,16 +34,17 @@ public class ArtistAddPaintController {
 
     public void initialize() {
         if (catagorySelect != null) {
-            catagorySelect.getItems().addAll("Abstract", "Landscape", "Portrait", "Still Life", "Modern", "Contemporary");
+            catagorySelect.getItems().addAll("Oil paint", "Acrylic paint", "Watercolor", "Gouache", "Tempera", "Encaustic", "Casein", "Alkyd");
 
         }
     }
 
-    public void setArtistId(int artistId) {
-        System.out.println("artisId From Artist Add Painting Controller: " + artistId);
-        CurrentArtist.getInstance().setArtistId(artistId);
+    public void setUserId(int userId) {
+        this.userId = userId;
+        System.out.println("userId set to " + userId);
 
     }
+
 
 
     @FXML
@@ -63,7 +65,7 @@ public class ArtistAddPaintController {
 
     @FXML
     void photoadd(ActionEvent event) {
-        int artistId = CurrentArtist.getInstance().getArtistId();
+
         String name = photoname.getText();
         String yearStr = photoyear.getText();
         String category = catagorySelect.getValue();
@@ -95,7 +97,7 @@ public class ArtistAddPaintController {
             String query = "INSERT INTO Paintings (name, artist_id, year, category, price, image_url) VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement pstmt = conn.prepareStatement(query)) {
                 pstmt.setString(1, name);
-                pstmt.setInt(2, artistId);
+                pstmt.setInt(2, userId);
                 pstmt.setInt(3, year);
                 pstmt.setString(4, category);
                 pstmt.setDouble(5, price);
@@ -153,48 +155,101 @@ public class ArtistAddPaintController {
         alert.showAndWait();
     }
 
-    // Navigation methods
+    // Navigation methods (same as in ArtistAddPaintController)
     @FXML
     void artistAddAuctions(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistAddAuction.fxml");
+        loadPageWithUserId(event, "Artist/ArtistAddAuction.fxml");
+    }
+
+    @FXML
+    void artistAddNFTs(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistAddNFTs.fxml");
     }
 
     @FXML
     void artistDashboard(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistDashboard.fxml");
+        loadPageWithUserId(event, "Artist/ArtistDashboard.fxml");
     }
 
     @FXML
     void artistLogout(ActionEvent event) throws IOException {
-        loadPage(event, "Guest/userOrGuestHomePage.fxml");
+        System.out.println("ArtistAddNFTController: Logging out user");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Customer/CustomerLoginPage.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("ArtistAddNFTController: Navigated to login page");
     }
 
     @FXML
     void artistMessages(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistMessage.fxml");
+        loadPageWithUserId(event, "Artist/ArtistMessage.fxml");
     }
 
     @FXML
     void artistMyPainting(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistMyPaintPage.fxml");
+        loadPageWithUserId(event, "Artist/ArtistMyPaintPage.fxml");
     }
 
     @FXML
     void artistMyProfile(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistProfile.fxml");
+        loadPageWithUserId(event, "Artist/ArtistProfile.fxml");
+    }
+
+    @FXML
+    void artistNotification(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNotification.fxml");
     }
 
     @FXML
     void artistPaintings(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistPaintingPage.fxml");
+        loadPageWithUserId(event, "Artist/ArtistPaintingPage.fxml");
     }
 
-    private void loadPage(ActionEvent event, String fxmlFile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+    @FXML
+    void artistSeeAuction(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistSeeAuctionPage.fxml");
+    }
+
+    @FXML
+    void artistOrders(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistOrderPage.fxml");
+    }
+
+
+    @FXML
+    void artistAddPainting(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistAddPaint.fxml");
+    }
+
+
+    private void loadPageWithUserId(ActionEvent event, String fxmlPath) throws IOException {
+        System.out.println("ArtistAddNFTController: loadPageWithUserId() called with path: " + fxmlPath);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load();
 
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        BaseController controller = loader.getController();
+        if (controller != null) {
+            System.out.println("ArtistAddNFTController: Setting userId " + userId + " on new controller");
+            controller.setUserId(this.userId);
+        } else {
+            System.out.println("ArtistAddNFTController: Warning - controller is null");
+        }
+
         Scene scene = new Scene(root);
+        Stage stage;
+
+        if (event.getSource() instanceof MenuItem) {
+            MenuItem menuItem = (MenuItem) event.getSource();
+            stage = (Stage) menuItem.getParentPopup().getOwnerWindow();
+        } else if (event.getSource() instanceof Node) {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        } else {
+            throw new IllegalArgumentException("Event source not recognized");
+        }
+
         stage.setScene(scene);
         stage.show();
     }

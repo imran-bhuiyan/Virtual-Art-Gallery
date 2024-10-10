@@ -29,16 +29,13 @@ public class ArtistEditPaintingController {
 
     private int paintingId;
     private String currentImageUrl;
-    private Runnable refreshCallback;
+
 
     public void setPaintingId(int paintingId) {
         this.paintingId = paintingId;
         loadPaintingDetails();
     }
 
-    public void setRefreshCallback(Runnable refreshCallback) {
-        this.refreshCallback = refreshCallback;
-    }
 
 
     private void loadPaintingDetails() {
@@ -110,26 +107,7 @@ public class ArtistEditPaintingController {
         }
     }
 
-    @FXML
-    private void deletePainting() {
-        String query = "DELETE FROM Paintings WHERE painting_id = ?";
-        try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            pstmt.setInt(1, paintingId);
-
-            int affectedRows = pstmt.executeUpdate();
-            if (affectedRows > 0) {
-                showAlert(Alert.AlertType.INFORMATION, "Success", "Painting deleted successfully!");
-                closeWindow();
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete painting.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete painting: " + e.getMessage());
-        }
-    }
 
     private void showAlert(Alert.AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);

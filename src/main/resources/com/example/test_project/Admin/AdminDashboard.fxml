@@ -13,18 +13,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.AdminPageController">
-   <top>
-      <AnchorPane prefHeight="716.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.adminDashboardController">
+   <bottom>
+      <AnchorPane prefHeight="700.0" prefWidth="893.0" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane layoutX="192.0" layoutY="152.0" prefHeight="200.0" prefWidth="200.0" styleClass="colored_card">
                <effect>
                   <InnerShadow />
                </effect>
                <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #FBE9D0;">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #FFD09B;">
                      <children>
-                        <Text layoutX="82.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="25.98223876953125">
+                        <Text fx:id="artistCount" layoutX="85.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="53.98223876953125">
                            <font>
                               <Font name="Malgun Gothic" size="18.0" />
                            </font>
@@ -36,13 +36,47 @@
                         </Text>
                      </children>
                   </Pane>
+                  <AnchorPane layoutX="247.0" prefHeight="200.0" prefWidth="198.0" style="-fx-background-color: B2A59B; -fx-background-radius: 10 10 10 10;">
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                     <children>
+                        <Text layoutX="57.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artworks" wrappingWidth="85.18212890625">
+                           <font>
+                              <Font name="Malgun Gothic" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="artworkCount" layoutX="78.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="41.98223876953125">
+                           <font>
+                              <Font name="Malgun Gothic" size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="494.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B6C4B6; -fx-background-radius: 10 10 10 10;">
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                     <children>
+                        <Text layoutX="61.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenue" wrappingWidth="76.38226318359375">
+                           <font>
+                              <Font name="Malgun Gothic" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="totalSellCount" layoutX="77.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="399$" wrappingWidth="90.18218994140625">
+                           <font>
+                              <Font name="Malgun Gothic" size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
-            <Pane layoutX="-3.0" layoutY="-1.0" prefHeight="74.0" prefWidth="906.0" style="-fx-background-color: #40E0D0;">
+            <Pane layoutY="-1.0" prefHeight="74.0" prefWidth="900.0" style="-fx-background-color: #40E0D0;">
                <children>
                   <MenuButton layoutX="824.0" layoutY="21.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Logout" />
+                      <MenuItem mnemonicParsing="false" onAction="#goLogout" text="Logout" />
                     </items>
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -54,7 +88,7 @@
                   </MenuButton>
                   <Text layoutX="411.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Panel" wrappingWidth="162.125732421875">
                      <font>
-                        <Font name="System Italic" size="24.0" />
+                        <Font name="Bell MT Bold" size="24.0" />
                      </font>
                   </Text>
                </children>
@@ -62,41 +96,7 @@
                   <Blend />
                </effect>
             </Pane>
-            <AnchorPane layoutX="194.0" layoutY="402.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #AFDDE5;">
-               <effect>
-                  <InnerShadow />
-               </effect>
-               <children>
-                  <Text layoutX="66.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Events" wrappingWidth="54.78216552734375">
-                     <font>
-                        <Font name="Malgun Gothic" size="18.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="83.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="25.98223876953125">
-                     <font>
-                        <Font name="Malgun Gothic" size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="431.0" layoutY="402.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EBE9E1;">
-               <effect>
-                  <InnerShadow />
-               </effect>
-               <children>
-                  <Text layoutX="63.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports" wrappingWidth="73.18218994140625">
-                     <font>
-                        <Font name="Malgun Gothic" size="18.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="85.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="25.98223876953125">
-                     <font>
-                        <Font name="Malgun Gothic" size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="682.0" layoutY="402.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #40E0D0;">
+            <AnchorPane layoutX="682.0" layoutY="402.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #40E0D0; -fx-background-radius: 10 10 10 10;">
                <effect>
                   <InnerShadow />
                </effect>
@@ -106,120 +106,11 @@
                         <Font name="Malgun Gothic" size="18.0" />
                      </font>
                   </Text>
-                  <Text layoutX="87.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="25.98223876953125">
+                  <Text fx:id="customerCount" layoutX="83.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="33.98223876953125">
                      <font>
                         <Font name="Malgun Gothic" size="18.0" />
                      </font>
                   </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="433.0" layoutY="152.0" prefHeight="200.0" prefWidth="198.0" style="-fx-background-color: #90AEAD;">
-               <effect>
-                  <InnerShadow />
-               </effect>
-               <children>
-                  <Text layoutX="57.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artworks" wrappingWidth="85.18212890625">
-                     <font>
-                        <Font name="Malgun Gothic" size="18.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="82.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="25.98223876953125">
-                     <font>
-                        <Font name="Malgun Gothic" size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="682.0" layoutY="152.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #D3D9D4;">
-               <effect>
-                  <InnerShadow />
-               </effect>
-               <children>
-                  <Text layoutX="62.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenue" wrappingWidth="76.38226318359375">
-                     <font>
-                        <Font name="Malgun Gothic" size="18.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="78.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="399$" wrappingWidth="41.18218994140625">
-                     <font>
-                        <Font name="Malgun Gothic" size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="2.0" layoutY="109.0" prefHeight="546.0" prefWidth="162.0" style="-fx-background-color: #AFDDE5;">
-               <children>
-                  <Button layoutX="46.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleOrders" style="-fx-background-color: transparent;" text="Orders">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
-                  <MenuButton layoutX="34.0" layoutY="186.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Customers">
-                     <items>
-                        <MenuItem onAction="#handleAddCustomers" text="Add" />
-                        <MenuItem onAction="#handleManageCustomers" text="Manage" />
-                     </items>
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </MenuButton>
-                  <MenuButton layoutX="45.0" layoutY="294.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Events">
-                     <items>
-                        <MenuItem onAction="#handleAddEvents" text="Add" />
-                        <MenuItem onAction="#handleManageEvents" text="Manage" />
-                     </items>
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </MenuButton>
-                  <Button layoutX="48.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleChats" style="-fx-background-color: transparent;" text="Chats">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="40.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleReports" style="-fx-background-color: transparent;" text="Reports">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
-                  <MenuButton layoutX="52.0" layoutY="89.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artist">
-                     <items>
-                        <MenuItem onAction="#handleAddArtist" text="Add" />
-                        <MenuItem onAction="#handleManageArtist" text="Manage" />
-                     </items>
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </MenuButton>
-                  <MenuButton layoutX="38.0" layoutY="138.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Artworks">
-                     <items>
-                        <MenuItem onAction="#handleAddArtwork" text="Add" />
-                        <MenuItem onAction="#handleManageArtwork" text="Manage" />
-                     </items>
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </MenuButton>
-                  <Button layoutX="27.0" layoutY="41.0" mnemonicParsing="false" onAction="#handleDashboard" prefHeight="38.0" prefWidth="112.0" style="-fx-background-color: transparent;" text="Dashboard">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="39.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleInquiries" style="-fx-background-color: transparent;" text="Inquiries">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
-                  <ImageView fitHeight="27.0" fitWidth="33.0" layoutX="69.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:/D:/Projects/AOOP/Project_23-07-24/src/main/java/Icon/Menu.png" />
-                     </image>
-                  </ImageView>
-                  <Button layoutX="37.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleAuctions" style="-fx-background-color: transparent;" text="Auctions">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
                </children>
             </AnchorPane>
             <Text layoutX="308.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;Behind every successful system, there's an administrator who makes it all work.&quot;">
@@ -227,10 +118,119 @@
                   <Font name="System Italic" size="12.0" />
                </font>
             </Text>
+            <AnchorPane layoutX="1.0" layoutY="73.0" prefHeight="626.0" prefWidth="162.0">
+               <children>
+                  <MenuButton layoutX="20.0" layoutY="217.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="132.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Customers">
+                     <items>
+                        <MenuItem onAction="#addCustomer" text="Add" />
+                        <MenuItem onAction="#manageCustomer" text="Manage" />
+                     </items>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </MenuButton>
+                  <MenuButton layoutX="18.0" layoutY="273.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="137.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Events" textAlignment="CENTER">
+                     <items>
+                        <MenuItem onAction="#addEvent" text="Add" />
+                        <MenuItem onAction="#manageEvent" text="Manage" />
+                     </items>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </MenuButton>
+                  <Button layoutX="17.0" layoutY="379.0" mnemonicParsing="false" onAction="#goMessages" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Chats" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <MenuButton layoutX="19.0" layoutY="109.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="133.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Artist" textAlignment="CENTER">
+                     <items>
+                        <MenuItem onAction="#addArtist" text="Add" />
+                        <MenuItem onAction="#manageArtist" text="Manage" />
+                     </items>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </MenuButton>
+                  <MenuButton layoutX="21.0" layoutY="162.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="131.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Artworks">
+                     <items>
+                        <MenuItem onAction="#addArtworks" text="Add" />
+                        <MenuItem onAction="#manageArtwork" text="Manage" />
+                     </items>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </MenuButton>
+                  <Button layoutX="17.0" layoutY="55.0" mnemonicParsing="false" onAction="#goDashboard" prefHeight="38.0" prefWidth="135.0" style="-fx-background-color: #A5B68D;" text="Dashboard" textFill="#141414">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="16.0" layoutY="432.0" mnemonicParsing="false" onAction="#goQueries" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Inquiries" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="27.0" fitWidth="33.0" layoutX="69.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Menu.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="19.0" layoutY="485.0" mnemonicParsing="false" onAction="#goAuctionRequest" prefHeight="40.0" prefWidth="135.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Auctions" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="20.0" layoutY="538.0" mnemonicParsing="false" onAction="#goCreditRequest" prefHeight="45.0" prefWidth="133.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Credit Request" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="18.0" layoutY="328.0" mnemonicParsing="false" onAction="#goOrders" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Orders" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="197.0" layoutY="400.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #AFDDE5; -fx-background-radius: 10 10 10 10;">
+               <effect>
+                  <InnerShadow />
+               </effect>
+               <children>
+                  <Text layoutX="66.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Events" wrappingWidth="54.78216552734375">
+                     <font>
+                        <Font name="Malgun Gothic" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="eventCount" layoutX="79.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="44.98223876953125">
+                     <font>
+                        <Font name="Malgun Gothic" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="429.0" layoutY="400.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F5EEC8; -fx-background-radius: 10 10 10 10;">
+               <effect>
+                  <InnerShadow />
+               </effect>
+               <children>
+                  <Text layoutX="58.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inqueries" wrappingWidth="83.18218994140625">
+                     <font>
+                        <Font name="Malgun Gothic" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="inqueriesCount" layoutX="79.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="42.98223876953125">
+                     <font>
+                        <Font name="Malgun Gothic" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
          </children>
          <effect>
             <Blend />
          </effect>
       </AnchorPane>
-   </top>
+   </bottom>
 </BorderPane>

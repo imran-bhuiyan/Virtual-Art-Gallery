@@ -1,4 +1,9 @@
+//ArtistDashboardController.java
+
+
+
 package com.example.test_project;
+
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,7 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -16,135 +21,209 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ArtistDashboardController {
+public class ArtistDashboardController extends BaseController{
+    private int userId;
 
-    @FXML private Text artwork;
-    @FXML private Text soldIteams;
-    @FXML private Text revenue;
+    @FXML
+    private Text artworkCount;
 
-    public void initialize() {
+    @FXML
+    private Text revenueCount;
+
+    @FXML
+    private Text soldItemsCount;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+        System.out.println("ArtistDashboardController: userId set to " + userId);
         loadDashboardData();
     }
 
-    public void setArtistId(int artistId) {
-        System.out.println("artisId From ArtistP DashBoard Controller : " + artistId);
-        CurrentArtist.getInstance().setArtistId(artistId);
-        loadDashboardData();
+    public int getUserId() {
+        return userId;
     }
 
     private void loadDashboardData() {
-        int artistId = CurrentArtist.getInstance().getArtistId();
         try (Connection conn = DataBaseConnection.getConnection()) {
-            loadArtworkCount(conn);
+            loadArtworksCount(conn);
             loadSoldItemsCount(conn);
-            loadTotalRevenue(conn);
+            loadRevenue(conn);
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load dashboard data");
+            // Handle the exception (e.g., show an error message to the user)
         }
     }
 
-    private void loadArtworkCount(Connection conn) throws SQLException {
-        int artistId = CurrentArtist.getInstance().getArtistId();
-        String query = "SELECT COUNT(*) as artwork_count FROM Paintings WHERE artist_id = ?";
+    private void loadArtworksCount(Connection conn) throws SQLException {
+        String query = "SELECT COUNT(painting_id) as Total_Paint FROM paintings WHERE artist_id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setInt(1, artistId);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next() && artwork != null) {
-                artwork.setText(String.valueOf(rs.getInt("artwork_count")));
+            pstmt.setInt(1, userId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt("Total_Paint");
+                    artworkCount.setText(String.valueOf(count));
+                }
             }
         }
     }
 
     private void loadSoldItemsCount(Connection conn) throws SQLException {
-        int artistId = CurrentArtist.getInstance().getArtistId();
-        String query = "SELECT COUNT(*) as sold_items_count FROM OrderItems oi " +
-                "JOIN Paintings p ON oi.painting_id = p.painting_id " +
-                "WHERE p.artist_id = ?";
+        String query = "SELECT COUNT(o.order_id) as Sold FROM orderitems as o JOIN paintings as p ON o.painting_id = p.painting_id WHERE p.artist_id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setInt(1, artistId);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next() && soldIteams != null) {
-                soldIteams.setText(String.valueOf(rs.getInt("sold_items_count")));
+            pstmt.setInt(1, userId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt("Sold");
+                    soldItemsCount.setText(String.valueOf(count));
+                }
             }
         }
     }
 
-    private void loadTotalRevenue(Connection conn) throws SQLException {
-        int artistId = CurrentArtist.getInstance().getArtistId();
-        String query = "SELECT COALESCE(SUM(oi.price * oi.quantity), 0) as total_revenue " +
-                "FROM OrderItems oi " +
-                "JOIN Paintings p ON oi.painting_id = p.painting_id " +
-                "WHERE p.artist_id = ?";
+    private void loadRevenue(Connection conn) throws SQLException {
+        String query = "SELECT SUM(o.price) as Revenue FROM orderitems as o JOIN paintings as p ON o.painting_id = p.painting_id WHERE p.artist_id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setInt(1, artistId);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next() && revenue != null) {
-                revenue.setText(String.format("$%.2f", rs.getDouble("total_revenue")));
+            pstmt.setInt(1, userId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    double totalRevenue = rs.getDouble("Revenue");
+                    revenueCount.setText(String.format("%.2f", totalRevenue));
+                }
             }
         }
     }
+
+// Navigate fxml files
 
     @FXML
     void artistAddAuctions(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistAddAuction.fxml");
+        loadPageWithUserId(event, "Artist/ArtistAddAuction.fxml");
     }
 
     @FXML
     void artistAddPainting(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistAddPaint.fxml");
+        loadPageWithUserId(event, "Artist/ArtistAddPaint.fxml");
     }
 
     @FXML
     void artistDashboard(ActionEvent event) throws IOException {
-        // No need to load a new page, we're already on the dashboard
+        loadPageWithUserId(event, "Artist/ArtistDashboard.fxml");
+
+
     }
 
     @FXML
     void artistLogout(ActionEvent event) throws IOException {
-        loadPage(event, "Guest/userOrGuestHomePage.fxml");
+        System.out.println("ArtistPaintingPageController: Logging out user");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Customer/CustomerLoginPage.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("ArtistPaintingPageController: Navigated to login page");
     }
+
 
     @FXML
     void artistMessages(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistMessage.fxml");
+        loadPageWithUserId(event, "Artist/ArtistMessage.fxml");
+
     }
 
     @FXML
     void artistMyPainting(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistMyPaintPage.fxml");
+
+        loadPageWithUserId(event, "Artist/ArtistMyPaintPage.fxml");
+
     }
 
     @FXML
     void artistMyProfile(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistProfile.fxml");
+        loadPageWithUserId(event, "Artist/ArtistProfile.fxml");
+
+    }
+
+    @FXML
+    void artistNotification(ActionEvent event) throws IOException {
+
+        loadPageWithUserId(event, "Artist/ArtistNotification.fxml");
+
     }
 
     @FXML
     void artistPaintings(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistPaintingPage.fxml");
+        loadPageWithUserId(event, "Artist/ArtistPaintingPage.fxml");
+
     }
 
-    private void loadPage(ActionEvent event, String fxmlFile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+    @FXML
+    void artistSeeAuction(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistSeeAuctionPage.fxml");
+
+    }
+
+    @FXML
+    void artistOrders(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistOrderPage.fxml");
+
+    }
+
+    @FXML
+    void artistAddNFTs(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistAddNFTs.fxml");
+
+    }
+
+    @FXML
+    void artistSeeBalance(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Artist/ArtistBalanceWindow.fxml"));
+            Parent root = loader.load();
+
+            ArtistBalanceController balanceController = loader.getController();
+            balanceController.setUserId(this.userId);
+            balanceController.loadBalance();
+
+            Stage balanceStage = new Stage();
+            balanceStage.setTitle("Artist Balance");
+            balanceStage.setScene(new Scene(root));
+            balanceStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception (e.g., show an error message to the user)
+        }
+    }
+
+    private void loadPageWithUserId(ActionEvent event, String fxmlPath) throws IOException {
+        System.out.println("ArtistDashboardController: loadPageWithUserId() called with path: " + fxmlPath);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load();
 
-        Object controller = loader.getController();
-        if (controller instanceof ArtistPageController) {
-            ((ArtistPageController) controller).setArtistId(CurrentArtist.getInstance().getArtistId());
+        BaseController controller = loader.getController();
+        if (controller != null) {
+            System.out.println("AdminDashboardController: Setting userId " + userId + " on new controller");
+            controller.setUserId(this.userId);
+        } else {
+            System.out.println("AdminDashboardController: Warning - controller is null");
         }
 
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
+        Stage stage;
+
+        if (event.getSource() instanceof MenuItem) {
+            // If the event source is a MenuItem, we need to get the stage differently
+            MenuItem menuItem = (MenuItem) event.getSource();
+            stage = (Stage) menuItem.getParentPopup().getOwnerWindow();
+        } else if (event.getSource() instanceof Node) {
+            // If it's a regular Node (like a Button), we can get the stage as before
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        } else {
+            throw new IllegalArgumentException("Event source not recognized");
+        }
+
         stage.setScene(scene);
         stage.show();
     }
 
-    private void showAlert(Alert.AlertType alertType, String title, String content) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
 }

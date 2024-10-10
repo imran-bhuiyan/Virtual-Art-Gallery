@@ -1,86 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.CustomerNFTCheckoutController">
     <children>
-        <HBox alignment="CENTER" layoutX="1.0" layoutY="-1.0" prefHeight="79.0" prefWidth="899.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
-                    <font>
-                        <Font name="System Italic" size="30.0" />
-                    </font>
-                </Text>
-                <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Home" textFill="#181818" />
-                <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Paintings" textFill="#181818" />
-                <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Top Art" textFill="#1b1b1b" />
-                <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Events" textFill="#0d0d0d" />
-                <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Auction" textFill="#0d0d0d" />
-                <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="NFT" textFill="#131212" />
-                <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Profile" textFill="#181818" />
-                <Button mnemonicParsing="false" prefWidth="0.0" style="-fx-background-color: transparent;">
-                    <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0">
-                            <image>
-                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Shopping%20Cart.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-            </children>
-        </HBox>
-
-        <Text layoutX="382.0" layoutY="119.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Checkout" />
-
-        <ScrollPane layoutY="140.0" prefHeight="528.0" prefWidth="899.0">
-            <content>
-                <VBox spacing="20" style="-fx-padding: 20;">
-                    <children>
-                        <AnchorPane prefHeight="400.0" prefWidth="860.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-width: 1;">
-                            <children>
-                                <Text layoutX="20.0" layoutY="30.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Order Summary" />
-                                <Text layoutX="20.0" layoutY="60.0" text="NFT: Cosmic Dreamscape #1" />
-                                <Text layoutX="20.0" layoutY="80.0" text="Price: 0.5 ETH" />
-                                <Text layoutX="20.0" layoutY="100.0" text="Transaction Fee: 0.01 ETH" />
-                                <Text layoutX="20.0" layoutY="130.0" style="-fx-font-weight: bold;" text="Total: 0.51 ETH" />
-
-                                <Text layoutX="20.0" layoutY="170.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Payment Information" />
-                                <Text layoutX="20.0" layoutY="200.0" text="Wallet Address:" />
-                                <TextField layoutX="120.0" layoutY="180.0" prefWidth="300.0" promptText="Enter your wallet address" />
-
-                                <Text layoutX="20.0" layoutY="240.0" text="Payment Method:" />
-                                <ComboBox layoutX="120.0" layoutY="220.0" prefWidth="150.0" promptText="Select method">
-                                    <items>
-                                        <!-- Add payment methods here -->
-                                    </items>
-                                </ComboBox>
-
-                                <Button layoutX="20.0" layoutY="280.0" mnemonicParsing="false" style="-fx-background-color: #4CAF50;" text="Confirm Purchase">
-                                    <graphic>
-                                        <ImageView fitHeight="14" fitWidth="14">
-                                            <image>
-                                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Tags.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-
-                                <Text layoutX="20.0" layoutY="330.0" style="-fx-font-size: 12px;" text="By confirming your purchase, you agree to our terms of service and privacy policy." />
-                            </children>
-                        </AnchorPane>
-                    </children>
-                </VBox>
-            </content>
-        </ScrollPane>
+        <Label layoutX="214.0" layoutY="14.0" text="NFT Checkout">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="50.0" layoutY="80.0" text="NFT Title:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="nftTitleLabel" layoutX="200.0" layoutY="80.0" text="[NFT Title]">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="50.0" layoutY="120.0" text="Artist:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="artistLabel" layoutX="200.0" layoutY="120.0" text="[Artist Name]">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="50.0" layoutY="160.0" text="Price:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="priceLabel" layoutX="200.0" layoutY="160.0" text="[Price]">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Button fx:id="orderNowButton" layoutX="250.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleOrderNow" text="Order Now">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
     </children>
 </AnchorPane>

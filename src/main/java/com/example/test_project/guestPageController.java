@@ -42,13 +42,11 @@ public class guestPageController {
     @FXML
     private void goLogin(ActionEvent event) throws IOException {
         loadPage(event, "customer/customerLoginPage.fxml");
-        //loadPage(event, "Artist/ArtistLoginPage.fxml");
     }
 
     @FXML
     private void goSignUpChoice(ActionEvent event) throws IOException {
         loadPage(event, "guest/guestRegistrationForm.fxml");
-
     }
 
     private void loadPage(ActionEvent event, String fxmlFile) throws IOException {
