@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.ArtistWithdrawMoneyController">
+    <center>
+        <AnchorPane prefHeight="734.0" prefWidth="860.0" style="-fx-background-color: #d8e4e9;" BorderPane.alignment="CENTER">
+            <children>
+                <AnchorPane layoutX="236.0" layoutY="163.0" prefHeight="343.0" prefWidth="468.0" style="-fx-border-color: #1eb6a7; -fx-background-color: #D8D2C2;">
+                    <children>
+                        <Text layoutX="94.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-fill: #1e1e1e; -fx-padding: 5;" text="Amount" />
+                        <TextField fx:id="amount" layoutX="184.0" layoutY="76.0" prefHeight="30.0" prefWidth="182.0" style="-fx-background-color: #F0F8FF; -fx-border-color: #1eb6a7; -fx-border-radius: 5; -fx-padding: 5;" />
+
+                        <Text layoutX="82.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-fill: #1e1e1e; -fx-padding: 5;" text="Account No." />
+                        <TextField fx:id="accountNo" layoutX="183.0" layoutY="122.0" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #F0F8FF; -fx-border-color: #1eb6a7; -fx-border-radius: 5; -fx-padding: 5;" />
+
+                        <Text layoutX="56.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-fill: #1e1e1e; -fx-padding: 5;" text="Payment Method" />
+
+                        <Button layoutX="252.0" layoutY="249.0" mnemonicParsing="false" onAction="#requestWithdrawal" prefHeight="14.0" prefWidth="100.0" style="-fx-background-color: Green;" text="Request" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="134.0" layoutY="249.0" mnemonicParsing="false" onAction="#clear" prefHeight="14.0" prefWidth="100.0" style="-fx-background-color: Red;" text="Clear" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                  <TextField fx:id="paymentMethod" layoutX="183.0" layoutY="169.0" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #F0F8FF; -fx-border-color: #1eb6a7; -fx-border-radius: 5; -fx-padding: 5;" />
+                    </children>
+                </AnchorPane>
+                <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="74.0" prefWidth="900.0" style="-fx-background-color: #40E0D0;">
+                    <children>
+                        <Text layoutX="396.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WITHDRAW MONEY" wrappingWidth="283.125732421875">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Text>
+                    </children>
+                    <effect>
+                        <Blend />
+                    </effect>
+                </Pane>
+            </children>
+            <effect>
+                <Blend />
+            </effect>
+        </AnchorPane>
+    </center>
+</BorderPane>
