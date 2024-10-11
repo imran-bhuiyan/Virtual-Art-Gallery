@@ -7,49 +7,47 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.customerHomePageController">
     <children>
-        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="921.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
+        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="921.0" spacing="20" style="-fx-background-color: #d8e4e9; -fx-padding: 10;">
             <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
-               <font>
-                  <Font name="Bell MT Bold" size="27.0" />
-               </font>
-            </Text>
-                <Button mnemonicParsing="false" onAction="#goCustomerHome" style="-fx-background-color: transparent;" text="Home" textFill="#181818">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Button>
-                <Button mnemonicParsing="false" onAction="#goCustomerPaintings" style="-fx-background-color: transparent;" text="Paintings" textFill="#181818">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Button>
-                <Button mnemonicParsing="false" onAction="#goCustomerTopArt" style="-fx-background-color: transparent;" text="Top Art" textFill="#1b1b1b">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Button>
-                <Button mnemonicParsing="false" onAction="#goCustomerEvents" style="-fx-background-color: transparent;" text="Events" textFill="#0d0d0d">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Button>
-                <Button mnemonicParsing="false" onAction="#goCustomerAuction" style="-fx-background-color: transparent;" text="Auction" textFill="#0d0d0d">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Button>
-                <Button mnemonicParsing="false" onAction="#goCustomerNFT" style="-fx-background-color: transparent;" text="NFT" textFill="#131212">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Button>
-            <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerProfile" style="-fx-background-color: transparent;" text="Profile" textFill="#181818">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Button>
-                <Button mnemonicParsing="false" onAction="#goCustomerCart" prefWidth="0.0" style="-fx-background-color: transparent;">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
+                    <font>
+                        <Font name="Bell MT Bold" size="27.0" />
+                    </font>
+                </Text>
+                <Button mnemonicParsing="false" onAction="#goCustomerHome" style="-fx-background-color: D2E0FB;" text="Home" textFill="#181818">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerPaintings" style="-fx-background-color: D2E0FB;" text="Paintings" textFill="#181818">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerTopArt" style="-fx-background-color: D2E0FB;" text="Top Art" textFill="#1b1b1b">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerEvents" style="-fx-background-color: D2E0FB;" text="Events" textFill="#0d0d0d">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerAuction" style="-fx-background-color: D2E0FB;" text="Auction" textFill="#0d0d0d">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerNFT" style="-fx-background-color: D2E0FB;" text="NFT" textFill="#131212">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerProfile" style="-fx-background-color: D2E0FB;" text="Profile" textFill="#181818">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerCart" prefWidth="0.0" style="-fx-background-color: D2E0FB;">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0">
                             <image>
@@ -58,77 +56,61 @@
                         </ImageView>
                     </graphic>
                 </Button>
-            <Button layoutX="741.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerNotification" style="-fx-background-color: transparent;" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Notification.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#goCustomerMessages" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Chat%20Message.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="843.0" layoutY="36.0" mnemonicParsing="false" onAction="#customerLogout" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/logout.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+                <Button layoutX="741.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerNotification" style="-fx-background-color: D2E0FB;" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Notification.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goCustomerMessages" style="-fx-background-color: D2E0FB;">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Chat%20Message.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button layoutX="843.0" layoutY="36.0" mnemonicParsing="false" onAction="#customerLogout" style="-fx-background-color: D2E0FB;">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/logout.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
             </children>
         </HBox>
-
-        <StackPane layoutX="-2.0" layoutY="77.0" prefHeight="268.0" prefWidth="871.0">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To Virtual Art Gallery">
-                    <font>
-                        <Font name="Arial Narrow Bold Italic" size="56.0" />
-                    </font>
-                </Text>
-                <ImageView fitHeight="275.0" fitWidth="925.0" opacity="0.35" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/rsz_nature.jpg" />
-                    </image>
-                </ImageView>
-            </children>
-        </StackPane>
-
-        <Text fill="#201a1a" layoutX="208.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step into a world where creativity knows no bounds and art comes alive in the digital realm" />
-
-        <Pane layoutY="345.0" prefHeight="294.0" prefWidth="921.0" style="-fx-border-color: #000000;">
-         <children>
-            <Button layoutX="151.0" layoutY="79.0" mnemonicParsing="false" onAction="#addCredit" prefHeight="31.0" prefWidth="135.0" style="-fx-background-color: blue;" text="Add Credit " textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Button>
-            <Label layoutX="9.0" layoutY="29.0" text="Balance : " textFill="#b90d0d">
-               <font>
-                  <Font name="System Bold Italic" size="24.0" />
-               </font>
-            </Label>
-            <TextField fx:id="balance" layoutX="144.0" layoutY="29.0" prefHeight="35.0" prefWidth="149.0" />
-            <Button layoutX="306.0" layoutY="34.0" mnemonicParsing="false" onAction="#seeBalance" prefHeight="25.0" prefWidth="54.0" text="See" />
-         </children></Pane>
-
-        <Button layoutX="778.0" layoutY="640.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="143.0" style="-fx-background-color: #40E0D0;" text="Chat With Admin">
-            <graphic>
-                <ImageView fitHeight="20.0" fitWidth="20.0">
-                    <image>
-                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Chat.png" />
-                    </image>
-                </ImageView>
-            </graphic>
+        <ImageView fitHeight="593.0" fitWidth="921.0" layoutX="-6.0" layoutY="133.0" opacity="0.87" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Autmn.jpg" />
+            </image>
+        </ImageView>
+        <Label layoutX="591.0" layoutY="86.0" text="Balance : " textFill="#676b51">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Label>
+        <TextField fx:id="balance" layoutX="663.0" layoutY="89.0" prefHeight="25.0" prefWidth="149.0" />
+        <Button layoutX="828.0" layoutY="86.0" mnemonicParsing="false" onAction="#seeBalance" prefHeight="25.0" prefWidth="78.0" style="-fx-background-color: B7B7B7;" text="View" />
+        <Button layoutX="780.0" layoutY="623.0" mnemonicParsing="false" onAction="#addCredit" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #a7c7cb;" text="Add Credit " textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
         </Button>
+        <Text fill="#fff8f8" layoutX="102.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To Virtual Art Gallery">
+            <font>
+                <Font name="Arial Narrow Bold Italic" size="62.0" />
+            </font>
+        </Text>
+        <Text fill="WHITE" layoutX="110.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step into a world where creativity knows no bounds and art comes alive in the digital realm">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Text>
     </children>
 </AnchorPane>

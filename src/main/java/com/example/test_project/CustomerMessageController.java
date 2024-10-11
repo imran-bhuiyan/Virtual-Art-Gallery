@@ -1,3 +1,4 @@
+// CustomerMessageController.java
 package com.example.test_project;
 
 import javafx.application.Platform;
@@ -7,8 +8,6 @@ import javafx.event.ActionEvent;
 import java.io.*;
 import java.net.Socket;
 import java.sql.*;
-import java.util.Set;
-import java.util.HashSet;
 
 public class CustomerMessageController extends BaseController {
 
@@ -23,12 +22,13 @@ public class CustomerMessageController extends BaseController {
     private String currentArtistName;
     private boolean isHandlingSelection = false;
 
-    private Set<String> displayedMessageIds = new HashSet<>();
-
     @FXML
     public void initialize() {
         System.out.println("Initializing CustomerMessengerController");
+
         validateComponents();
+
+        loadChatPartners();
     }
 
     private void validateComponents() {
@@ -44,23 +44,6 @@ public class CustomerMessageController extends BaseController {
         System.out.println("CustomerMessengerController: Setting userId to " + userId);
         connectToServer();
         loadChatPartners();
-    }
-
-    private void displayMessage(int senderId, String content, Timestamp timestamp) {
-        String displayText = (senderId == userId) ? "You: " + content : "Artist: " + content;
-        String messageId = senderId + "_" + content.hashCode() + "_" + timestamp.getTime();
-
-        if (!displayedMessageIds.contains(messageId)) {
-            System.out.println("Displaying message: " + displayText);
-            if (messageListView != null) {
-                messageListView.getItems().add(displayText);
-                displayedMessageIds.add(messageId);
-            } else {
-                System.err.println("Error: messageListView is null when trying to display message");
-            }
-        } else {
-            System.out.println("Message already displayed, skipping: " + displayText);
-        }
     }
 
     private void connectToServer() {
@@ -86,11 +69,10 @@ public class CustomerMessageController extends BaseController {
             while ((message = in.readLine()) != null) {
                 System.out.println("Received message: " + message);
                 if (message.startsWith("MESSAGE ")) {
-                    String[] parts = message.split(" ", 4);
+                    String[] parts = message.split(" ", 3);
                     int senderId = Integer.parseInt(parts[1]);
-                    long timestamp = Long.parseLong(parts[2]);
-                    String content = parts[3];
-                    Platform.runLater(() -> displayMessage(senderId, content, new Timestamp(timestamp)));
+                    String content = parts[2];
+                    Platform.runLater(() -> displayMessage(senderId, content));
                 }
             }
         } catch (IOException e) {
@@ -99,28 +81,36 @@ public class CustomerMessageController extends BaseController {
         }
     }
 
+    private void displayMessage(int senderId, String content) {
+        String displayText = (senderId == userId) ? "You: " + content : "Artist: " + content;
+        System.out.println("Displaying message: " + displayText);
+        if (messageListView != null) {
+            messageListView.getItems().add(displayText);
+        } else {
+            System.err.println("Error: messageListView is null when trying to display message");
+        }
+    }
+
     @FXML
     void sendMessage() {
         String message = messageField.getText().trim();
         if (!message.isEmpty() && currentArtistId != 0) {
             System.out.println("Sending message: " + message + " to artist ID: " + currentArtistId);
-            long timestamp = System.currentTimeMillis();
-            out.println("SEND " + currentArtistId + " " + timestamp + " " + message);
-            saveChatMessage(userId, currentArtistId, message, new Timestamp(timestamp));
+            out.println("SEND " + currentArtistId + " " + message);
+//            saveChatMessage(userId, currentArtistId, message);
             messageField.clear();
         } else {
             System.out.println("Message not sent. Empty message or no artist selected.");
         }
     }
 
-    private void saveChatMessage(int senderId, int receiverId, String content, Timestamp timestamp) {
+    private void saveChatMessage(int senderId, int receiverId, String content) {
         try (Connection conn = DataBaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(
-                     "INSERT INTO ChatMessages (sender_id, receiver_id, content, sent_at, is_read) VALUES (?, ?, ?, ?, false)")) {
+                     "INSERT INTO ChatMessages (sender_id, receiver_id, content, sent_at, is_read) VALUES (?, ?, ?, NOW(), false)")) {
             pstmt.setInt(1, senderId);
             pstmt.setInt(2, receiverId);
             pstmt.setString(3, content);
-            pstmt.setTimestamp(4, timestamp);
             pstmt.executeUpdate();
             System.out.println("Message saved to database");
         } catch (SQLException e) {
@@ -132,17 +122,21 @@ public class CustomerMessageController extends BaseController {
     public void initChat(int artistId, String artistName) {
         System.out.println("Initializing chat with artist ID: " + artistId + ", name: " + artistName);
 
+        // Check if artist exists in chat list
         boolean artistExists = checkArtistExistsInChatHistory(artistId);
 
+        // If artist doesn't exist in chat list, add them
         if (!artistExists) {
             System.out.println("Adding new artist to chat list: " + artistName);
             addInitialChatMessage(artistId);
         }
 
+        // Set current artist and update UI
         this.currentArtistId = artistId;
         this.currentArtistName = artistName;
         chatPartnerLabel.setText("Chat with " + artistName);
 
+        // Reload chat list and history
         loadChatPartners();
         loadChatHistory(artistId);
         selectArtistInList(artistName);
@@ -189,8 +183,7 @@ public class CustomerMessageController extends BaseController {
 
     private void loadChatHistory(int artistId) {
         messageListView.getItems().clear();
-        displayedMessageIds.clear();
-        String query = "SELECT sender_id, content, sent_at FROM ChatMessages " +
+        String query = "SELECT sender_id, content FROM ChatMessages " +
                 "WHERE (sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?) " +
                 "ORDER BY sent_at";
 
@@ -203,7 +196,7 @@ public class CustomerMessageController extends BaseController {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 if (!rs.getString("content").equals("Chat started")) {
-                    displayMessage(rs.getInt("sender_id"), rs.getString("content"), rs.getTimestamp("sent_at"));
+                    displayMessage(rs.getInt("sender_id"), rs.getString("content"));
                 }
             }
         } catch (SQLException e) {
@@ -251,6 +244,7 @@ public class CustomerMessageController extends BaseController {
                 try {
                     isHandlingSelection = true;
 
+                    // Only load chat if a new artist is selected
                     if (currentArtistName != null && currentArtistName.equals(newValue)) {
                         return;
                     }
@@ -261,6 +255,9 @@ public class CustomerMessageController extends BaseController {
                         currentArtistId = artistId;
                         currentArtistName = newValue;
                         chatPartnerLabel.setText("Chat with " + newValue);
+
+                        // Clear previous messages and load new chat history
+                        messageListView.getItems().clear();  // Clear messages when switching profiles
                         loadChatHistory(artistId);
                     } else {
                         System.err.println("Could not find artist ID for: " + newValue);

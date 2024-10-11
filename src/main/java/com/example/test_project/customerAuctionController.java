@@ -20,6 +20,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
@@ -46,11 +48,12 @@ public class customerAuctionController extends BaseController {
     }
 
     private void loadAuctionItems() {
-        auctionItemsContainer.getChildren().clear(); // Add this line
+        auctionItemsContainer.getChildren().clear();
         String query = "SELECT p.name as Title, u.name as Artist, p.category as Category, " +
-                "a.starting_bid, a.current_bid, a.ends_time, a.auction_id, p.image_url " +
+                "a.starting_bid, a.current_bid, a.ends_time, a.start_date, a.auction_id, p.image_url " +
                 "FROM auctions as a JOIN paintings as p ON a.painting_id = p.painting_id " +
-                "JOIN users as u ON u.user_id = p.artist_id WHERE a.status = 'active'" ;
+                "JOIN users as u ON u.user_id = p.artist_id WHERE a.status = 'active' or a.status = 'pending'";
+
 
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query);
@@ -100,23 +103,51 @@ public class customerAuctionController extends BaseController {
         Text currentBid = createText("Current Bid: $" + rs.getDouble("current_bid"), 220, 150, null);
         Text endsTime = createText("Auction Ends: " + rs.getString("ends_time"), 220, 180, null);
 
-        TextField bidField = new TextField();
-        bidField.setLayoutX(220);
-        bidField.setLayoutY(210);
-        bidField.setPromptText("Enter your bid");
+        Text startTime = createText("Auction Starts: " + rs.getString("start_date"), 220, 200, null);
+
+        // Convert timestamps to Java LocalDateTime
+        LocalDateTime startDate = rs.getTimestamp("start_date").toLocalDateTime();
+        LocalDateTime endsDate = rs.getTimestamp("ends_time").toLocalDateTime();
+        LocalDateTime currentDate = LocalDateTime.now();
+
+        Text auctionStatus = new Text();
+        auctionStatus.setLayoutX(650);
+        auctionStatus.setLayoutY(30);
+        auctionStatus.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
         Button bidButton = new Button("Place Bid");
         bidButton.setLayoutX(380);
-        bidButton.setLayoutY(210);
+        bidButton.setLayoutY(240);
         bidButton.setStyle("-fx-background-color: #4CAF50;");
+        bidButton.setDisable(true);  // Disable by default
+
+        if (currentDate.isBefore(startDate)) {
+            auctionStatus.setText("COMING SOON");
+            auctionStatus.setStyle("-fx-text-fill: #FFA500; -fx-font-weight: bold; -fx-font-size: 16px;");
+        } else if (currentDate.isAfter(startDate) && currentDate.isBefore(endsDate)) {
+            auctionStatus.setText("LIVE NOW!");
+            auctionStatus.setStyle("-fx-text-fill: red; -fx-font-weight: bold; -fx-font-size: 18px;");
+            bidButton.setDisable(false);  // Enable the button since the auction is live
+        } else if (currentDate.isAfter(endsDate)) {
+            auctionStatus.setText("AUCTION ENDED");
+            auctionStatus.setStyle("-fx-text-fill: #808080; -fx-font-weight: bold; -fx-font-size: 16px;");
+        }
+
+
+
+        TextField bidField = new TextField();
+        bidField.setLayoutX(220);
+        bidField.setLayoutY(240);
+        bidField.setPromptText("Enter your bid");
 
         int auctionId = rs.getInt("auction_id");
-        bidButton.setOnAction(event -> placeBid(auctionId, bidField.getText(),startingBid, currentBid));
+        bidButton.setOnAction(event -> placeBid(auctionId, bidField.getText(), startingBid, currentBid));
 
-        pane.getChildren().addAll(paintingImageView, title, artist, category, startingBid, currentBid, endsTime, bidField, bidButton);
+        pane.getChildren().addAll(paintingImageView, title, artist, category, startingBid, currentBid, endsTime, startTime, auctionStatus, bidField, bidButton);
 
         return pane;
     }
+
 
     private void setPlaceholderImage(ImageView imageView) {
         File placeholderFile = new File(IMAGE_DIRECTORY, "placeholder.png");
@@ -143,17 +174,30 @@ public class customerAuctionController extends BaseController {
             double currentBid = Double.parseDouble(currentBidText.getText().replaceAll("[^\\d.]", ""));
             double startingBid = Double.parseDouble(startingBidText.getText().replaceAll("[^\\d.]", ""));
 
-            // Check if the new bid is higher than both the starting bid and current bid
             if (newBid <= currentBid || newBid <= startingBid) {
                 showAlert("Invalid Bid", "Your bid must be higher than both the starting bid and the current bid.");
                 return;
             }
 
+            // Check user's balance
             Connection conn = dbConnection.getConnection();
+            String checkBalanceQuery = "SELECT credits FROM users WHERE user_id = ?";
+            try (PreparedStatement balanceStmt = conn.prepareStatement(checkBalanceQuery)) {
+                balanceStmt.setInt(1, this.userId);
+                ResultSet rs = balanceStmt.executeQuery();
+                if (rs.next()) {
+                    double userCredits = rs.getDouble("credits");
+                    if (userCredits < newBid) {
+                        showAlert("Insufficient Balance", "You don't have enough credits to place this bid.");
+                        return;
+                    }
+                }
+            }
+
             conn.setAutoCommit(false);
 
             try {
-                // Update the current_bid in the auctions table
+                // Update current_bid in auctions table
                 String updateAuctionQuery = "UPDATE auctions SET current_bid = ? WHERE auction_id = ?";
                 try (PreparedStatement pstmt = conn.prepareStatement(updateAuctionQuery)) {
                     pstmt.setDouble(1, newBid);
@@ -161,7 +205,7 @@ public class customerAuctionController extends BaseController {
                     pstmt.executeUpdate();
                 }
 
-                // Insert the bid into the bids table
+                // Insert bid into bids table
                 String insertBidQuery = "INSERT INTO bids (auction_id, user_id, bid_amount, bid_time) VALUES (?, ?, ?, NOW())";
                 try (PreparedStatement pstmt = conn.prepareStatement(insertBidQuery)) {
                     pstmt.setInt(1, auctionId);
@@ -187,6 +231,9 @@ public class customerAuctionController extends BaseController {
             showAlert("Error", "Failed to place bid: " + e.getMessage());
         }
     }
+
+
+
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(AlertType.ERROR);

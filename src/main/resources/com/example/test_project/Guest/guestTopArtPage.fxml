@@ -8,14 +8,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="908.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.guestTopArtController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="908.0" style="-fx-background-color: FCFAEE;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.guestTopArtController">
     <children>
-        <ImageView fitHeight="340.0" fitWidth="533.0" layoutX="178.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Street%20Art.jpg" />
-            </image>
-        </ImageView>
-        <Text fx:id="titleText" layoutX="361.0" layoutY="511.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street Art">
+
+        <AnchorPane layoutX="228.0" layoutY="111.0" prefHeight="340.0" prefWidth="533.0" style="-fx-background-color: #f0f0f0;">
+            <children>
+                <ImageView fx:id="paintingImageView" fitHeight="300.0" fitWidth="500.0" layoutX="20.5" layoutY="20.0" preserveRatio="true" />
+            </children>
+        </AnchorPane>
+
+        <Text fx:id="titleText" layoutX="361.0" layoutY="511.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Painting Name">
             <font>
                 <Font name="System Bold Italic" size="32.0" />
             </font>
@@ -25,7 +27,7 @@
                 <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Love.png" />
             </image>
         </ImageView>
-        <Text fx:id="reactionsText" layoutX="410.0" layoutY="555.0" strokeType="OUTSIDE" strokeWidth="0.0" text="300">
+        <Text fx:id="reactionsText" layoutX="410.0" layoutY="555.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
             <font>
                 <Font size="21.0" />
             </font>
@@ -35,50 +37,49 @@
                 <Font size="23.0" />
             </font>
         </Text>
-        <Text fx:id="artistText" layoutX="444.0" layoutY="597.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Muzan Kibutsuji">
+        <Text fx:id="artistText" layoutX="444.0" layoutY="597.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist Name">
             <font>
                 <Font size="23.0" />
             </font>
         </Text>
-        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="908.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
-            <children>
-                <ImageView fitHeight="50" fitWidth="100" preserveRatio="true">
-                    <image>
-                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Screenshot%202024-06-27%20023303.png" />
-                    </image>
-                </ImageView>
-                <HBox prefHeight="50.0" prefWidth="141.0" />
-                <Button onAction="#goHome" style="-fx-background-color: transparent;" text="Home">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
-                <Button onAction="#goEvents" style="-fx-background-color: transparent;" text="Events">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
-                <Button onAction="#goPaintings" style="-fx-background-color: transparent;" text="Paintings">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
-                <Button onAction="#goTopArt" style="-fx-background-color: transparent;" text="Top Art">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
-                <Button onAction="#goContactUS" style="-fx-background-color: transparent;" text="Contact Us">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
-                <Button mnemonicParsing="false" onAction="#goLogin" style="-fx-background-color: transparent;" text="Login">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
-            </children>
-        </HBox>
+      <HBox alignment="CENTER" layoutX="1.0" prefHeight="80.0" prefWidth="908.0" spacing="20" style="-fx-background-color: #d8e4e9; -fx-padding: 10;">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
+               <font>
+                  <Font name="Bell MT Bold" size="27.0" />
+               </font>
+            </Text>
+            <Button mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: D2E0FB;" text="Home" textFill="#181818">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goPaintings" style="-fx-background-color: D2E0FB;" text="Paintings" textFill="#181818">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goTopArt" style="-fx-background-color: D2E0FB;" text="Top Art" textFill="#1b1b1b">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goEvents" style="-fx-background-color: D2E0FB;" text="Events" textFill="#0d0d0d">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goContactUS" style="-fx-background-color: D2E0FB;" text="Contact Us" textFill="#0d0d0d">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goLogin" style="-fx-background-color: D2E0FB;" text="Login" textFill="#181818">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
     </children>
 </AnchorPane>

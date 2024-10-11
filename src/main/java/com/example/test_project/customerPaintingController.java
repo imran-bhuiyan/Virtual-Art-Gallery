@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -58,10 +59,10 @@ public class customerPaintingController extends BaseController {
         paintingsContainer.getChildren().clear();
         String selectedCategory = categoryComboBox.getValue();
 
-        String query = "SELECT p.artist_id,p.painting_id, p.name as Title, u.name as Artist, p.year, p.category, p.price, p.image_url,COUNT(r.painting_id) as Reaction " +
+        String query = "SELECT p.artist_id, p.painting_id, p.name as Title, u.name as Artist, p.year, p.category, p.price, p.image_url,COUNT(r.painting_id) as Reaction " +
                 "FROM paintings as p JOIN users as u ON p.artist_id = u.user_id " +
                 "LEFT JOIN reactions as r ON r.painting_id = p.painting_id " +
-                "WHERE p.category = ? OR ? = 'All Categories' " +
+                "WHERE p.category = ? OR ? = 'All Categories' and p.painting_status ='active' and p.stock = 'In Stock' " +
                 "GROUP BY p.painting_id";
 
         try (Connection conn = dbConnection.getConnection();
@@ -94,7 +95,7 @@ public class customerPaintingController extends BaseController {
         }
     }
 
-    private AnchorPane createPaintingCard(String title, String artist, int year, String category, double price, int reactions , String imageUrl,int paintingId,int artistId) {
+    private AnchorPane createPaintingCard(String title, String artist, int year, String category, double price, int reactions , String imageUrl,int paintingId ,int artistId) {
         AnchorPane card = new AnchorPane();
         card.setPrefSize(860, 213);
         card.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-width: 1;");
@@ -166,6 +167,7 @@ public class customerPaintingController extends BaseController {
             try {
                 Image image = new Image(imageFile.toURI().toString());
                 paintingImageView.setImage(image);
+                paintingImageView.setOnMouseClicked(event -> openImageInNewWindow(image));
             } catch (Exception e) {
                 System.out.println("Error loading image: " + e.getMessage());
                 setPlaceholderImage(paintingImageView);
@@ -178,18 +180,6 @@ public class customerPaintingController extends BaseController {
         card.getChildren().addAll(titleText, artistText, yearText, categoryText, priceText, reactionText, addToCartButton, chatWithArtistButton, reactionButton,paintingImageView);
 
         return card;
-    }
-
-    //setting image
-
-    private void setPlaceholderImage(ImageView imageView) {
-        // Set a placeholder image
-        File placeholderFile = new File(IMAGE_DIRECTORY, "placeholder.png");
-        if (placeholderFile.exists()) {
-            imageView.setImage(new Image(placeholderFile.toURI().toString()));
-        } else {
-            System.out.println("Placeholder image not found");
-        }
     }
 
     // load chat
@@ -216,6 +206,40 @@ public class customerPaintingController extends BaseController {
         }
     }
 
+    // zoom
+    private void openImageInNewWindow(Image image) {
+        // Create a new stage (window)
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Zoomed Image");
+
+        // Create an ImageView for displaying the image
+        ImageView imageView = new ImageView(image);
+        imageView.setPreserveRatio(true); // Keep aspect ratio
+
+        // Set the fixed size for the ImageView (500x600)
+        imageView.setFitWidth(500);
+        imageView.setFitHeight(600);
+
+        // Add the ImageView to a layout container (StackPane)
+        StackPane root = new StackPane(imageView);
+        Scene scene = new Scene(root, 500, 600); // Set the window size to 500x600
+
+        // Set the scene and show the new window
+        newWindow.setScene(scene);
+        newWindow.show();
+    }
+
+    //setting image
+
+    private void setPlaceholderImage(ImageView imageView) {
+        // Set a placeholder image
+        File placeholderFile = new File(IMAGE_DIRECTORY, "placeholder.png");
+        if (placeholderFile.exists()) {
+            imageView.setImage(new Image(placeholderFile.toURI().toString()));
+        } else {
+            System.out.println("Placeholder image not found");
+        }
+    }
 
     // reaction check
     private boolean checkUserReaction(int paintingId) {
@@ -401,16 +425,8 @@ public class customerPaintingController extends BaseController {
 
     @FXML
     void goCustomerMessages(ActionEvent event) throws IOException {
-        System.out.println("CustomerHomePageController: Navigating to Messages page");
+        loadPageWithUserId(event,"Customer/customerMessengerPage.fxml");
 
-        // Instead of direct FXMLLoader usage, use BaseController's loadPage method
-        loadPageWithUserId(event, "Customer/customerMessengerPage.fxml");
-
-    /* No need for manual controller setup and userId setting because:
-       1. BaseController.loadPage() automatically handles loading the FXML
-       2. It automatically passes the userId to the new controller via setUserId()
-       3. The CustomerMessengerController extends BaseController and implements proper setUserId()
-    */
     }
 
     @FXML

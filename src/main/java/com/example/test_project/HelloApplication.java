@@ -17,6 +17,7 @@ public class HelloApplication extends Application {
 
         stage.setScene(scene);
         stage.show();
+
     }
 
     private static void testDatabaseConnection() {
@@ -33,7 +34,10 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
+
         testDatabaseConnection();
         launch();
+
+
     }
 }

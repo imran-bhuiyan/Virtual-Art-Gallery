@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,8 +42,11 @@ public class customerNFTcontroller extends BaseController {
     }
 
     private void loadNFTsFromDatabase() {
-        String query = "SELECT n.name as Title, u.name as Artist, n.edition, n.blockchain, n.price, n.image_url " +
-                "FROM nfts as n JOIN users as u ON n.artist_id = u.user_id";
+        String query = "SELECT n.nft_id, n.name as Title, artist.name as Artist, n.edition, n.blockchain, n.price, n.image_url, " +
+                "owner.user_id as owner_id, owner.name as Owner " +
+                "FROM nfts as n " +
+                "JOIN users as artist ON n.artist_id = artist.user_id " +
+                "LEFT JOIN users as owner ON n.owner_id = owner.user_id";
         try (Connection conn = dbConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -54,7 +58,10 @@ public class customerNFTcontroller extends BaseController {
                         rs.getString("edition"),
                         rs.getString("blockchain"),
                         rs.getString("price"),
-                        rs.getString("image_url")
+                        rs.getString("image_url"),
+                        rs.getInt("nft_id"),
+                        rs.getInt("owner_id"),
+                        rs.getString("Owner")
                 );
                 nftContainer.getChildren().add(nftCard);
             }
@@ -64,9 +71,9 @@ public class customerNFTcontroller extends BaseController {
         }
     }
 
-    private AnchorPane createNFTCard(String title, String artist, String edition, String blockchain, String price, String imageUrl) {
+    private AnchorPane createNFTCard(String title, String artist, String edition, String blockchain, String price, String imageUrl, int nftId, int ownerId, String ownerName) {
         AnchorPane card = new AnchorPane();
-        card.setPrefHeight(250.0);
+        card.setPrefHeight(280.0);
         card.setPrefWidth(860.0);
         card.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-width: 1;");
 
@@ -113,21 +120,33 @@ public class customerNFTcontroller extends BaseController {
         priceText.setLayoutX(220.0);
         priceText.setLayoutY(150.0);
 
+        Text ownerText = new Text("Owner: " + (ownerName != null ? ownerName : "Not owned"));
+        ownerText.setLayoutX(220.0);
+        ownerText.setLayoutY(180.0);
+        ownerText.setStyle("-fx-font-weight: bold; -fx-fill: #4A90E2;");
+
         Button buyButton = new Button("Buy Now");
         buyButton.setLayoutX(220.0);
-        buyButton.setLayoutY(180.0);
+        buyButton.setLayoutY(210.0);
         buyButton.setStyle("-fx-background-color: #4CAF50;");
-        buyButton.setOnAction(event -> openCheckoutPage(title, artist, price));
+        buyButton.setOnAction(event -> openCheckoutPage(title, artist, price, nftId));
 
         Text infoText = new Text("After purchase, ownership will be transferred automatically and you can download your NFT.");
         infoText.setLayoutX(220.0);
-        infoText.setLayoutY(220.0);
+        infoText.setLayoutY(250.0);
         infoText.setStyle("-fx-font-size: 12px;");
 
-        card.getChildren().addAll(imageView, titleText, artistText, editionText, blockchainText, priceText, buyButton, infoText);
+        card.getChildren().addAll(imageView, titleText, artistText, editionText, blockchainText, priceText, ownerText, infoText);
+
+        // Only add the buy button if the NFT is not owned
+        if (ownerId == 0) {
+            card.getChildren().add(buyButton);
+        }
 
         return card;
     }
+
+
 
     private void setPlaceholderImage(ImageView imageView) {
         // Set a placeholder image
@@ -139,13 +158,15 @@ public class customerNFTcontroller extends BaseController {
         }
     }
 
-    private void openCheckoutPage(String title, String artist, String price) {
+    private void openCheckoutPage(String title, String artist, String price, int nftId) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Customer/customerNFTcheckoutPage.fxml"));
             Parent root = loader.load();
 
             CustomerNFTCheckoutController checkoutController = loader.getController();
-            checkoutController.setNFTDetails(title, artist, price, 1); // Assuming nftId is 1 for simplicity. You should pass the actual nftId.
+            BigDecimal priceDecimal = new BigDecimal(price.replace("$", "").trim());
+            checkoutController.setNFTDetails(nftId, priceDecimal);
+            checkoutController.setUserId(this.userId);
 
             Stage checkoutStage = new Stage();
             checkoutStage.initModality(Modality.APPLICATION_MODAL);
@@ -156,6 +177,7 @@ public class customerNFTcontroller extends BaseController {
             e.printStackTrace();
             System.out.println("Error opening checkout page: " + e.getMessage());
         }
+
     }
     @FXML
     void goCustomerAuction(ActionEvent event) throws IOException {

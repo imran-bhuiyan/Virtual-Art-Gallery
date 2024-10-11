@@ -71,21 +71,20 @@ public class CustomerNotificationController extends BaseController {
         }
 
         // Check for user birthdays tomorrow
-        String birthdayQuery = "SELECT u.* FROM users u LEFT JOIN notifications n ON n.type = 'birthday' AND n.user_id = ? AND n.message LIKE CONCAT('%', u.name, '%') AND YEAR(n.created_at) = YEAR(CURDATE()) WHERE DATE_FORMAT(u.dob, '%m-%d') = DATE_FORMAT(?, '%m-%d') AND n.id IS NULL";
+        String birthdayQuery = "SELECT u.* FROM users u LEFT JOIN notifications n ON n.type = 'birthday' AND n.user_id = ? AND n.message LIKE CONCAT('%', u.name, '%') AND YEAR(n.created_at) = YEAR(CURDATE()) WHERE u.user_id = ? AND DATE_FORMAT(u.dob, '%m-%d') = DATE_FORMAT(?, '%m-%d') AND n.id IS NULL";
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(birthdayQuery)) {
             pstmt.setInt(1, userId);
-            pstmt.setString(2, tomorrow.format(formatter));
+            pstmt.setInt(2, userId);
+            pstmt.setString(3, tomorrow.format(formatter));  // Compare birthday with tomorrow
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                createNotification("birthday", "Birthday Reminder",
-                        "Tomorrow is " + rs.getString("name") + "'s birthday!");
+            if (rs.next()) {
+                createNotification("birthday", "Birthday Reminder", "Tomorrow is your birthday!");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
     private void createNotification(String type, String title, String message) {
         String insertQuery = "INSERT INTO notifications (user_id, type, title, message, created_at) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = dbConnection.getConnection();

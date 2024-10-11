@@ -81,7 +81,7 @@ public class ArtistPaintingPageController extends BaseController {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle the exception appropriately
+
         }
     }
 
@@ -177,9 +177,8 @@ public class ArtistPaintingPageController extends BaseController {
         imageView.setFitWidth(500);
         imageView.setFitHeight(600);
 
-        // Add the ImageView to a layout container (StackPane)
         StackPane root = new StackPane(imageView);
-        Scene scene = new Scene(root, 500, 600); // Set the window size to 500x600
+        Scene scene = new Scene(root, 500, 600);
 
         // Set the scene and show the new window
         newWindow.setScene(scene);
@@ -187,7 +186,7 @@ public class ArtistPaintingPageController extends BaseController {
     }
 
 
-    // Navigation methods (same as in ArtistAddPaintController)
+    // Navigation methods
     @FXML
     void artistAddAuctions(ActionEvent event) throws IOException {
         loadPageWithUserId(event, "Artist/ArtistAddAuction.fxml");
@@ -254,6 +253,18 @@ public class ArtistPaintingPageController extends BaseController {
     @FXML
     void artistAddPainting(ActionEvent event) throws IOException {
         loadPageWithUserId(event, "Artist/ArtistAddPaint.fxml");
+    }
+
+    @FXML
+    void mynft(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNFTPage.fxml");
+    }
+
+
+    @FXML
+    void nftorders(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNFTorders.fxml");
+
     }
 
     private void loadPageWithUserId(ActionEvent event, String fxmlPath) throws IOException {

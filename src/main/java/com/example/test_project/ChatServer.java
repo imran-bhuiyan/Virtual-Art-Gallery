@@ -6,10 +6,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-/**
- * ChatServer handles the server-side logic for the chat functionality.
- * It manages client connections, message broadcasting, and database interactions.
- */
+
 public class ChatServer {
     private static final int PORT = 12345;
     private static final Map<Integer, PrintWriter> clientWriters = new ConcurrentHashMap<>();

@@ -85,11 +85,6 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </MenuButton>
-                  <Button layoutX="13.0" layoutY="379.0" mnemonicParsing="false" onAction="#goMessages" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Chats" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
                   <MenuButton layoutX="15.0" layoutY="109.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="133.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Artist" textAlignment="CENTER">
                      <items>
                         <MenuItem onAction="#addArtist" text="Add" />
@@ -113,7 +108,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="12.0" layoutY="432.0" mnemonicParsing="false" onAction="#goQueries" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Inquiries" textAlignment="CENTER">
+                  <Button layoutX="12.0" layoutY="386.0" mnemonicParsing="false" onAction="#goQueries" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Inquiries" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -123,7 +118,7 @@
                         <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Menu.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="15.0" layoutY="485.0" mnemonicParsing="false" onAction="#goAuctionRequest" prefHeight="40.0" prefWidth="135.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Auctions" textAlignment="CENTER">
+                  <Button layoutX="15.0" layoutY="439.0" mnemonicParsing="false" onAction="#goAuctionRequest" prefHeight="40.0" prefWidth="135.0" style="-fx-background-color: #A5B68D; -fx-border-color: #40E0D0;" text="Auctions" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

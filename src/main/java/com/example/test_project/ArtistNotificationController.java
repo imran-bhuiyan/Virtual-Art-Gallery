@@ -319,6 +319,17 @@ public class ArtistNotificationController extends BaseController {
     void artistAddPainting(ActionEvent event) throws IOException {
         loadPageWithUserId(event, "Artist/ArtistAddPaint.fxml");
     }
+    @FXML
+    void mynft(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNFTPage.fxml");
+    }
+
+
+    @FXML
+    void nftorders(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNFTorders.fxml");
+
+    }
 
     private void loadPageWithUserId(ActionEvent event, String fxmlPath) throws IOException {
         System.out.println("ArtistAddNFTController: loadPageWithUserId() called with path: " + fxmlPath);

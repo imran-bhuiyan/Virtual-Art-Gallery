@@ -41,9 +41,9 @@ public class adminHandleAuctionController extends BaseController {
 
     private void loadAuctionRequests() {
         auctionRequestsContainer.getChildren().clear();
-        String query = "SELECT a.auction_id, a.starting_bid, a.ends_time, p.name, p.image_url, p.price " +
+        String query = "SELECT a.auction_id, a.starting_bid, a.ends_time,a.start_date, p.name, p.image_url, p.price " +
                 "FROM auctions a JOIN paintings p ON a.painting_id = p.painting_id " +
-                "WHERE a.status = 'pending'";
+                "WHERE a.request = 'pending'";
 
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query);
@@ -54,6 +54,7 @@ public class adminHandleAuctionController extends BaseController {
                         rs.getInt("auction_id"),
                         rs.getDouble("starting_bid"),
                         rs.getTimestamp("ends_time").toLocalDateTime(),
+                        rs.getTimestamp("start_date").toLocalDateTime(),
                         rs.getString("name"),
                         rs.getString("image_url"),
                         rs.getDouble("price")
@@ -65,7 +66,7 @@ public class adminHandleAuctionController extends BaseController {
         }
     }
 
-    private javafx.scene.layout.HBox createAuctionRequestCard(int auctionId, double startingBid, LocalDateTime endsTime, String paintingName, String imageUrl, double price) {
+    private javafx.scene.layout.HBox createAuctionRequestCard(int auctionId, double startingBid, LocalDateTime endsTime,LocalDateTime startsTime, String paintingName, String imageUrl, double price) {
         javafx.scene.layout.HBox card = new javafx.scene.layout.HBox(10);
         card.setStyle("-fx-background-color: #f0f0f0; -fx-padding: 10; -fx-border-color: #cccccc; -fx-border-radius: 5;");
 
@@ -92,6 +93,7 @@ public class adminHandleAuctionController extends BaseController {
                 new Text("Painting: " + paintingName),
                 new Text("Starting Bid: $" + startingBid),
                 new Text("Original Price: $" + price),
+                new Text("Starts at: " + startsTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))),
                 new Text("Ends at: " + endsTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
         );
 
@@ -164,7 +166,7 @@ public class adminHandleAuctionController extends BaseController {
                     // After inserting the notification, proceed with accept or decline
                     String auctionQuery;
                     if (isAccepted) {
-                        auctionQuery = "UPDATE auctions SET status = 'active' WHERE auction_id = ?";
+                        auctionQuery = "UPDATE auctions SET request = 'accepted' WHERE auction_id = ?";
                     } else {
                         auctionQuery = "DELETE FROM auctions WHERE auction_id = ?";
                     }

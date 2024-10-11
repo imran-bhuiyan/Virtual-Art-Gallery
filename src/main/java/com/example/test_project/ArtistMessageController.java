@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -225,84 +226,112 @@ public class ArtistMessageController extends BaseController {
     }
 
     // Navigation methods
-
-    @FXML
-    void artistAddPainting(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistAddPaint.fxml");
-    }
-
-    @FXML
-    void artistMessages(ActionEvent event) throws IOException {
-        // We're already on the messages page, so no action needed
-    }
-
-    @FXML
-    void artistDashboard(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistDashboard.fxml");
-    }
-
-    @FXML
-    void artistPaintings(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistPaintingPage.fxml");
-    }
-
-    @FXML
-    void artistMyPainting(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistMyPaintPage.fxml");
-    }
-
     @FXML
     void artistAddAuctions(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistAddAuction.fxml");
-    }
-
-    @FXML
-    void artistMyProfile(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistProfile.fxml");
-    }
-
-    @FXML
-    void artistLogout(ActionEvent event) throws IOException {
-        loadPage(event, "Guest/userOrGuestHomePage.fxml");
-    }
-
-    @FXML
-    void artistNotification(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistNotification.fxml");
-    }
-
-    @FXML
-    void artistSeeAuction(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistSeeAuctionPage.fxml");
-    }
-
-    @FXML
-    void artistOrders(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistOrderPage.fxml");
+        loadPageWithUserId(event, "Artist/ArtistAddAuction.fxml");
     }
 
     @FXML
     void artistAddNFTs(ActionEvent event) throws IOException {
-        loadPage(event, "Artist/ArtistAddNFTs.fxml");
+        loadPageWithUserId(event, "Artist/ArtistAddNFTs.fxml");
     }
 
     @FXML
-    void artistSeeBalance(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Artist/ArtistBalanceWindow.fxml"));
-            Parent root = loader.load();
+    void artistDashboard(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistDashboard.fxml");
+    }
 
-            ArtistBalanceController balanceController = loader.getController();
-            balanceController.setUserId(this.userId);
-            balanceController.loadBalance();
+    @FXML
+    void artistLogout(ActionEvent event) throws IOException {
+        System.out.println("ArtistAddNFTController: Logging out user");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Customer/CustomerLoginPage.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("ArtistAddNFTController: Navigated to login page");
+    }
 
-            Stage balanceStage = new Stage();
-            balanceStage.setTitle("Artist Balance");
-            balanceStage.setScene(new Scene(root));
-            balanceStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the exception (e.g., show an error message to the user)
+    @FXML
+    void artistMessages(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistMessage.fxml");
+    }
+
+    @FXML
+    void artistMyPainting(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistMyPaintPage.fxml");
+    }
+
+    @FXML
+    void artistMyProfile(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistProfile.fxml");
+    }
+
+    @FXML
+    void artistNotification(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNotification.fxml");
+    }
+
+    @FXML
+    void artistPaintings(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistPaintingPage.fxml");
+    }
+
+    @FXML
+    void artistSeeAuction(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistSeeAuctionPage.fxml");
+    }
+
+    @FXML
+    void artistOrders(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistOrderPage.fxml");
+    }
+
+
+    @FXML
+    void artistAddPainting(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistAddPaint.fxml");
+    }
+    @FXML
+    void mynft(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNFTPage.fxml");
+    }
+
+
+    @FXML
+    void nftorders(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNFTorders.fxml");
+
+    }
+
+
+    private void loadPageWithUserId(ActionEvent event, String fxmlPath) throws IOException {
+        System.out.println("ArtistAddNFTController: loadPageWithUserId() called with path: " + fxmlPath);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Parent root = loader.load();
+
+        BaseController controller = loader.getController();
+        if (controller != null) {
+            System.out.println("ArtistAddNFTController: Setting userId " + userId + " on new controller");
+            controller.setUserId(this.userId);
+        } else {
+            System.out.println("ArtistAddNFTController: Warning - controller is null");
         }
+
+        Scene scene = new Scene(root);
+        Stage stage;
+
+        if (event.getSource() instanceof MenuItem) {
+            MenuItem menuItem = (MenuItem) event.getSource();
+            stage = (Stage) menuItem.getParentPopup().getOwnerWindow();
+        } else if (event.getSource() instanceof Node) {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        } else {
+            throw new IllegalArgumentException("Event source not recognized");
+        }
+
+        stage.setScene(scene);
+        stage.show();
     }
 }

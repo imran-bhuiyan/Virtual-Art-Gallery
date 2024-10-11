@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,6 +31,8 @@ public class ArtistAddNFTController extends BaseController {
     @FXML private TextField nftedition;
     @FXML private TextField nftblockchain;
     @FXML private TextField nftprice;
+    @FXML
+    private TextField paymentAccount;;
 
     public void setUserId(int userId) {
         this.userId = userId;
@@ -59,8 +62,9 @@ public class ArtistAddNFTController extends BaseController {
         String blockchain = nftblockchain.getText();
         String priceStr = nftprice.getText();
         String imagePath = imagePathField.getText();
+        String address = paymentAccount.getText();
 
-        if (name.isEmpty() || edition.isEmpty() || blockchain.isEmpty() || priceStr.isEmpty() || imagePath.isEmpty()) {
+        if (name.isEmpty() || edition.isEmpty() || blockchain.isEmpty() || priceStr.isEmpty() || imagePath.isEmpty() || address.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Error", "All fields are required");
             return;
         }
@@ -80,14 +84,15 @@ public class ArtistAddNFTController extends BaseController {
         }
 
         try (Connection conn = DataBaseConnection.getConnection()) {
-            String query = "INSERT INTO NFTs (name, artist_id, edition, blockchain, price, image_url) VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO NFTs (name, artist_id, edition, blockchain, price, image_url, payment_address) VALUES (?, ?, ?, ?, ?, ?,?)";
             try (PreparedStatement pstmt = conn.prepareStatement(query)) {
                 pstmt.setString(1, name);
                 pstmt.setInt(2, userId);
                 pstmt.setString(3, edition);
                 pstmt.setString(4, blockchain);
-                pstmt.setDouble(5, price);
+                pstmt.setBigDecimal(5, BigDecimal.valueOf(price));
                 pstmt.setString(6, newImagePath);
+                pstmt.setString(7, address);
 
                 int affectedRows = pstmt.executeUpdate();
                 if (affectedRows > 0) {
@@ -124,13 +129,14 @@ public class ArtistAddNFTController extends BaseController {
             return null;
         }
     }
-
+    @FXML
     private void clearFields() {
         photoname.clear();
         nftedition.clear();
         nftblockchain.clear();
         nftprice.clear();
         imagePathField.clear();
+        paymentAccount.clear();
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String content) {
@@ -208,6 +214,17 @@ public class ArtistAddNFTController extends BaseController {
     @FXML
     void artistAddPainting(ActionEvent event) throws IOException {
         loadPageWithUserId(event, "Artist/ArtistAddPaint.fxml");
+    }
+    @FXML
+    void mynft(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNFTPage.fxml");
+    }
+
+
+    @FXML
+    void nftorders(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNFTorders.fxml");
+
     }
 
     private void loadPageWithUserId(ActionEvent event, String fxmlPath) throws IOException {

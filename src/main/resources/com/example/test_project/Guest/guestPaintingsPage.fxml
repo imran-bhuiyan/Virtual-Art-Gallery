@@ -11,46 +11,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.GuestPaintingController">
     <children>
-        <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="67.0" prefWidth="899.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="123.0">
-                    <font>
-                        <Font size="24.0" />
-                    </font>
-                </Text>
-                <HBox prefHeight="47.0" prefWidth="114.0" />
-                <Button onAction="#goHome" style="-fx-background-color: transparent;" text="Home">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
-                <Button onAction="#goEvents" style="-fx-background-color: transparent;" text="Events">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
-                <Button onAction="#goPaintings" style="-fx-background-color: transparent;" text="Paintings">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
-                <Button onAction="#goTopArt" style="-fx-background-color: transparent;" text="Top Art">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
-                <Button onAction="#goContactUS" style="-fx-background-color: transparent;" text="Contact Us">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
-                <Button onAction="#goLogin" style="-fx-background-color: transparent;" text="Login">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
-            </children>
-        </HBox>
 
         <HBox alignment="CENTER_RIGHT" layoutY="79.0" prefHeight="26.0" prefWidth="899.0" style="-fx-padding: 10;">
             <children>
@@ -69,5 +29,44 @@
                 <VBox fx:id="paintingsContainer" spacing="20" style="-fx-padding: 20;" />
             </content>
         </ScrollPane>
+      <HBox alignment="CENTER" prefHeight="80.0" prefWidth="899.0" spacing="20" style="-fx-background-color: #d8e4e9; -fx-padding: 10;">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
+               <font>
+                  <Font name="Bell MT Bold" size="27.0" />
+               </font>
+            </Text>
+            <Button mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: D2E0FB;" text="Home" textFill="#181818">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goPaintings" style="-fx-background-color: D2E0FB;" text="Paintings" textFill="#181818">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goTopArt" style="-fx-background-color: D2E0FB;" text="Top Art" textFill="#1b1b1b">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goEvents" style="-fx-background-color: D2E0FB;" text="Events" textFill="#0d0d0d">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goContactUS" style="-fx-background-color: D2E0FB;" text="Contact Us" textFill="#0d0d0d">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goLogin" style="-fx-background-color: D2E0FB;" text="Login" textFill="#181818">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
     </children>
 </AnchorPane>

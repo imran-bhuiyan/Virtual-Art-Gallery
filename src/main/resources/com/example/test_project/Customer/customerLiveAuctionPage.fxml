@@ -21,49 +21,49 @@
                 </VBox>
             </content>
         </ScrollPane>
-      <HBox alignment="CENTER" prefHeight="80.0" prefWidth="921.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
+      <HBox alignment="CENTER" prefHeight="80.0" prefWidth="921.0" spacing="20" style="-fx-background-color: #d8e4e9; -fx-padding: 10;">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
                <font>
                   <Font name="Bell MT Bold" size="27.0" />
                </font>
             </Text>
-            <Button mnemonicParsing="false" onAction="#goCustomerHome" style="-fx-background-color: transparent;" text="Home" textFill="#181818">
+            <Button mnemonicParsing="false" onAction="#goCustomerHome" style="-fx-background-color: D2E0FB;" text="Home" textFill="#181818">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#goCustomerPaintings" style="-fx-background-color: transparent;" text="Paintings" textFill="#181818">
+            <Button mnemonicParsing="false" onAction="#goCustomerPaintings" style="-fx-background-color: D2E0FB;" text="Paintings" textFill="#181818">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#goCustomerTopArt" style="-fx-background-color: transparent;" text="Top Art" textFill="#1b1b1b">
+            <Button mnemonicParsing="false" onAction="#goCustomerTopArt" style="-fx-background-color: D2E0FB;" text="Top Art" textFill="#1b1b1b">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#goCustomerEvents" style="-fx-background-color: transparent;" text="Events" textFill="#0d0d0d">
+            <Button mnemonicParsing="false" onAction="#goCustomerEvents" style="-fx-background-color: D2E0FB;" text="Events" textFill="#0d0d0d">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#goCustomerAuction" style="-fx-background-color: transparent;" text="Auction" textFill="#0d0d0d">
+            <Button mnemonicParsing="false" onAction="#goCustomerAuction" style="-fx-background-color: D2E0FB;" text="Auction" textFill="#0d0d0d">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#goCustomerNFT" style="-fx-background-color: transparent;" text="NFT" textFill="#131212">
+            <Button mnemonicParsing="false" onAction="#goCustomerNFT" style="-fx-background-color: D2E0FB;" text="NFT" textFill="#131212">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerProfile" style="-fx-background-color: transparent;" text="Profile" textFill="#181818">
+            <Button layoutX="332.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerProfile" style="-fx-background-color: D2E0FB;" text="Profile" textFill="#181818">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#goCustomerCart" prefWidth="0.0" style="-fx-background-color: transparent;">
+            <Button mnemonicParsing="false" onAction="#goCustomerCart" prefWidth="0.0" style="-fx-background-color: D2E0FB;">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0">
                      <image>
@@ -72,7 +72,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="741.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerNotification" style="-fx-background-color: transparent;" textFill="WHITE">
+            <Button layoutX="741.0" layoutY="37.0" mnemonicParsing="false" onAction="#goCustomerNotification" style="-fx-background-color: D2E0FB;" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -81,7 +81,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#goCustomerMessages" style="-fx-background-color: transparent;">
+            <Button mnemonicParsing="false" onAction="#goCustomerMessages" style="-fx-background-color: D2E0FB;">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -90,7 +90,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="843.0" layoutY="36.0" mnemonicParsing="false" onAction="#customerLogout" style="-fx-background-color: transparent;">
+            <Button layoutX="843.0" layoutY="36.0" mnemonicParsing="false" onAction="#customerLogout" style="-fx-background-color: D2E0FB;">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>

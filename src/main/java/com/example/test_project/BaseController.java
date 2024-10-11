@@ -36,11 +36,11 @@ public abstract class BaseController implements UserIdAware {
         Stage stage;
 
         if (event.getSource() instanceof MenuItem) {
-            // If the event source is a MenuItem, we need to get the stage differently
+
             MenuItem menuItem = (MenuItem) event.getSource();
             stage = (Stage) menuItem.getParentPopup().getOwnerWindow();
         } else if (event.getSource() instanceof Node) {
-            // If it's a regular Node (like a Button), we can get the stage as before
+
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         } else {
             throw new IllegalArgumentException("Event source not recognized");

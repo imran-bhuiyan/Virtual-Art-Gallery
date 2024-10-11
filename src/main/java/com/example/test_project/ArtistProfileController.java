@@ -23,8 +23,8 @@ import java.util.regex.Pattern;
 public class ArtistProfileController extends BaseController {
     @FXML
     private TextField name;
-    @FXML
-    private TextField id;
+//    @FXML
+//    private TextField id;
     @FXML
     private TextField email;
     @FXML
@@ -51,7 +51,7 @@ public class ArtistProfileController extends BaseController {
                 try (ResultSet rs = pstmt.executeQuery()) {
                     if (rs.next()) {
                         name.setText(rs.getString("name"));
-                        id.setText(String.valueOf(userId));
+//                        id.setText(String.valueOf(userId));
                         email.setText(rs.getString("email"));
                         dateOfbirth.setText(rs.getString("dob"));
 
@@ -67,7 +67,7 @@ public class ArtistProfileController extends BaseController {
 
     private void setFieldsEditable(boolean editable) {
         name.setEditable(editable);
-        id.setEditable(false); // ID should always be non-editable
+//        id.setEditable(false);
         email.setEditable(editable);
         dateOfbirth.setEditable(false);
     }
@@ -236,6 +236,59 @@ public class ArtistProfileController extends BaseController {
     @FXML
     void artistAddPainting(ActionEvent event) throws IOException {
         loadPageWithUserId(event, "Artist/ArtistAddPaint.fxml");
+    }
+
+    @FXML
+    void mynft(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNFTPage.fxml");
+    }
+
+
+    @FXML
+    void nftorders(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNFTorders.fxml");
+
+    }
+
+    @FXML
+    void withdrawcash(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Artist/ArtistWithdrawMoney.fxml"));
+            Parent root = loader.load();
+
+            ArtistWithdrawMoneyController balanceController = loader.getController();
+            balanceController.setUserId(this.userId);
+
+
+            Stage balanceStage = new Stage();
+            balanceStage.setTitle("Artist Withdraw");
+            balanceStage.setScene(new Scene(root));
+            balanceStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
+
+    }
+    @FXML
+    void withdrawHistory(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Artist/ArtistWithdrawHistory.fxml"));
+            Parent root = loader.load();
+
+            ArtistWithdrawHistoryController historyController = loader.getController();
+            historyController.setUserId(this.userId);
+
+            Stage historyStage = new Stage();
+            historyStage.setTitle("Withdraw History");
+            historyStage.setScene(new Scene(root));
+            historyStage.initModality(Modality.APPLICATION_MODAL);
+            historyStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
     }
 
     private void loadPageWithUserId(ActionEvent event, String fxmlPath) throws IOException {

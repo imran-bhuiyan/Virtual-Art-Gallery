@@ -53,7 +53,7 @@ public class AdminCreditRequestController extends BaseController {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle the exception (e.g., show an error message to the user)
+
         }
     }
 
@@ -111,6 +111,9 @@ public class AdminCreditRequestController extends BaseController {
         try (Connection conn = dbConnection.getConnection()) {
             conn.setAutoCommit(false);
 
+            String notificationMessage;
+            String notificationTitle;
+
             if (isAccepted) {
                 // Update user_credit table
                 String updateCreditQuery = "UPDATE user_credit SET d_status = 'approved' WHERE id = ?";
@@ -119,13 +122,16 @@ public class AdminCreditRequestController extends BaseController {
                     pstmt.executeUpdate();
                 }
 
-                // Update users table
+                // Update users table (credits)
                 String updateUserQuery = "UPDATE users SET credits = credits + ? WHERE user_id = ?";
                 try (PreparedStatement pstmt = conn.prepareStatement(updateUserQuery)) {
                     pstmt.setDouble(1, amount);
                     pstmt.setInt(2, userId);
                     pstmt.executeUpdate();
                 }
+
+                notificationTitle = "Credit Request Approved";
+                notificationMessage = "Your credit request for $" + String.format("%.2f", amount) + " has been approved.";
             } else {
                 // Update user_credit table to decline the request
                 String declineQuery = "UPDATE user_credit SET d_status = 'declined' WHERE id = ?";
@@ -133,25 +139,37 @@ public class AdminCreditRequestController extends BaseController {
                     pstmt.setInt(1, requestId);
                     pstmt.executeUpdate();
                 }
+
+                notificationTitle = "Credit Request Declined";
+                notificationMessage = "Your credit request for $" + String.format("%.2f", amount) + " has been declined.";
+            }
+
+            // Insert notification for the user
+            String insertNotificationQuery = "INSERT INTO notifications (user_id, type, title, message, created_at) VALUES (?, ?, ?, ?, NOW())";
+            try (PreparedStatement pstmt = conn.prepareStatement(insertNotificationQuery)) {
+                pstmt.setInt(1, userId);  // user_id who made the request
+                pstmt.setString(2, "credit_request"); // type of the notification
+                pstmt.setString(3, notificationTitle); // notification title
+                pstmt.setString(4, notificationMessage); // notification message
+                pstmt.executeUpdate();
             }
 
             conn.commit();
             showAlert(isAccepted ? "Credit request approved" : "Credit request declined");
-            loadCreditRequests(); // Reload the credit requests
+            loadCreditRequests(); // Reload the requests after processing
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle the exception (e.g., show an error message to the user)
         }
     }
 
+
     private void showAlert(String message) {
-        // Implement a method to show a sweet alert with the given message
-        // For example, you could use a library like ControlsFX or create a custom alert dialog
+
         System.out.println("Alert: " + message);
         // TODO: Implement actual alert dialog
     }
 
-    // Navigation methods (same as in your sample controller)
+    // Navigation methods
 
     @FXML
     void addArtist(ActionEvent event) throws IOException {

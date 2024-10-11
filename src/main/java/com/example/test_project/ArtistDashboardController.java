@@ -1,9 +1,4 @@
-//ArtistDashboardController.java
-
-
-
 package com.example.test_project;
-
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,7 +63,12 @@ public class ArtistDashboardController extends BaseController{
     }
 
     private void loadSoldItemsCount(Connection conn) throws SQLException {
-        String query = "SELECT COUNT(o.order_id) as Sold FROM orderitems as o JOIN paintings as p ON o.painting_id = p.painting_id WHERE p.artist_id = ?";
+        String query = "SELECT p.artist_id, \n" +
+                "       SUM(oi.quantity) AS Sold\n" +
+                "FROM orders o\n" +
+                "JOIN orderitems oi ON o.order_id = oi.order_id\n" +
+                "JOIN paintings p ON oi.painting_id = p.painting_id\n" +
+                "WHERE o.order_status = 'active' and p.artist_id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, userId);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -81,7 +81,11 @@ public class ArtistDashboardController extends BaseController{
     }
 
     private void loadRevenue(Connection conn) throws SQLException {
-        String query = "SELECT SUM(o.price) as Revenue FROM orderitems as o JOIN paintings as p ON o.painting_id = p.painting_id WHERE p.artist_id = ?";
+        String query = "SELECT p.artist_id, SUM(oi.price * oi.quantity) AS Revenue\n" +
+                "FROM orders o\n" +
+                "JOIN orderitems oi ON o.order_id = oi.order_id\n" +
+                "JOIN paintings p ON oi.painting_id = p.painting_id\n" +
+                "WHERE o.order_status = 'active' and p.artist_id = ? ";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, userId);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -175,6 +179,7 @@ public class ArtistDashboardController extends BaseController{
 
     }
 
+
     @FXML
     void artistSeeBalance(ActionEvent event) {
         try {
@@ -225,5 +230,6 @@ public class ArtistDashboardController extends BaseController{
         stage.setScene(scene);
         stage.show();
     }
+
 
 }

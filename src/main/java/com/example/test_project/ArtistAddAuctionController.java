@@ -30,6 +30,8 @@ public class ArtistAddAuctionController extends BaseController {
 
     @FXML
     private DatePicker date;
+    @FXML
+    private DatePicker startDate;
 
     private int userId;
 
@@ -46,20 +48,32 @@ public class ArtistAddAuctionController extends BaseController {
 
         String basePriceStr = basePrice.getText();
         LocalDate endDate = date.getValue();
+        LocalDate start = startDate.getValue();
 
-        if (artIdStr.isEmpty() || basePriceStr.isEmpty() || endDate == null) {
+        if (artIdStr.isEmpty() || basePriceStr.isEmpty() || endDate == null || start == null) {
             showAlert(Alert.AlertType.ERROR, "Error", "Please Select all field");
             return;
         }
 
-        // Here I have to add date exception . Like if user give past date , it will show error. entry_date >= current_date
+        // Here I have to add date exceptions. Like start date should be greater from current date and end date should be greater that start date.
+        // Date validation logic
+        LocalDate currentDate = LocalDate.now();
+        if (start.isBefore(currentDate)) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Start date must be today or later.");
+            return;
+        }
+
+        if (endDate.isBefore(start)) {
+            showAlert(Alert.AlertType.ERROR, "Error", "End date must be later than start date.");
+            return;
+        }
 
         try {
             int artIdInt = Integer.parseInt(artIdStr);
             double basePriceDouble = Double.parseDouble(basePriceStr);
 
             if (isArtistsPainting(artIdInt,userId)) {
-                addAuction(artIdInt, basePriceDouble, endDate);
+                addAuction(artIdInt, basePriceDouble, endDate ,start);
             }
 
 
@@ -87,15 +101,14 @@ public class ArtistAddAuctionController extends BaseController {
         }
     }
 
-
-
-    private void addAuction(int artId, double basePrice, LocalDate endDate) throws SQLException {
-        String query = "INSERT INTO auctions (painting_id, starting_bid, ends_time) VALUES (?, ?, ?)";
+    private void addAuction(int artId, double basePrice, LocalDate endDate ,LocalDate start) throws SQLException {
+        String query = "INSERT INTO auctions (painting_id, starting_bid, ends_time,start_date) VALUES (?, ?, ?,?)";
         try (Connection conn = DataBaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, artId);
             pstmt.setDouble(2, basePrice);
             pstmt.setDate(3, java.sql.Date.valueOf(endDate));
+            pstmt.setDate(4, java.sql.Date.valueOf(start));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
                 showAlert(Alert.AlertType.CONFIRMATION, "Success", "Auction Added Successfully");
@@ -190,7 +203,17 @@ public class ArtistAddAuctionController extends BaseController {
         loadPageWithUserId(event, "Artist/ArtistAddPaint.fxml");
     }
 
+    @FXML
+    void mynft(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNFTPage.fxml");
+    }
 
+
+    @FXML
+    void nftorders(ActionEvent event) throws IOException {
+        loadPageWithUserId(event, "Artist/ArtistNFTorders.fxml");
+
+    }
 
     private void loadPageWithUserId(ActionEvent event, String fxmlPath) throws IOException {
         System.out.println("ArtistAddNFTController: loadPageWithUserId() called with path: " + fxmlPath);

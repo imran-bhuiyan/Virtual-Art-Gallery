@@ -114,7 +114,13 @@ public class GuestPaintingController implements Initializable {
         likeImageView.setFitHeight(20);
         likeButton.setGraphic(likeImageView);
 
-        card.getChildren().addAll(titleText, artistText, yearText, categoryText, priceText, reactionsText, addToCartButton, likeButton);
+        ImageView paintingImageView = new ImageView(new Image("file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Uploads/Login.png"));
+        paintingImageView.setFitWidth(150);
+        paintingImageView.setFitHeight(150);
+        paintingImageView.setLayoutX(20);
+        paintingImageView.setLayoutY(20);
+
+        card.getChildren().addAll(titleText, artistText, yearText, categoryText, priceText, reactionsText, addToCartButton, likeButton,paintingImageView);
 
         return card;
     }

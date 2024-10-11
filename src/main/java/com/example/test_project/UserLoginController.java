@@ -1,5 +1,3 @@
-//UserLoginController.java
-
 package com.example.test_project;
 
 import javafx.event.ActionEvent;

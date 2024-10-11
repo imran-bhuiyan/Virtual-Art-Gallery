@@ -164,5 +164,4 @@ public class adminEditArtworkController extends BaseController {
         Stage stage = (Stage) nameField.getScene().getWindow();
         stage.close();
     }
-
 }

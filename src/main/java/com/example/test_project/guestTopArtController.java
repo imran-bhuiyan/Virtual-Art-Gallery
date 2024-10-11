@@ -6,9 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,6 +29,10 @@ public class guestTopArtController {
     @FXML
     private Text reactionsText;
 
+    @FXML
+    private ImageView paintingImageView;
+
+    private static final String IMAGE_DIRECTORY = "D:\\Trimester\\8th\\AOOP\\IntellijIdea\\Test_Project\\src\\main\\java\\Image_For_Database";
 
     @FXML
     public void initialize() {
@@ -33,7 +40,8 @@ public class guestTopArtController {
     }
 
     private void loadTopArt() {
-        String query = "SELECT p.name as Title, COUNT(r.painting_id) as Total_Reaction, u.name as Artist " +
+
+        String query = "SELECT p.name as Title, COUNT(r.painting_id) as Total_Reaction, u.name as Artist, p.image_url " +
                 "FROM reactions as r JOIN paintings as p ON r.painting_id = p.painting_id " +
                 "JOIN users as u ON u.user_id = p.artist_id " +
                 "GROUP BY r.painting_id " +
@@ -48,18 +56,50 @@ public class guestTopArtController {
                 titleText.setText(rs.getString("Title") != null ? rs.getString("Title") : "N/A");
                 artistText.setText(rs.getString("Artist") != null ? rs.getString("Artist") : "Unknown");
                 reactionsText.setText(String.valueOf(rs.getInt("Total_Reaction")));
+
+                String imageUrl = rs.getString("image_url");
+                loadImage(imageUrl);
             } else {
-                // Handle case when no results are returned
                 titleText.setText("No top art found");
                 artistText.setText("N/A");
                 reactionsText.setText("0");
+                setPlaceholderImage();
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle the exception (e.g., show an error message to the user)
             titleText.setText("Error loading top art");
             artistText.setText("N/A");
             reactionsText.setText("N/A");
+            setPlaceholderImage();
+        }
+    }
+
+    private void loadImage(String imageUrl) {
+        File imageFile = new File(imageUrl);
+        if (imageFile.exists()) {
+            try {
+                Image image = new Image(imageFile.toURI().toString());
+                paintingImageView.setImage(image);
+                paintingImageView.setFitWidth(500);
+                paintingImageView.setFitHeight(300);
+            } catch (Exception e) {
+                System.out.println("Error loading image: " + e.getMessage());
+                setPlaceholderImage();
+            }
+        } else {
+            System.out.println("Image file not found: " + imageUrl);
+            setPlaceholderImage();
+        }
+    }
+
+    private void setPlaceholderImage() {
+        File placeholderFile = new File(IMAGE_DIRECTORY, "placeholder.png");
+        if (placeholderFile.exists()) {
+            paintingImageView.setImage(new Image(placeholderFile.toURI().toString()));
+            paintingImageView.setFitWidth(500);
+            paintingImageView.setFitHeight(300);
+        } else {
+            System.out.println("Placeholder image not found");
         }
     }
 

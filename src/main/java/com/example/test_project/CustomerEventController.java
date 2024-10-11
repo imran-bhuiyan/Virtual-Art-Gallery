@@ -41,7 +41,7 @@ public class CustomerEventController extends BaseController {
     }
 
     private void loadEventsFromDatabase() {
-        String query = "SELECT * FROM events";
+        String query = "SELECT * FROM events where date_time > NOW()";
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
@@ -106,7 +106,7 @@ public class CustomerEventController extends BaseController {
         bookNowButton.setLayoutX(218);
         bookNowButton.setLayoutY(199);
         bookNowButton.setStyle("-fx-background-color: #4CAF50;");
-        bookNowButton.setOnAction(event -> handleBooking(eventId, capacity));
+        bookNowButton.setOnAction(event -> handleBooking(eventId, capacity,entryFee));
 
         ImageView paintingImageView = new ImageView();
         paintingImageView.setFitWidth(150);
@@ -133,8 +133,25 @@ public class CustomerEventController extends BaseController {
         return card;
     }
 
-    private void handleBooking(int eventId, int currentCapacity) {
+    private void handleBooking(int eventId, int currentCapacity, String entryFee) {
         try (Connection conn = dbConnection.getConnection()) {
+            // Check the user's current credits
+            String getCreditsQuery = "SELECT credits FROM users WHERE user_id = ?";
+            try (PreparedStatement creditsStmt = conn.prepareStatement(getCreditsQuery)) {
+                creditsStmt.setInt(1, userId);
+                ResultSet creditsRs = creditsStmt.executeQuery();
+                if (creditsRs.next()) {
+                    double userCredits = creditsRs.getDouble("credits");
+                    double fee = Double.parseDouble(entryFee);
+
+                    // Check if the user has enough credits to book the event
+                    if (userCredits < fee) {
+                        showSweetAlert("Insufficient Balance", "You do not have enough credits to book this event.");
+                        return;
+                    }
+                }
+            }
+
             // Check if the user has already booked this event
             String checkBookingQuery = "SELECT * FROM eventbookings WHERE user_id = ? AND event_id = ?";
             try (PreparedStatement checkStmt = conn.prepareStatement(checkBookingQuery)) {
@@ -142,20 +159,22 @@ public class CustomerEventController extends BaseController {
                 checkStmt.setInt(2, eventId);
                 ResultSet rs = checkStmt.executeQuery();
                 if (rs.next()) {
-                    showAlert("Already Booked", "You have already booked this event.");
+                    showSweetAlert("Already Booked", "You have already booked this event.");
                     return;
                 }
             }
 
             // Check if there's still capacity
             if (currentCapacity <= 0) {
-                showAlert("Booking Failed", "Sorry, this event is fully booked.");
+                showSweetAlert("Booking Failed", "Sorry, this event is fully booked.");
                 return;
             }
 
-            // Proceed with booking
+            // Proceed with booking and deduct credits
             String bookingQuery = "INSERT INTO eventbookings (user_id, event_id) VALUES (?, ?)";
             String updateCapacityQuery = "UPDATE events SET capacity = capacity - 1 WHERE event_id = ?";
+            String updateCreditsQuery = "UPDATE users SET credits = credits - ? WHERE user_id = ?";
+            String updateAdminCreditsQuery = "UPDATE users SET credits = credits + ? WHERE role = 'admin'";
 
             conn.setAutoCommit(false);
             try {
@@ -166,26 +185,48 @@ public class CustomerEventController extends BaseController {
                     bookingStmt.executeUpdate();
                 }
 
-                // Update capacity
+                // Update event capacity
                 try (PreparedStatement updateStmt = conn.prepareStatement(updateCapacityQuery)) {
                     updateStmt.setInt(1, eventId);
                     updateStmt.executeUpdate();
                 }
 
+                // Deduct the entry fee from the user's credits
+                try (PreparedStatement updateAdq = conn.prepareStatement(updateAdminCreditsQuery)) {
+                    updateAdq.setDouble(1, Double.parseDouble(entryFee));
+                    updateAdq.executeUpdate();
+                }
+
+
+                // Deduct the entry fee from the user's credits
+                try (PreparedStatement updateCreditsStmt = conn.prepareStatement(updateCreditsQuery)) {
+                    updateCreditsStmt.setDouble(1, Double.parseDouble(entryFee));
+                    updateCreditsStmt.setInt(2, userId);
+                    updateCreditsStmt.executeUpdate();
+                }
+
                 conn.commit();
-                showAlert("Booking Successful", "You have successfully booked this event.");
-                loadEventsFromDatabase(); // Refresh the event display
+                showSweetAlert("Booking Successful", "You have successfully booked this event.");
+//                loadEventsFromDatabase(); // Refresh the event display
             } catch (SQLException e) {
                 conn.rollback();
                 e.printStackTrace();
-                showAlert("Booking Failed", "An error occurred while booking the event.");
+                showSweetAlert("Booking Failed", "An error occurred while booking the event.");
             } finally {
                 conn.setAutoCommit(true);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert("Database Error", "An error occurred while connecting to the database.");
+            showSweetAlert("Database Error", "An error occurred while connecting to the database.");
         }
+    }
+
+    private void showSweetAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 

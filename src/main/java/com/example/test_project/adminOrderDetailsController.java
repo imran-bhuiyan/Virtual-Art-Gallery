@@ -21,6 +21,14 @@ import java.sql.SQLException;
 
 public class adminOrderDetailsController extends BaseController {
 
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+        System.out.println("userId set to " + userId);
+
+    }
+
+
     @FXML
     private TableView<ObservableList<String>> orderTable;
 
@@ -74,7 +82,7 @@ public class adminOrderDetailsController extends BaseController {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle the exception (e.g., show an error message to the user)
+
         }
 
         orderTable.setItems(data);

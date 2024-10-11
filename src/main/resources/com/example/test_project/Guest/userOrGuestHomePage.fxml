@@ -12,55 +12,63 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.guestPageController">
     <children>
-        <VBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
-            <HBox alignment="CENTER_LEFT" prefWidth="1000.0" spacing="20" style="-fx-background-color: #40E0D0; -fx-padding: 10;">
-                <ImageView fitHeight="50" fitWidth="100" preserveRatio="true">
-                    <image>
-                        <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Screenshot%202024-06-27%20023303.png" />
-                    </image></ImageView>
-                <HBox prefHeight="0.0" prefWidth="200.0" />
-                <Button onAction="#goHome" style="-fx-background-color: transparent;" text="Home">
+        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="1000.0" spacing="20" style="-fx-background-color: #d8e4e9; -fx-padding: 10;">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art Gallery" wrappingWidth="142.93669414520264">
                     <font>
-                        <Font size="16.0" />
-                    </font></Button>
-                <Button onAction="#goEvents" style="-fx-background-color: transparent;" text="Events">
+                        <Font name="Bell MT Bold" size="27.0" />
+                    </font>
+                </Text>
+                <Button mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: D2E0FB;" text="Home" textFill="#181818">
                     <font>
-                        <Font size="16.0" />
-                    </font></Button>
-                <Button onAction="#goPaintings" style="-fx-background-color: transparent;" text="Paintings">
-                    <font>
-                        <Font size="16.0" />
-                    </font></Button>
-                <Button onAction="#goTopArt" style="-fx-background-color: transparent;" text="Top Art">
-                    <font>
-                        <Font size="16.0" />
-                    </font></Button>
-                <Button onAction="#goContactUS" style="-fx-background-color: transparent;" text="Contact Us">
-                    <font>
-                        <Font size="16.0" />
-                    </font></Button>
-                <Button mnemonicParsing="false" onAction="#goLogin" style="-fx-background-color: transparent;" text="Login">
-                    <font>
-                        <Font size="16.0" />
+                        <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-            </HBox>
-        </VBox>
+                <Button mnemonicParsing="false" onAction="#goPaintings" style="-fx-background-color: D2E0FB;" text="Paintings" textFill="#181818">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goTopArt" style="-fx-background-color: D2E0FB;" text="Top Art" textFill="#1b1b1b">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goEvents" style="-fx-background-color: D2E0FB;" text="Events" textFill="#0d0d0d">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goContactUS" style="-fx-background-color: D2E0FB;" text="Contact Us" textFill="#0d0d0d">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goLogin" style="-fx-background-color: D2E0FB;" text="Login" textFill="#181818">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+            </children>
+        </HBox>
 
-        <StackPane style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="70">
+        <StackPane style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="80">
             <ImageView fitHeight="600" fitWidth="1000.0" preserveRatio="false">
                 <image>
                     <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/autumn-leaves-fall-gracefully-painting-nature-canvas-generative-ai.jpg" />
-                </image></ImageView>
+                </image>
+            </ImageView>
             <VBox alignment="CENTER" spacing="20" style="-fx-background-color: transparent;">
                 <Text style="-fx-font-size: 48; -fx-fill: white;" text="Art Gallery">
                     <font>
                         <Font name="System Bold" size="48.0" />
-                    </font></Text>
+                    </font>
+                </Text>
                 <Text style="-fx-font-size: 18; -fx-fill: white;" text="Step into a world where creativity knows no bounds and art comes alive in the digital realm">
                     <font>
                         <Font name="System Bold" size="18.0" />
-                    </font></Text>
+                    </font>
+                </Text>
                 <Button onAction="#goSignUpChoice" style="-fx-background-color: #7B68EE; -fx-text-fill: white;" text="Get Started" />
             </VBox>
         </StackPane>

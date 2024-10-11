@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
@@ -13,12 +15,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1056.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.ArtistPaintingPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="774.0" prefWidth="1056.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test_project.ArtistPaintingPageController">
    <children>
       <!-- Top Pane -->
       <Pane layoutX="-2.0" prefHeight="74.0" prefWidth="1057.0" style="-fx-background-color: #40E0D0;">
          <children>
-            <Text layoutX="440.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAINTINGS" wrappingWidth="162.125732421875">
+            <Text layoutX="482.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAINTINGS" wrappingWidth="162.125732421875">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -30,19 +32,19 @@
       </Pane>
 
       <!-- Main Content Area -->
-      <AnchorPane layoutX="164.0" layoutY="74.0" prefHeight="702.0" prefWidth="891.0">
+      <AnchorPane layoutX="164.0" layoutY="74.0" prefHeight="685.0" prefWidth="891.0">
          <children>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="10.0">
                <ComboBox fx:id="categoryComboBox" prefWidth="150.0" promptText="Select Category" />
             </HBox>
-            <ScrollPane layoutX="0.0" layoutY="50.0" prefHeight="574.0" prefWidth="891.0">
+            <ScrollPane layoutX="0.0" layoutY="50.0" prefHeight="627.0" prefWidth="891.0">
                <content>
                   <VBox fx:id="paintingsContainer" spacing="10" />
                </content>
             </ScrollPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="74.0" prefHeight="653.0" prefWidth="162.0" style="-fx-background-color: #AFDDE5;">
+      <AnchorPane layoutY="74.0" prefHeight="712.0" prefWidth="162.0">
          <children>
             <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="21.0" prefWidth="142.0" spacing="10">
                <children>
@@ -51,62 +53,71 @@
                         <Image url="file:/D:/Trimester/8th/AOOP/IntellijIdea/Test_Project/src/main/java/Icon/Menu.png" />
                      </image>
                   </ImageView>
-                  <Button mnemonicParsing="false" onAction="#artistDashboard" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #40E0D0; -fx-text-fill: white;" text="Dashboard">
+                  <Button mnemonicParsing="false" onAction="#artistDashboard" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #d8e4e9;" text="Dashboard">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#artistPaintings" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Paintings">
+                  <Button mnemonicParsing="false" onAction="#artistPaintings" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #a7c7cb; -fx-border-color: #40E0D0;" text="Paintings">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#artistMyPainting" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="My Paintings">
+                  <Button mnemonicParsing="false" onAction="#artistMyPainting" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #d8e4e9; -fx-border-color: #40E0D0;" text="My Paintings">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#artistAddPainting" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Add Paintings">
+                  <Button mnemonicParsing="false" onAction="#artistAddPainting" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #a7c7cb; -fx-border-color: #40E0D0;" text="Add Paintings">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="10.0" layoutY="287.0" mnemonicParsing="false" onAction="#artistAddNFTs" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Add NFT">
+                  <Button layoutX="10.0" layoutY="287.0" mnemonicParsing="false" onAction="#artistAddNFTs" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #d8e4e9; -fx-border-color: #40E0D0;" text="Add NFT">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#artistMessages" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Messages">
+                  <MenuButton mnemonicParsing="false" prefHeight="34.0" prefWidth="137.0" style="-fx-background-color: #a7c7cb; -fx-border-color: #40E0D0;" text="NFT's" textAlignment="CENTER">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#mynft" text="My NFT's" />
+                      <MenuItem mnemonicParsing="false" onAction="#nftorders" text="Orders" />
+                    </items>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </MenuButton>
+                  <Button mnemonicParsing="false" onAction="#artistMessages" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #d8e4e9; -fx-border-color: #40E0D0;" text="Messages">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#artistAddAuctions" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Add Auction">
+                  <Button mnemonicParsing="false" onAction="#artistAddAuctions" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #a7c7cb; -fx-border-color: #40E0D0;" text="Add Auction">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#artistMyProfile" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="My Profile">
+                  <Button mnemonicParsing="false" onAction="#artistMyProfile" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #d8e4e9; -fx-border-color: #40E0D0;" text="My Profile">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#artistNotification" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Notifications">
+                  <Button mnemonicParsing="false" onAction="#artistNotification" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #a7c7cb; -fx-border-color: #40E0D0;" text="Notifications">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#artistSeeAuction" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-border-color: #40E0D0;" text="Auctions">
+                  <Button mnemonicParsing="false" onAction="#artistSeeAuction" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #d8e4e9; -fx-border-color: #40E0D0;" text="Auctions">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#artistOrders" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #FFD09B; -fx-text-fill: black;" text="Orders">
+                  <Button mnemonicParsing="false" onAction="#artistOrders" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #a7c7cb; -fx-text-fill: black;" text="Orders">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#artistLogout" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #FF6347; -fx-text-fill: white;" text="Logout">
+                  <Button mnemonicParsing="false" onAction="#artistLogout" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #d8e4e9;" text="Logout">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
